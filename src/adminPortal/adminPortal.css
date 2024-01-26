@@ -1,0 +1,42 @@
+.custom-tabs-container {
+    width: 97%;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: -5%;
+    color: white;
+  }
+  
+  .custom-tab-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    background-color: #000D6B; /* Background color for the tabs */
+  }
+  
+  .custom-tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .react-tabs__tab--selected {
+    background-color: white; /* Selected tab color */
+  }
+  p{
+    color: black;
+  }
+  .textColor{
+    color: red;
+  }
+  /* CustomerContactDetails.css */
+
+.table th.header-cell {
+  background-color: #0c032e; /* Green background color for header cells */
+  color: white;
+}
+
+.even-row {
+  background-color: #d71f1f !important; /* Grey background color for even rows */
+}

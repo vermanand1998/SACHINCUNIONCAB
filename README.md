@@ -68,3 +68,40 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+const sheets = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1Rc1VIFr3l4c5ErJ4S5DGramk59fUyZ3_xsvBJh5B17k/edit#gid=0");
+const sheet = sheets.getSheetByName("CONTACT");
+
+const sheets2 = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1Rc1VIFr3l4c5ErJ4S5DGramk59fUyZ3_xsvBJh5B17k/edit#gid=157462856");
+const sheetB = sheets2.getSheetByName("CABBOOKING");
+
+const sheets3 = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1Rc1VIFr3l4c5ErJ4S5DGramk59fUyZ3_xsvBJh5B17k/edit#gid=941997358");
+const sheetC = sheets3.getSheetByName("DRIVERCABDETAIL");
+
+function doPost(e) {
+  let data = e.parameter;
+
+  // Check if the request is for CONTACT or CABBOOKING
+  if (data.hasOwnProperty("NAME")) {
+    // Request for CONTACT sheet
+    sheet.appendRow([data.NAME, data.EMAIL, data.MESSAGE]);
+    return ContentService.createTextOutput("Your message was successfully sent to the Googlesheet CONTACT database!");
+  } else if (data.hasOwnProperty("FIRSTNAME")) {
+    // Request for CABBOOKING sheet
+    sheetB.appendRow([data.FIRSTNAME, data.LASTNAME, data.EMAIL, data.MOBILE, data.FROMADDRESS, data.TOADDRESS, data.PERSON, data.LUGGAGE, data.JOURNEYDATE, data.JOURNEYTIME, data.MESSAGE]);
+    return ContentService.createTextOutput("Your message was successfully sent to the Googlesheet CABBOOKING database!");
+  }else if (data.hasOwnProperty("DRIVERID")) {
+    // Request for CABBOOKING sheet
+    sheetC.appendRow([data.DRIVERID, data.CARNUMBER, data.DRIVERNAME, data.EMPLOYEENAME, data.DATE, data.PICKUPLOCATION, data.PICKUPTIME, data.DROPLOCATION, data.DROPTIME, data.OPENINGREADING, data.CLOSINGREADING,data.TOTALRUNKMS,data.EXTRAKMS,data.NIGHTHALTS,data.TOTALDAYS]);
+    return ContentService.createTextOutput("Your message was successfully sent to the Googlesheet CABBOOKING database!");
+  }
+   else {
+    // Handle unrecognized request
+    return ContentService.createTextOutput("Invalid request");
+  }
+}
+
