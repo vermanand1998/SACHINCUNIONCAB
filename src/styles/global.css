@@ -17,4 +17,10 @@
     .ShowthisTextMobile{
         display: block !important;
     }
+    .mobileHeight{
+        height: 110px;
+    }
+    .mobileWidth{
+        width: 10px;
+    }
 }

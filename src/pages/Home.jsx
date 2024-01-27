@@ -102,7 +102,7 @@ const Home = () => {
       {/* ===============OUR CLIENTS======================== */}
       <section>
         <Container>
-          <Row>
+          <Row >
             <Col lg="12" className="mb-5 text-center">
               <h6 className="section__subtitle">Clients</h6>
               <h2 className="section__title">Our Clients</h2>

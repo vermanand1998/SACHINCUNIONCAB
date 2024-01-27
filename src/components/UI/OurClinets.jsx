@@ -7,6 +7,7 @@ import companyLogo02 from "../../assets/all-images/carnationInfoTechlogo.png";
 import companyLogo03 from "../../assets/all-images/pcggroup.png";
 import companyLogo04 from "../../assets/all-images/entigrity.jpeg";
 import companyLogo05 from "../../assets/all-images/madhu.jpg";
+import "../../styles/global.css"
 const OUR__CLINETS = [
   {
     name: "GOVERNMENT SECTOR",
@@ -47,11 +48,11 @@ const OurClients = () => {
   return (
     <>
       {OUR__CLINETS.map((item, index) => (
-        <Col  key={index} className="mb-4">
+        <Col  key={index} className="mb-4" xs="6" md="">
           <div >
             <div className="single__member-img">
             <Link to={item.websiteurl}>
-              <img height={'150px'} width={'50px'} src={item.imgUrl} alt="" className="w-100" />
+              <img height={'150px'} width={'50px'} src={item.imgUrl} alt="" className="w-100 mobileHeight mobileWidth" />
             </Link>
             </div>
             <h6 className="text-center mb-0 mt-3">{item.name}</h6>
