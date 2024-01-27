@@ -160,14 +160,23 @@
 .nav__active {
   color: #f9a826;
 }
+.showinMobOnly{
+  display: none;
+}
+
 
 @media only screen and (max-width: 768px) {
-  .header__top,
+  /* .header__top,
   .header__middle,
   .nav__right {
     display: none;
+  } */
+  .showinMobOnlyCallbutton{
+    display: none !important;
   }
-
+  .showinMobOnly{
+    display: block;
+  }
   .mobile__menu {
     display: block;
   }

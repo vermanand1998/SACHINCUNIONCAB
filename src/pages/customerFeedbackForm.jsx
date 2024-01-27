@@ -4,6 +4,7 @@ import CommonSection from "../components/UI/CommonSection";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { googleSheetUrl } from "../urlandKeys";
+import "../../src/styles/global.css";
 
 const CustomerFeedbackFrom = () => {
   const [formData, setFormData] = useState({
@@ -76,7 +77,7 @@ const CustomerFeedbackFrom = () => {
   return (
     <>
       <CommonSection title="Feedback Form" />
-      <Form style={{ marginLeft: '20px' }} onSubmit={handleSubmit}>
+      <Form className="marginFormArround" onSubmit={handleSubmit}>
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
           <label htmlFor="driverId">Your Name:</label>
           <input

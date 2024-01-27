@@ -5,8 +5,8 @@ import "../../styles/header.css";
 import Example from "../../popups/authpopup";
 import authModelContext from "../../Store/UserContext";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -43,9 +43,9 @@ const Header = () => {
   };
   const handleSearchKeyPress = (e) => {
     if (e.key === "Enter" && searchQuery.length > 3) {
-      navigate("/cars");
-      toast.success("Searched successfully !", {});
-    } else {
+      navigate('/cars');
+      toast.success('Searched successfully !', {});
+    }else{
       // toast.success('Please Enter atleast 3 character !',{
       //   style: {
       //     color: 'white',
@@ -57,14 +57,14 @@ const Header = () => {
 
   const handleSearchClick = () => {
     if (searchQuery.length > 3) {
-      navigate("/cars");
-      toast.success("Searched successfully !", {});
-    } else {
-      toast.success("Please Enter atleast 3 character !", {
+      navigate('/cars');
+      toast.success('Searched successfully !', {});
+    }else{
+      toast.success('Please Enter atleast 3 character !',{
         style: {
-          color: "white",
-          backgroundColor: "lightcoral",
-        },
+          color: 'white',
+          backgroundColor: 'lightcoral',
+        }
       });
     }
   };
@@ -119,7 +119,7 @@ const Header = () => {
           <Container>
             <Row>
               <Col lg="6" md="6" sm="6">
-                <div className="header__top__left">
+                <div className="header__top__left showinMobOnlyCallbutton">
                   <span>Need Help?</span>
                   <span className="header__top__help">
                     <i className="ri-phone-fill"></i> +919956237689,
@@ -131,6 +131,11 @@ const Header = () => {
               <Col lg="6" md="6" sm="6">
                 {userToken === "null" || userToken === undefined ? (
                   <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+                    <span style={{marginRight:'30%'}} className="showinMobOnly">
+                    <div  className="d-flex gap-1">
+                      Welcome <b>User</b>
+                    </div>
+                    </span>
                     <div
                       style={{ cursor: "pointer" }}
                       onClick={() => openModal("Login")}
@@ -149,9 +154,16 @@ const Header = () => {
                   </div>
                 ) : (
                   <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+                    <span className="showinMobOnlyCallbutton">
                     <div className="d-flex align-items-center gap-1">
                       Welcome <b>{userName}</b>
                     </div>
+                    </span>
+                    <span style={{marginRight:'48%'}} className="showinMobOnly">
+                     <div  className="d-flex gap-1">
+                      Welcome <b>{userName}</b>
+                    </div>
+                    </span>
                     <div
                       style={{ cursor: "pointer" }}
                       onClick={() => logoutMe()}
@@ -178,8 +190,11 @@ const Header = () => {
                       className="d-flex align-items-center gap-2"
                     >
                       <i className="ri-car-line"></i>
-                      <span>
+                      <span className="ShowthisText">
                         Union Cabs India <br /> Service
+                      </span>
+                      <span className="ShowthisTextMobile">
+                        Union Cabs India Service
                       </span>
                     </Link>
                   </h1>
@@ -216,12 +231,10 @@ const Header = () => {
                 sm="0"
                 className="d-flex align-items-center justify-content-end"
               >
-                <button className="header__btn btn ">
-                  {/* <Link to="/contact"> */}
-                  <a href="tel:9120891661" target="_blank">
+                <button className="header__btn btn showinMobOnlyCallbutton">
+                  <Link to="/contact">
                     <i className="ri-phone-line"></i> Request a call
-                    {/* </Link> */}
-                  </a>
+                  </Link>
                 </button>
               </Col>
             </Row>

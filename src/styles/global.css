@@ -1,0 +1,20 @@
+.marginFormArround{
+    margin-left: 30px;
+}
+.ShowthisText{
+    display: block;
+}
+.ShowthisTextMobile{
+    display: none;
+}
+@media only screen and (max-width: 768px) {
+    .marginFormArround{
+        margin:10px;
+    }
+    .ShowthisText{
+        display: none;
+    }
+    .ShowthisTextMobile{
+        display: block !important;
+    }
+}
