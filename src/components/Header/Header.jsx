@@ -131,7 +131,7 @@ const Header = () => {
               <Col lg="6" md="6" sm="6">
                 {userToken === "null" || userToken === undefined ? (
                   <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                    <span style={{marginRight:'26%'}} className="showinMobOnly">
+                    <span style={{marginRight:'24%'}} className="showinMobOnly">
                     <div  className="d-flex gap-1">
                       Welcome <b>User</b>
                     </div>
