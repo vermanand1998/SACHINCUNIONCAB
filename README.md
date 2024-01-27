@@ -105,3 +105,18 @@ function doPost(e) {
   }
 }
 
+#push code on github
+1. git init
+2. git add README.md
+3. git commit -m "first commit"
+4. git branch -M main
+5. git remote add origin https://github.com/vermanand1998/abcd.git
+6. git push -u origin main
+
+
+#code commit command
+1. git init
+2. git add .
+3. git commit -m "Secondt commit"
+4. git push -u origin main
+
