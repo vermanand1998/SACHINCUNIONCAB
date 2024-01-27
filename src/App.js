@@ -21,7 +21,7 @@ function App() {
       >
         <div>
           <a
-            href="tel:+9113105613"
+            href="tel:9120891661"
             target="_blank"
           >
             <img
@@ -34,7 +34,7 @@ function App() {
         </div>
         <div style={{marginLeft:'16px'}}>
           <a
-            href="https://wa.me/9113105613?text=How%20I%20can%20help%20you"
+            href="https://wa.me/9120891661?text=How%20I%20can%20help%20you"
             target="_blank"
           >
             <img
