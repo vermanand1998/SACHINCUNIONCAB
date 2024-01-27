@@ -11,8 +11,9 @@ import carData from "../assets/data/carData";
 import CarItem from "../components/UI/CarItem";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import Testimonial from "../components/UI/Testimonial";
-
+import OurClients from "../components/UI/OurClinets";
 import BlogList from "../components/UI/BlogList";
+import AboutUnionCabs from "../components/UI/aboutunioncabs";
 
 const Home = () => {
   return (
@@ -38,7 +39,8 @@ const Home = () => {
         </div>
       </section>
       {/* =========== about section ================ */}
-      <AboutSection />
+      {/* <AboutSection /> */}
+      <AboutUnionCabs />
       {/* ========== services section ============ */}
       <section>
         <Container>
@@ -94,6 +96,18 @@ const Home = () => {
             </Col>
 
             <BlogList />
+          </Row>
+        </Container>
+      </section>
+      {/* ===============OUR CLIENTS======================== */}
+      <section>
+        <Container>
+          <Row>
+            <Col lg="12" className="mb-5 text-center">
+              <h6 className="section__subtitle">Clients</h6>
+              <h2 className="section__title">Our Clients</h2>
+            </Col>
+            <OurClients />
           </Row>
         </Container>
       </section>

@@ -49,7 +49,7 @@ const Footer = () => {
               </h1>
             </div>
             <p className="footer__logo-content">
-            We assures you to provide the best services. <br /> GST NO. 09BDDPV7168P1ZG
+            We assures you to provide the best services. <br /> GST NO. 09BDDPV7168P1ZG <br /> ESTABLISHMENT YEAR:2020
             </p>
           </Col>
 
@@ -80,14 +80,20 @@ const Footer = () => {
 
           <Col lg="3" md="4" sm="12">
             <div className="mb-4">
-              <h5 className="footer__link-title">Newsletter</h5>
-              <p className="section__description">Subscribe our newsletter</p>
-              <div className="newsletter">
-                <input type="email" placeholder="Email" />
-                <span>
-                  <i class="ri-send-plane-line"></i>
-                </span>
-              </div>
+              <h5 className="footer__link-title">SPECIALIZATION</h5>
+              <div className="mb-4">
+              <p className="office__info">
+                1. MONTHLY BASIS CAR RENTAL <br />
+                2. DAILY BASIS CAR RENTAL <br />
+                3. AIRPORT PICKUP & DROP OFF <br />
+                4. OUTSTATION (ALL OVER INDIA) <br />
+                5. LOCAL TRAVELLING <br />
+                6. GPS ENABLED CABS <br />
+                7. 24 HOURS SERVICES <br />
+                8. PROVIDING VERFIED DRIVER <br />
+                9. CAR FOR WEDDING PURPOSE
+              </p>
+            </div>
             </div>
           </Col>
 

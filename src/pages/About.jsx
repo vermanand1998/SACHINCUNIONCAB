@@ -5,15 +5,17 @@ import Helmet from "../components/Helmet/Helmet";
 import AboutSection from "../components/UI/AboutSection";
 import { Container, Row, Col } from "reactstrap";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
-
 import driveImg from "../assets/all-images/drive.jpg";
 import OurMembers from "../components/UI/OurMembers";
+import OurClients from "../components/UI/OurClinets";
 import "../styles/about.css";
+import AboutMe from "../components/UI/aboutMe";
 
 const About = () => {
   return (
     <Helmet title="About">
       <CommonSection title="About Us" />
+      <AboutMe aboutClass="aboutPage"/>
       <AboutSection aboutClass="aboutPage" />
 
       <section className="about__page-section">
@@ -61,12 +63,19 @@ const About = () => {
 
       <section>
         <Container>
-          <Row>
+        <Row>
             <Col lg="12" className="mb-5 text-center">
               <h6 className="section__subtitle">Experts</h6>
               <h2 className="section__title">Our Members</h2>
             </Col>
             <OurMembers />
+          </Row>
+          <Row>
+            <Col lg="12" className="mb-5 text-center">
+              <h6 className="section__subtitle">Clients</h6>
+              <h2 className="section__title">Our Clients</h2>
+            </Col>
+            <OurClients />
           </Row>
         </Container>
       </section>

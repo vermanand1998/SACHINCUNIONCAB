@@ -8,8 +8,8 @@ import ava03 from "../../assets/all-images/ava-3.jpg";
 
 const OUR__MEMBERS = [
   {
-    name: "Sachin Verma",
-    experience: "5 years of experience",
+    name: "Mr. Deva Nand",
+    experience: "Senior Cab Manager (3+ years experience)",
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",
@@ -18,8 +18,8 @@ const OUR__MEMBERS = [
   },
 
   {
-    name: "Devanand Verma",
-    experience: "3 years of experience",
+    name: "Mr. Siddharth Singh",
+    experience: "Cab Manager (3+ years experience)",
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",
@@ -28,8 +28,8 @@ const OUR__MEMBERS = [
   },
 
   {
-    name: "Shiva Singh",
-    experience: "2 years of experience",
+    name: "Mr. Anand Verma",
+    experience: "Website Developer and IT Engineer",
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",
@@ -38,8 +38,8 @@ const OUR__MEMBERS = [
   },
 
   {
-    name: "Raghav Yadav",
-    experience: "7 years of experience",
+    name: "Mr. Aditya Nishad",
+    experience: "Legal Lawyer of company",
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",

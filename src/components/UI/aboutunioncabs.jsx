@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import "../../styles/about-section.css";
 import aboutImg from "../../assets/all-images/cars-img/bmw-offer.png";
 
-const AboutSection = ({ aboutClass }) => {
+const AboutUnionCabs = ({ aboutClass }) => {
   return (
     <section
       className="about__section"
@@ -17,13 +17,19 @@ const AboutSection = ({ aboutClass }) => {
         <Row>
           <Col lg="6" md="6">
             <div className="about__section-content">
-              {/* <h4 className="section__subtitle">About Us</h4> */}
-              <h2 className="section__title">Welcome to car booking service</h2>
+              <h4 className="section__subtitle">Our Services</h4>
+              <h2 className="section__title">HATCHBACK, SEDAN, PERMIUM SEDAN, SUV, MUV</h2>
               <p className="section__description">
-              <b>Easy Booking : </b> Booking a cab with us is as simple as a few clicks. Our user-friendly interface ensures a seamless and quick booking process. <br />
-              <b>Affordable Rates : </b>Enjoy competitive and transparent pricing. No hidden fees – what you see is what you pay. <br />
-              <b>Wide Fleet Selection : </b> From sleek sedans to spacious SUVs, choose the vehicle that suits your needs. We have a diverse fleet to accommodate solo travelers or larger groups. <br />
-              <b>Trained Drivers : </b> Your safety is our top priority. Our drivers are experienced, licensed, and undergo regular training to provide you with a secure and comfortable journey.
+              <b> 1 : </b> Provides cabs of all category on monthly basis rental. <br />
+              <b> 2 : </b> Provides cabs of all category on daily basis rental. <br />
+              <b> 3 : </b> Provides cabs of all category for local journey. <br />
+              <b> 4 : </b> Provides cabs of all category for outstation journey. <br />
+              <b> 5 : </b> Provides cabs of all category for airport pickup & drop. <br />
+              <b> 6 : </b> Provides GPS enabled cabs for female safety with live tracking. <br />
+              <b> 7 : </b> Provides cabs to government and private for their various purposes. <br />
+              <b> 8 : </b> Provides cars on rent for wedding. <br />
+              <b> 9 : </b> Provides Tour Packages. <br />
+              <b> 10 : </b> Bulk cars on rent  <br />              
               </p>
               <div className="about__section-item d-flex align-items-center">
                 <p className="section__description d-flex align-items-center gap-2">
@@ -58,4 +64,4 @@ const AboutSection = ({ aboutClass }) => {
   );
 };
 
-export default AboutSection;
+export default AboutUnionCabs;
