@@ -34,7 +34,7 @@ function App() {
         </div>
         <div style={{marginLeft:'16px'}}>
           <a
-            href="https://wa.me/9120891661?text=How%20I%20can%20help%20you"
+            href="https://wa.me/9120891661?text=Hello%20Anand,%20how%20are%20you%20doing?"
             target="_blank"
           >
             <img

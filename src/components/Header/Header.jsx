@@ -5,8 +5,8 @@ import "../../styles/header.css";
 import Example from "../../popups/authpopup";
 import authModelContext from "../../Store/UserContext";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -43,9 +43,9 @@ const Header = () => {
   };
   const handleSearchKeyPress = (e) => {
     if (e.key === "Enter" && searchQuery.length > 3) {
-      navigate('/cars');
-      toast.success('Searched successfully !', {});
-    }else{
+      navigate("/cars");
+      toast.success("Searched successfully !", {});
+    } else {
       // toast.success('Please Enter atleast 3 character !',{
       //   style: {
       //     color: 'white',
@@ -57,14 +57,14 @@ const Header = () => {
 
   const handleSearchClick = () => {
     if (searchQuery.length > 3) {
-      navigate('/cars');
-      toast.success('Searched successfully !', {});
-    }else{
-      toast.success('Please Enter atleast 3 character !',{
+      navigate("/cars");
+      toast.success("Searched successfully !", {});
+    } else {
+      toast.success("Please Enter atleast 3 character !", {
         style: {
-          color: 'white',
-          backgroundColor: 'lightcoral',
-        }
+          color: "white",
+          backgroundColor: "lightcoral",
+        },
       });
     }
   };
@@ -217,9 +217,11 @@ const Header = () => {
                 className="d-flex align-items-center justify-content-end"
               >
                 <button className="header__btn btn ">
-                  <Link to="/contact">
+                  {/* <Link to="/contact"> */}
+                  <a href="tel:9120891661" target="_blank">
                     <i className="ri-phone-line"></i> Request a call
-                  </Link>
+                    {/* </Link> */}
+                  </a>
                 </button>
               </Col>
             </Row>
