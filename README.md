@@ -120,3 +120,18 @@ function doPost(e) {
 3. git commit -m "Secondt commit"
 4. git push -u origin main
 
+
+
+//Admin Login Pass
+userName: Sachin2020
+email: uniooncabsindia2020@gmail.com
+pass: UnionCabs@2024
+token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjYwYjc0NDY5OTAzNDgwYWE1ZTAwNSIsImlhdCI6MTcwNjQzMDk5OCwiZXhwIjoxNzM3OTY2OTk4fQ.tvD8kxgcUFRGlu-YmNaVsjsL7LTZ0r9oaOOEvK7Ag4k'
+
+
+
+//Drivers Login Pass
+userName: UnionCab12
+email: indiacabs2020@gmail.com
+pass: DriverCab@2024
+token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjYxMGU5OTQxYWU5ZTM5MmU0OGYzMCIsImlhdCI6MTcwNjQzMDg2MiwiZXhwIjoxNzM3OTY2ODYyfQ.sEeW7KQBngP8WPOWFML6mrL1LFOwPQ1OeQF-uGbc7lY'

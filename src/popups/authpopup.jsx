@@ -52,6 +52,7 @@ function AuthPopup() {
       const json = await response.json();
       setuserData(json.data)
       localStorage.setItem("Token",json.token);
+      {login ?(localStorage.setItem("UserEmail",json.data.email)):(localStorage.setItem("UserEmail",json.data.user.email))}
       {login ?(localStorage.setItem("Name",json.data.name)):(localStorage.setItem("Name",json.data.user.name))}
       window.location.reload();
       handleClose();
@@ -71,7 +72,7 @@ function AuthPopup() {
       }
     } catch (error) {
       console.error("Error during fetch:", error);
-      toast.error(`Incorrect EmailId or Password !!`, {
+      toast.error(`Please Check your Details !!`, {
         style: {
           color: "white",
           backgroundColor: "lightcoral",
@@ -90,7 +91,7 @@ function AuthPopup() {
       >
         <Modal.Header
           closeButton
-          style={{ backgroundColor: "#000D6B", color: "white" }}
+          style={{ backgroundColor: "#3973ac", color: "white" }}
         >
           <Modal.Title className="text-center">
             {login ? "Login" : "Signup"}
@@ -131,13 +132,14 @@ function AuthPopup() {
               <>
                 <Form.Group controlId="formBasicUsername">
                   <Form.Label>
-                    <FaUser className="mr-2" /> Username
+                    <FaUser className="mr-2"  /> Username
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter username"
+                    placeholder="Enter 10 char"
                     name="name"
                     required
+                    maxLength={'10'}
                     value={formData.name}
                     onChange={handleInputChange}
                   />

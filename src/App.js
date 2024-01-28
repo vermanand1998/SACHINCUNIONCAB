@@ -17,11 +17,12 @@ function App() {
           left: "initial",
           display: "flex",
           flexDirection: "column",
+          marginRight:'-20px'
         }}
       >
         <div>
           <a
-            href="tel:9120891661"
+            href="tel:9169945434"
             target="_blank"
           >
             <img
@@ -34,7 +35,7 @@ function App() {
         </div>
         <div style={{marginLeft:'16px'}}>
           <a
-            href="https://wa.me/9120891661?text=Hello%20Anand,%20how%20are%20you%20doing?"
+            href="https://wa.me/9169945434?text=Hello%20Sachin,%20how%20are%20you%20doing?"
             target="_blank"
           >
             <img

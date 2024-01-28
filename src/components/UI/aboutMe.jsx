@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import "../../styles/about-section.css";
-import ava01 from "../../assets/all-images/ava-1.jpg";
+// import ava01 from "../../assets/all-images/ava-1.jpg";
+import ava01 from "../../assets/all-images/Sachin.png";
 import "../../styles/our-member.css";
 const AboutMe = ({ aboutClass }) => {
   return (
@@ -62,8 +63,7 @@ const AboutMe = ({ aboutClass }) => {
             <Col>
               <div>
                 <div
-                  style={{ marginLeft: "18%" }}
-                  className="single__member-img"
+                  className="single__member-img imageMargin"
                 >
                   <img height={300} width={400} src={ava01} alt="" />
                 </div>

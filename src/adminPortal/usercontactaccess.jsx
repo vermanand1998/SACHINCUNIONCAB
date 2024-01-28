@@ -56,7 +56,7 @@ function CustomerContactDetails() {
   return (
     <div className="container">
       {loading ? (
-        <div className="loader" style={{ color:'#000D6B',fontSize:'30px',margin:'50px'}}>Please Wait Data is Loading...</div>
+        <div className="loader" style={{ color:'#000D6B',fontSize:'20px',margin:'50px'}}>Please Wait Data is Loading...</div>
       ) : contactData.length > 0 ? (
         <div className="table-responsive">
           <table className="table table-bordered table-hover">

@@ -5,7 +5,15 @@
     margin-top: -5%;
     color: white;
   }
-  
+    @media only screen and (max-width: 768px) {
+      .custom-tabs-container {
+        /* width:0%; */
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: -22%;
+        color: white;
+      }
+    }
   .custom-tab-list {
     list-style: none;
     padding: 0;

@@ -7,7 +7,35 @@
 .ShowthisTextMobile{
     display: none;
 }
-@media only screen and (max-width: 768px) {
+.imageMargin{
+    margin-left: 18%;
+}
+@media only screen and (min-width: 355px) and (max-width: 410px) {
+    .classMarginGap{
+      margin-right: 32% !important;
+    }
+    .marginFormArround{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .imageMargin{
+        margin-left: -5%;
+    }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 411px) {
+    .classMarginGap{
+      margin-right: 42% !important;
+    }
+    .marginFormArround{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .imageMargin{
+        margin-left: -0.9%;
+    }
+}
+@media only screen and (max-width: 800px) and (min-width: 768px) {
     .marginFormArround{
         margin:10px;
     }
@@ -22,5 +50,8 @@
     }
     .mobileWidth{
         width: 10px;
+    }
+    .imageMargin{
+        margin-left: -5%;
     }
 }

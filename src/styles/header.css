@@ -3,7 +3,12 @@
   background: #000d6b;
   color: #fff;
 }
-
+.header__top_instruction {
+  /* padding: 10px 0px; */
+  background: black;
+  color: #fff;
+  height: 25px;
+}
 .header__top__left {
   display: flex;
   align-items: center;
@@ -201,7 +206,7 @@
     flex-direction: column;
     row-gap: 2rem;
     justify-content: center;
-    background-color: #888994;
+    background-color: #ccddff;
   }
 
   .menu a {

@@ -5,8 +5,9 @@ import "../../styles/header.css";
 import Example from "../../popups/authpopup";
 import authModelContext from "../../Store/UserContext";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../../styles/global.css"
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -42,10 +43,11 @@ const Header = () => {
     setSearchQuery(e.target.value);
   };
   const handleSearchKeyPress = (e) => {
-    if (e.key === "Enter" && searchQuery.length > 3) {
-      navigate('/cars');
-      toast.success('Searched successfully !', {});
-    }else{
+    if (e.key === "Enter" && searchQuery.length >= 3) {
+      navigate("/cars");
+      toast.success("Searched successfully !", {});
+      setSearchQuery("");
+    } else {
       // toast.success('Please Enter atleast 3 character !',{
       //   style: {
       //     color: 'white',
@@ -56,23 +58,24 @@ const Header = () => {
   };
 
   const handleSearchClick = () => {
-    if (searchQuery.length > 3) {
-      navigate('/cars');
-      toast.success('Searched successfully !', {});
-    }else{
-      toast.success('Please Enter atleast 3 character !',{
+    if (searchQuery.length >= 3) {
+      navigate("/cars");
+      toast.success("Searched successfully !", {});
+    } else {
+      toast.success("Please Enter atleast 3 character !", {
         style: {
-          color: 'white',
-          backgroundColor: 'lightcoral',
-        }
+          color: "white",
+          backgroundColor: "lightcoral",
+        },
       });
     }
   };
   useEffect(() => {
     const token = localStorage.getItem("Token");
+    const UserEmail = localStorage.getItem("UserEmail");
     setshowAuthModel(false);
 
-    if (token !== "null") {
+    if (UserEmail!==null && UserEmail ==='uniooncabsindia2020@gmail.com' && token!==null) {
       setNavLinks((prevNavLinks) => {
         const existingCabDetailLink = prevNavLinks.find(
           (link) => link.path === "/drivercabsdetails"
@@ -95,6 +98,25 @@ const Header = () => {
 
         return prevNavLinks;
       });
+    }else if(UserEmail!==null && UserEmail ==='indiacabs2020@gmail.com' && token!==null){
+      setNavLinks((prevNavLinks) => {
+        const existingCabDetailLink = prevNavLinks.find(
+          (link) => link.path === "/drivercabsdetails"
+        );
+
+        // Add the Cab Detail link only if it doesn't exist in the array
+        if (!existingCabDetailLink) {
+          return [
+            ...prevNavLinks,
+            {
+              path: "/drivercabsdetails",
+              display: "Cab Detail",
+            },
+          ];
+        }
+
+        return prevNavLinks;
+      });
     }
   }, []);
   const openModal = (val) => {
@@ -102,6 +124,8 @@ const Header = () => {
   };
   const logoutMe = () => {
     localStorage.setItem("Token", null);
+    localStorage.setItem("UserEmail", null);
+    localStorage.setItem("Name", null);
     navigate("/home");
     window.location.reload();
   };
@@ -114,6 +138,19 @@ const Header = () => {
     <>
       {showAuthModel ? <Example /> : ""}
       <header className="header">
+        <div className="header__top_instruction">
+          <marquee direction="left" behavior="scroll" scrollamount="5">
+          Our Application will be live soon. Please stay tuned and don\'t take any action. We apologize for the inconvenience.
+          </marquee>
+        </div>
+        <span
+          style={{
+            display: "block",
+            width: "100%",
+            height: "0.3px",
+            backgroundColor: "white",
+          }}
+        ></span>
         {/* ============ header top ============ */}
         <div className="header__top">
           <Container>
@@ -131,10 +168,12 @@ const Header = () => {
               <Col lg="6" md="6" sm="6">
                 {userToken === "null" || userToken === undefined ? (
                   <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                    <span style={{marginRight:'24%'}} className="showinMobOnly">
-                    <div  className="d-flex gap-1">
-                      Welcome <b>User</b>
-                    </div>
+                    <span
+                      className="showinMobOnly classMarginGap"
+                    >
+                      <div className="d-flex gap-1">
+                        Welcome <b>User</b>
+                      </div>
                     </span>
                     <div
                       style={{ cursor: "pointer" }}
@@ -155,14 +194,16 @@ const Header = () => {
                 ) : (
                   <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
                     <span className="showinMobOnlyCallbutton">
-                    <div className="d-flex align-items-center gap-1">
-                      Welcome <b>{userName}</b>
-                    </div>
+                      <div className="d-flex align-items-center gap-1">
+                        Welcome <b>{userName}</b>
+                      </div>
                     </span>
-                    <span style={{marginRight:'44%'}} className="showinMobOnly">
-                     <div  className="d-flex gap-1">
-                      Welcome <b>{userName}</b>
-                    </div>
+                    <span
+                      className="showinMobOnly classMarginGap"
+                    >
+                      <div className="d-flex gap-1">
+                        Welcome <b>{userName}</b>
+                      </div>
                     </span>
                     <div
                       style={{ cursor: "pointer" }}
@@ -179,7 +220,7 @@ const Header = () => {
         </div>
 
         {/* =============== header middle =========== */}
-        <div className="header__middle">
+        <div style={{ backgroundColor: "#ccddff" }} className="header__middle">
           <Container>
             <Row>
               <Col lg="4" md="3" sm="4">
