@@ -169,7 +169,8 @@ const Header = () => {
                 {userToken === "null" || userToken === undefined ? (
                   <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
                     <span
-                      className="showinMobOnly classMarginGap"
+                      style={{marginRight:'24%'}}
+                      className="showinMobOnly"
                     >
                       <div className="d-flex gap-1">
                         Welcome <b>User</b>
