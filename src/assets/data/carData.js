@@ -54,7 +54,7 @@ const carData = [
       },
     ],
     description:
-      " Innova crysta is one of the most loved MUV by the customers with full feel of luxury, centralized AC with clean interior and exterior with comfortable seaters",
+      " Innova crysta is one of the most loved MUV by the customers with full feel of luxury, centralized AC with clean interior and exterior with comfortable seats",
   },
 
   {
@@ -109,7 +109,7 @@ const carData = [
     id: 3,
     brand: "Maruti Suzuki",
     rating: 132,
-    carName: "Maruti Suzuki Dezire",
+    carName: "Maruti Suzuki Dezire(4+1 Seater)",
     imgUrl: img03,
     model: "Model-2022",
     price: 125,
