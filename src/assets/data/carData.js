@@ -31,11 +31,11 @@ const carData = [
         ],
       },
     ],
-    OutStation-min 250 Km: [
+    outStation: [
       {
         key1: [  
           "12 Hours or 250 Km = ₹4500/-",
-          "Extra Km @ ₹17/- Per Km",
+          "Extra Km @ ₹18/- Per Km",
           "Extra Hours ₹200/- Per Hour",
           "Night Charges Rs. 300/-",
         ],
@@ -44,11 +44,12 @@ const carData = [
     monthly: [
       {
         key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
+          "Fixed Charges For First 2000Km = ₹60,000/-",
+          "Charges After Exceeding Limit of 2000 Km @ ₹17/- Per Km",
+          "Night Halt @ ₹250/- Per Night(Applicable from 10:00pm to 6:00am)",
+          "**Per Day Working Hour Garage to Garage will be 12 Hours**",
+          "**Toll Tax/Parking as applicable**",
+          "**5% GST will applicable as per the GST rule**",
         ],
       },
     ],
