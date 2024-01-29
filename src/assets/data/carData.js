@@ -24,20 +24,20 @@ const carData = [
     local: [
       {
         key1: [
-          "8 Hours or 80 KM= ₹2500/-",
+          "8 Hours or 80 Km= ₹2500/-",
           "Extra Hours= ₹200/- Per Hour",
           "Night Charges= ₹300/-",
           "Airport Pickup or Drop Charges= ₹2000/-",
         ],
       },
     ],
-    outStation: [
+    OutStation(min 250Km): [
       {
         key1: [  
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
+          "12 Hours or 250 Km = ₹4500/-",
+          "8 Hours 80 Km Rs. 1800/-",
           "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
+          "Night Charges Rs. 300/-",
         ],
       },
     ],
