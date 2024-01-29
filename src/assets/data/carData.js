@@ -54,7 +54,7 @@ const carData = [
       },
     ],
     description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+      " Innova crysta is one of the most loved MUV by the customers with full feel of luxury, centralized AC with clean interior and exterior with comfortable seaters",
   },
 
   {
