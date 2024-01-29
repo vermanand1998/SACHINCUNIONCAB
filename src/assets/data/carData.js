@@ -1,6 +1,6 @@
 // import all images from assets/images directory
 import img01 from "../all-images/cars-img/crysta final.png";
-import img02 from "../all-images/cars-img/offer-toyota.png";
+import img02 from "../all-images/cars-img/etios final.png";
 import img03 from "../all-images/cars-img/bmw-offer.png";
 import img04 from "../all-images/cars-img/nissan-offer.png";
 import img05 from "../all-images/cars-img/offer-toyota.png";
