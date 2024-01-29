@@ -31,12 +31,12 @@ const carData = [
         ],
       },
     ],
-    OutStation(min 250Km): [
+    OutStation-min 250 Km: [
       {
         key1: [  
           "12 Hours or 250 Km = ₹4500/-",
-          "8 Hours 80 Km Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
+          "Extra Km @ ₹17/- Per Km",
+          "Extra Hours ₹200/- Per Hour",
           "Night Charges Rs. 300/-",
         ],
       },
