@@ -13,7 +13,7 @@ const carData = [
     id: 1,
     brand: "Toyota",
     rating: 112,
-    carName: "Toyota Innova Crysta(6+1)",
+    carName: "Toyota Innova Crysta(6+1 Seater)",
     imgUrl: img01,
     model: "Model 3",
     price: 44,
