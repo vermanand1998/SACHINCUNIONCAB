@@ -34,7 +34,7 @@ const carData = [
     outStation: [
       {
         key1: [  
-          "12 Hours or 250 Km = ₹4500/-",
+          "12 Hours or 250 Km(min) = ₹4500/-",
           "Extra Km @ ₹18/- Per Km",
           "Extra Hours ₹200/- Per Hour",
           "Night Charges Rs. 300/-",
@@ -61,7 +61,7 @@ const carData = [
     id: 2,
     brand: "Toyota",
     rating: 102,
-    carName: "Toyota Aventador",
+    carName: "Toyota Etios(4+1 Seater)",
     imgUrl: img02,
     model: "Model-2022",
     price: 123,
@@ -72,33 +72,32 @@ const carData = [
     local: [
       {
         key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
+          "8 Hours or 80 Km= ₹1800/-",
+          "Extra Hours= ₹120/- Per Hour",
+          "Night Charges= ₹250/-",
+          "Airport Pickup or Drop Charges= ₹1300/-",
         ],
       },
     ],
     outStation: [
       {
         key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
+          "12 Hours or 200 Km(min) = ₹2200/-",
+          "Extra Km @ ₹11/- Per Km",
+          "Extra Hours ₹120/- Per Hour",
+          "Night Charges Rs. 250/-",,
         ],
       },
     ],
     monthly: [
       {
         key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
+         "Fixed Charges For First 2000Km = ₹36,000/-",
+          "Charges After Exceeding Limit of 2000 Km @ ₹11/- Per Km",
+          "Night Halt @ ₹200/- Per Night(Applicable from 10:00pm to 6:00am)",
+          "**Per Day Working Hour Garage to Garage will be 12 Hours**",
+          "**Toll Tax/Parking as applicable**",
+          "**5% GST will applicable as per the GST rule**",
         ],
       },
     ],
@@ -108,9 +107,9 @@ const carData = [
 
   {
     id: 3,
-    brand: "BMW",
+    brand: "Maruti Suzuki",
     rating: 132,
-    carName: "BMW X3",
+    carName: "Maruti Suzuki Dezire",
     imgUrl: img03,
     model: "Model-2022",
     price: 125,
@@ -121,33 +120,32 @@ const carData = [
     local: [
       {
         key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
+          "8 Hours or 80 Km= ₹1800/-",
+          "Extra Hours= ₹120/- Per Hour",
+          "Night Charges= ₹250/-",
+          "Airport Pickup or Drop Charges= ₹1300/-",
         ],
       },
     ],
     outStation: [
       {
         key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
+          "12 Hours or 200 Km(min) = ₹2200/-",
+          "Extra Km @ ₹11/- Per Km",
+          "Extra Hours ₹120/- Per Hour",
+          "Night Charges Rs. 250/-",,
         ],
       },
     ],
     monthly: [
       {
         key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
+         "Fixed Charges For First 2000Km = ₹32,000/-",
+          "Charges After Exceeding Limit of 2000 Km @ ₹11/- Per Km",
+          "Night Halt @ ₹200/- Per Night(Applicable from 10:00pm to 6:00am)",
+          "**Per Day Working Hour Garage to Garage will be 12 Hours**",
+          "**Toll Tax/Parking as applicable**",
+          "**5% GST will applicable as per the GST rule**",
         ],
       },
     ],
