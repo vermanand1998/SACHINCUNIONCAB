@@ -27,7 +27,7 @@ const CarItem = (props) => {
             <i class="ri-car-line"></i> Out Station
             </span>
             <span className=" d-flex align-items-center gap-1">
-            <i class="ri-car-line"></i> Montholy
+            <i class="ri-car-line"></i> Monthly
             </span>
           </div>
 

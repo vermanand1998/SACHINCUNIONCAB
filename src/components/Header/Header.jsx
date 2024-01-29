@@ -167,7 +167,7 @@ const Header = () => {
               </Col>
 
               <Col lg="6" md="6" sm="6">
-                {userToken === "null" || userToken === undefined ? (
+                {(userToken === undefined || userToken === "null" || userToken === null)  ? (
                   <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
                     <span
                       style={{marginRight:'24%'}}
