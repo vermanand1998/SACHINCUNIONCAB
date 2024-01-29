@@ -11,9 +11,9 @@ import img08 from "../all-images/cars-img/mercedes-offer.png";
 const carData = [
   {
     id: 1,
-    brand: "Tesla",
+    brand: "Toyota",
     rating: 112,
-    carName: "Tesla Malibu",
+    carName: "Toyota Innova Crysta",
     imgUrl: img01,
     model: "Model 3",
     price: 44,
