@@ -24,10 +24,8 @@ const carData = [
     local: [
       {
         key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
+          "8 Hours or 80 KM Rs. 2500/-",
+          "Extra Hours Rs. 200/- Per Hour",
           "Night Charges Rs. 300/-",
         ],
       },
