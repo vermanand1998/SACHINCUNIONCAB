@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { googleSheetUrl } from '../urlandKeys';
 import './adminPortal'; // Import your CSS file for styling
-
+import Helmet from "../components/Helmet/Helmet"
 function CustomerFeedback() {
   const [contactData, setContactData] = useState([]);
   const [dataFetched, setDataFetched] = useState(false);
@@ -54,6 +54,7 @@ function CustomerFeedback() {
   }, [dataFetched]);
 
   return (
+    <Helmet title="Feedback">
     <div className="container">
       {loading ? (
         <div className="loader" style={{ color:'#000D6B',fontSize:'20px',margin:'50px'}}>Please Wait Data is Loading...</div>
@@ -94,6 +95,7 @@ function CustomerFeedback() {
         <p>No contact details available.</p>
       )}
     </div>
+    </Helmet>
   );
 }
 
