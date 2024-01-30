@@ -1,5 +1,4 @@
 // import all images from assets/images directory
-<<<<<<< HEAD
 // import img01 from "../all-images/cars-img/crysta final.png";
 // import img02 from "../all-images/cars-img/etios final.png";
 // import img03 from "../all-images/cars-img/dezire final.png";
@@ -7,11 +6,6 @@
 import img01 from "../all-images/cars-img/nissan-offer.png";
 import img02 from "../all-images/cars-img/offer-toyota.png";
 import img03 from "../all-images/cars-img/bmw-offer.png";
-=======
-import img01 from "../all-images/cars-img/crysta final.png";
-import img02 from "../all-images/cars-img/etios final.png";
-import img03 from "../all-images/cars-img/dezire final.png";
->>>>>>> 9477dbb3d760de49c6e8e8db7e11bf8fb2577a75
 import img04 from "../all-images/cars-img/nissan-offer.png";
 import img05 from "../all-images/cars-img/offer-toyota.png";
 import img06 from "../all-images/cars-img/mercedes-offer.png";
