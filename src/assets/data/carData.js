@@ -2,15 +2,19 @@
 // import img01 from "../all-images/cars-img/crysta final.png";
 // import img02 from "../all-images/cars-img/etios final.png";
 // import img03 from "../all-images/cars-img/dezire final.png";
+// import img04 from "../all-images/cars-img/nissan-offer.png";
+// import img05 from "../all-images/cars-img/offer-toyota.png";
+// import img06 from "../all-images/cars-img/mercedes-offer.png";
+// import img07 from "../all-images/cars-img/toyota-offer-2.png";
+// import img08 from "../all-images/cars-img/mercedes-offer.png";
 
-import img01 from "../all-images/cars-img/nissan-offer.png";
-import img02 from "../all-images/cars-img/offer-toyota.png";
-import img03 from "../all-images/cars-img/bmw-offer.png";
-import img04 from "../all-images/cars-img/nissan-offer.png";
-import img05 from "../all-images/cars-img/offer-toyota.png";
-import img06 from "../all-images/cars-img/mercedes-offer.png";
-import img07 from "../all-images/cars-img/toyota-offer-2.png";
-import img08 from "../all-images/cars-img/mercedes-offer.png";
+import inovaFinalImage from "../all-images/cars-img/inovaFinalImage.png";
+import inovaFinalCarSeats from "../all-images/cars-img/inovaFinalCarSeats.png";
+import ToyotaEtiosFinal from "../all-images/cars-img/ToyotaEtiosFinal.png";
+import toyotaEtiosFinalSeats from "../all-images/cars-img/toyotaEtiosFinalSeats.png";
+import MarutiSuzukiDezireFinalImage from "../all-images/cars-img/MarutiSuzukiDezireFinalImage.png";
+import MarutiSuzukiDezireSeats from "../all-images/cars-img/MarutiSuzukiDezireSeats.png";
+
 
 const carData = [
   {
@@ -18,9 +22,10 @@ const carData = [
     brand: "Toyota",
     rating: 112,
     carName: "Toyota Innova Crysta(6+1 Seater)",
-    imgUrl: img01,
+    imgUrl: inovaFinalImage,
+    imgUrlSeats:inovaFinalCarSeats,
     model: "Model 3",
-    price: 44,
+    price: 200,
     speed: "20kmpl",
     gps: "GPS Navigation",
     seatType: "Heated seats",
@@ -58,7 +63,7 @@ const carData = [
       },
     ],
     description:
-      " Innova crysta is one of the most loved MUV by the customers with full feel of luxury, centralized AC with clean interior and exterior with comfortable seats",
+      "The Toyota Innova Crysta stands out as one of the most beloved Multi-Utility Vehicles (MUVs) among customers. Revel in the complete luxury package it offers, featuring a centralized AC for a refreshing journey and impeccably clean interiors and exteriors. The comfortable seats add an extra layer of joy to your travels. Book your ride now and indulge in the epitome of style, comfort, and elegance with the Toyota Innova Crysta.",
   },
 
   {
@@ -66,9 +71,10 @@ const carData = [
     brand: "Toyota",
     rating: 102,
     carName: "Toyota Etios(4+1 Seater)",
-    imgUrl: img02,
+    imgUrl: ToyotaEtiosFinal,
+    imgUrlSeats:toyotaEtiosFinalSeats,
     model: "Model-2022",
-    price: 123,
+    price: 120,
     speed: "20kmpl",
     gps: "GPS Navigation",
     seatType: "Heated seats",
@@ -106,7 +112,7 @@ const carData = [
       },
     ],
     description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+      "Experience comfort and style with the Toyota Etios, a spacious 4+1 seater designed for your convenience. Whether it's a family trip or a business outing, the Etios ensures a smooth and enjoyable ride. Reserve your Etios today to embark on a journey of comfort and reliability. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Don't miss out on the opportunity to make your upcoming travel memorable with the Toyota Etios.",
   },
 
   {
@@ -114,7 +120,8 @@ const carData = [
     brand: "Maruti Suzuki",
     rating: 132,
     carName: "Maruti Suzuki Dezire(4+1 Seater)",
-    imgUrl: img03,
+    imgUrl: MarutiSuzukiDezireFinalImage,
+    imgUrlSeats:toyotaEtiosFinalSeats,
     model: "Model-2022",
     price: 125,
     speed: "20kmpl",
@@ -154,644 +161,7 @@ const carData = [
       },
     ],
     description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 4,
-    brand: "Nissan",
-    rating: 100,
-    carName: "Nissan Mercielago",
-    imgUrl: img04,
-    model: "Model-2022",
-    price: 127,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 5,
-    brand: "Ferrari",
-    rating: 99,
-    carName: "Ferrari Camry",
-    imgUrl: img05,
-    model: "Model-2022",
-    price: 143,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 6,
-    brand: "Mercedes",
-    rating: 19,
-    carName: "Mercedes Benz XC90",
-    imgUrl: img06,
-    model: "Model-2022",
-    price: 1534,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 7,
-    brand: "Audi",
-    rating: 8,
-    carName: "Audi Fiesta",
-    imgUrl: img07,
-    model: "Model 3",
-    price: 165,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 8,
-    brand: "Colorado",
-    rating: 2,
-    carName: "Rolls Royce Colorado",
-    imgUrl: img08,
-    model: "Model 3",
-    price: 172,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 9,
-    brand: "Tesla",
-    rating: 112,
-    carName: "Tesla Malibu",
-    imgUrl: img01,
-    model: "Model 3",
-    price: 182,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 10,
-    brand: "Toyota",
-    rating: 102,
-    carName: "Toyota Aventador",
-    imgUrl: img02,
-    model: "Model-2022",
-    price: 145,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 11,
-    brand: "BMW",
-    rating: 132,
-    carName: "BMW X3",
-    imgUrl: img03,
-    model: "Model-2022",
-    price: 244,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 12,
-    brand: "Nissan",
-    rating: 102,
-    carName: "Nissan Mercielago",
-    imgUrl: img04,
-    model: "Model-2022",
-    price: 214,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 13,
-    brand: "Ferrari",
-    rating: 94,
-    carName: "Ferrari Camry",
-    imgUrl: img05,
-    model: "Model-2022",
-    price: 224,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 14,
-    brand: "Mercedes",
-    rating: 119,
-    carName: "Mercedes Benz XC90",
-    imgUrl: img06,
-    model: "Model-2022",
-    price: 223,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 15,
-    brand: "Audi",
-    rating: 82,
-    carName: "Audi Fiesta",
-    imgUrl: img07,
-    model: "Model 3",
-    price: 530,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
-  },
-
-  {
-    id: 16,
-    brand: "Colorado",
-    rating: 52,
-    carName: "Rolls Royce Colorado",
-    imgUrl: img08,
-    model: "Model 3",
-    price: 630,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    local: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    outStation: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    monthly: [
-      {
-        key1: [
-          "2 Hours 40 KM Rs. 1100/-",
-          "4 Hours 40 KM Rs. 1400/-",
-          "8 Hours 80 KM Rs. 1800/-",
-          "Extra Hours Rs. 100/- Per Hour",
-          "Night Charges Rs. 200/-",
-        ],
-      },
-    ],
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+      "Designed for small groups, the Maruti Suzuki Dzire effortlessly accommodates four passengers, offering an ideal blend of style and functionality. Its sleek design and cutting-edge features promise a delightful driving experience. Choose the Dzire for a journey where comfort meets sophistication, and every drive becomes a pleasure.",
   }
 ];
 

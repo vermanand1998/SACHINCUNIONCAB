@@ -33,6 +33,7 @@ const CarDetails = () => {
           <Row>
             <Col lg="5">
               <img src={singleCarItem.imgUrl} alt="" className="w-100" />
+              <img src={singleCarItem.imgUrlSeats} alt="" className="w-100" />
             </Col>
 
             <Col lg="7">
