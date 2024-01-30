@@ -46,7 +46,6 @@ const Contact = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // Create a new FormData object from the form element
     const formDataObject = new FormData(e.target);
 
@@ -59,7 +58,6 @@ const Contact = () => {
       EMAIL: '',
       MESSAGE: '',
     });
-
     try {
       // Perform your API call with the FormData object
       const response = await fetch(googleSheetUrl, {
@@ -88,6 +86,10 @@ const Contact = () => {
         }
       });
     }
+    // await fetch('https://formspree.io/f/moqgjbyd', {
+    //   method: 'POST',
+    //   body: formDataObject,
+    // });
   };
 
   return (
