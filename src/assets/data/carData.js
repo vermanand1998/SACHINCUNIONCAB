@@ -53,7 +53,7 @@ const carData = [
     monthly: [
       {
         key1: [
-          "Fixed Charges For First 2000Km = ₹60,000/-",
+          "Fixed Charges For First 2000Km = ₹65,000/-",
           "Charges After Exceeding Limit of 2000 Km @ ₹17/- Per Km",
           "Night Halt @ ₹250/- Per Night(Applicable from 10:00pm to 6:00am)",
           "**Per Day Working Hour Garage to Garage will be 12 Hours**",
@@ -102,7 +102,7 @@ const carData = [
     monthly: [
       {
         key1: [
-         "Fixed Charges For First 2000Km = ₹36,000/-",
+         "Fixed Charges For First 2000Km = ₹38,000/-",
           "Charges After Exceeding Limit of 2000 Km @ ₹11/- Per Km",
           "Night Halt @ ₹200/- Per Night(Applicable from 10:00pm to 6:00am)",
           "**Per Day Working Hour Garage to Garage will be 12 Hours**",
@@ -151,7 +151,7 @@ const carData = [
     monthly: [
       {
         key1: [
-         "Fixed Charges For First 2000Km = ₹36,000/-",
+         "Fixed Charges For First 2000Km = ₹38,000/-",
           "Charges After Exceeding Limit of 2000 Km @ ₹11/- Per Km",
           "Night Halt @ ₹200/- Per Night(Applicable from 10:00pm to 6:00am)",
           "**Per Day Working Hour Garage to Garage will be 12 Hours**",
