@@ -3,6 +3,7 @@ import React from "react";
 import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
 import "../../styles/footer.css";
+import img01 from "../../assets/all-images/companyLogo.png"
 
 const quickLinks = [
   {
@@ -41,9 +42,10 @@ const Footer = () => {
             <div className="logo footer__logo">
               <h1>
                 <Link to="/home" className=" d-flex align-items-center gap-2">
-                  <i class="ri-car-line"></i>
+                  {/* <i class="ri-car-line"></i> */}
+                  <img src={img01} alt="" height={'40px'} width={'40px'} />
                   <span>
-                    Union Cabs India <br /> Service
+                    Union Cabs
                   </span>
                 </Link>
               </h1>

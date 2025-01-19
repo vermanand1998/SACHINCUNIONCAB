@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, FormGroup, Button } from "reactstrap";
+import { Form, FormGroup, Button, Spinner } from "reactstrap";
 import CommonSection from "../components/UI/CommonSection";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,55 +7,64 @@ import {googleSheetUrl} from "../urlandKeys"
 import "../../src/styles/global.css";
 const CabDetailsForm = () => {
   const [formData, setFormData] = useState({
-    DRIVERID: "",
-    CARNUMBER: "",
-    DRIVERNAME: "",
+    SRNO: Math.floor(Math.random() * 10000) + 1,
+    DATE: new Date().toISOString().split('T')[0],
+    EMPCODE: "",
     EMPLOYEENAME: "",
-    DATE: "",
-    PICKUPLOCATION: "",
-    PICKUPTIME: "",
     DROPLOCATION: "",
-    DROPTIME: "",
-    OPENINGREADING: "",
-    CLOSINGREADING: "",
-    TOTALRUNKMS: "",
-    EXTRAKMS: "",
-    NIGHTHALTS: "",
-    TOTALDAYS: "",
+    DRIVERNAME: "",
+    STARTINGKM: "",
+    ENDKM: "",
+    TOTAL: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    
+    if (name === 'EMPLOYEENAME' || name === 'DRIVERNAME') {
+      if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
+        setFormData(prevData => ({
+          ...prevData,
+          [name]: value
+        }));
+      }
+      return;
+    }
+    
+    if (name === 'STARTINGKM' || name === 'ENDKM') {
+      const startKM = name === 'STARTINGKM' ? Number(value) : Number(formData.STARTINGKM);
+      const endKM = name === 'ENDKM' ? Number(value) : Number(formData.ENDKM);
+      
+      setFormData(prevData => ({
+        ...prevData,
+        [name]: value,
+        TOTAL: endKM && startKM ? (endKM - startKM).toString() : ""
+      }));
+    } else {
+      setFormData(prevData => ({
+        ...prevData,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formDataObject = new FormData(e.target);
-    console.log('Form data submitted:', formDataObject);
-
-    setFormData({
-      DRIVERID: "",
-      CARNUMBER: "",
-      DRIVERNAME: "",
-      EMPLOYEENAME: "",
-      DATE: "",
-      PICKUPLOCATION: "",
-      PICKUPTIME: "",
-      DROPLOCATION: "",
-      DROPTIME: "",
-      OPENINGREADING: "",
-      CLOSINGREADING: "",
-      TOTALRUNKMS: "",
-      EXTRAKMS: "",
-      NIGHTHALTS: "",
-      TOTALDAYS: "",
-    });
-
+    setIsLoading(true);
+    
+    // Create FormData with all form fields
+    const formDataObject = new FormData();
+    formDataObject.append('SRNO', formData.SRNO);
+    formDataObject.append('DATE', formData.DATE);
+    formDataObject.append('EMPCODE', formData.EMPCODE);
+    formDataObject.append('EMPLOYEENAME', formData.EMPLOYEENAME);
+    formDataObject.append('DROPLOCATION', formData.DROPLOCATION);
+    formDataObject.append('DRIVERNAME', formData.DRIVERNAME);
+    formDataObject.append('STARTINGKM', formData.STARTINGKM);
+    formDataObject.append('ENDKM', formData.ENDKM);
+    formDataObject.append('TOTAL', formData.TOTAL);
+    
     try {
       const response = await fetch(googleSheetUrl, {
         method: "POST",
@@ -63,26 +72,41 @@ const CabDetailsForm = () => {
       });
 
       if (response.ok) {
-        toast.success('Your Cabs Details Sent Successfully !', {});
-        console.log('Request was successful');
+        toast.success('Cab Details Sent Successfully!');
+        // Reset form
+        setFormData({
+          SRNO: Math.floor(Math.random() * 10000) + 1,
+          DATE: new Date().toISOString().split('T')[0],
+          EMPCODE: "",
+          EMPLOYEENAME: "",
+          DROPLOCATION: "",
+          DRIVERNAME: "",
+          STARTINGKM: "",
+          ENDKM: "",
+          TOTAL: "",
+        });
       } else {
-        console.error('Request failed:', response.statusText);
-        toast.success('Request failed:', response.statusText,{
-            style: {
-              color: 'white',
-              backgroundColor: 'lightcoral',
-            }
-          });
+        toast.error('Request failed: ' + response.statusText);
       }
     } catch (error) {
-      console.error('Error during fetch:', error);
-      toast.success('Error during fetch:', error,{
-        style: {
-          color: 'white',
-          backgroundColor: 'lightcoral',
-        }
-      });
+      toast.error('Error submitting form: ' + error.message);
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  // Add new function to check if form is valid
+  const isFormValid = () => {
+    return (
+      formData.DATE &&
+      formData.EMPCODE &&
+      formData.EMPLOYEENAME &&
+      formData.DROPLOCATION &&
+      formData.DRIVERNAME &&
+      formData.STARTINGKM &&
+      formData.ENDKM &&
+      formData.TOTAL
+    );
   };
 
   return (
@@ -90,36 +114,35 @@ const CabDetailsForm = () => {
       <CommonSection title="Cab Details" />
       <Form className="marginFormArround" onSubmit={handleSubmit}>
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="driverId">Driver Id:</label>
+          <label htmlFor="srNo">Sr No:</label>
           <input
-            type="text"
-            id="driverId"
-            name="DRIVERID"
-            value={formData.DRIVERID}
-            onChange={handleInputChange}
-            required
+            type="number"
+            id="srNo"
+            name="SRNO"
+            value={formData.SRNO}
+            disabled
           />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="carNumber">Car Number:</label>
+          <label htmlFor="date">Date:</label>
           <input
-            type="text"
-            id="carNumber"
-            name="CARNUMBER"
-            value={formData.CARNUMBER}
+            type="date"
+            id="date"
+            name="DATE"
+            value={formData.DATE}
             onChange={handleInputChange}
             required
           />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="driverName">Driver Name:</label>
+          <label htmlFor="empCode">Employee Code:</label>
           <input
             type="text"
-            id="driverName"
-            name="DRIVERNAME"
-            value={formData.DRIVERNAME}
+            id="empCode"
+            name="EMPCODE"
+            value={formData.EMPCODE}
             onChange={handleInputChange}
             required
           />
@@ -138,42 +161,6 @@ const CabDetailsForm = () => {
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="date">Date:</label>
-          <input
-            type="date"
-            id="date"
-            name="DATE"
-            value={formData.DATE}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="pickupLocation">Pickup Location:</label>
-          <input
-            type="text"
-            id="pickupLocation"
-            name="PICKUPLOCATION"
-            value={formData.PICKUPLOCATION}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="pickupTime">Pickup Time:</label>
-          <input
-            type="time"
-            id="pickupTime"
-            name="PICKUPTIME"
-            value={formData.PICKUPTIME}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
           <label htmlFor="dropLocation">Drop Location:</label>
           <input
             type="text"
@@ -185,92 +172,73 @@ const CabDetailsForm = () => {
           />
         </FormGroup>
 
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="dropTime">Drop Time:</label>
+        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
+          <label htmlFor="driverName">Driver Name:</label>
           <input
-            type="time"
-            id="dropTime"
-            name="DROPTIME"
-            value={formData.DROPTIME}
+            type="text"
+            id="driverName"
+            name="DRIVERNAME"
+            value={formData.DRIVERNAME}
+            onChange={handleInputChange}
+            required
+          />
+        </FormGroup>
+
+        <FormGroup className="booking__form d-inline-block me-4 mb-4">
+          <label htmlFor="startingKM">Starting KM:</label>
+          <input
+            type="number"
+            id="startingKM"
+            name="STARTINGKM"
+            value={formData.STARTINGKM}
             onChange={handleInputChange}
             required
           />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="openingReading">Opening Reading:</label>
+          <label htmlFor="endKM">End KM:</label>
           <input
             type="number"
-            id="openingReading"
-            name="OPENINGREADING"
-            value={formData.OPENINGREADING}
+            id="endKM"
+            name="ENDKM"
+            value={formData.ENDKM}
             onChange={handleInputChange}
             required
           />
         </FormGroup>
 
         <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="closingReading">Closing Reading:</label>
+          <label htmlFor="total">Total:</label>
           <input
             type="number"
-            id="closingReading"
-            name="CLOSINGREADING"
-            value={formData.CLOSINGREADING}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="totalRunKMs">Total Run KM's:</label>
-          <input
-            type="number"
-            id="totalRunKMs"
-            name="TOTALRUNKMS"
-            value={formData.TOTALRUNKMS}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="extraKMs">Extra KM's:</label>
-          <input
-            type="number"
-            id="extraKMs"
-            name="EXTRAKMS"
-            value={formData.EXTRAKMS}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="nightHalts">Night Halts:</label>
-          <input
-            type="number"
-            id="nightHalts"
-            name="NIGHTHALTS"
-            value={formData.NIGHTHALTS}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="totalDays">Total Number of Days:</label>
-          <input
-            type="number"
-            id="totalDays"
-            name="TOTALDAYS"
-            value={formData.TOTALDAYS}
-            onChange={handleInputChange}
-            required
+            id="total"
+            name="TOTAL"
+            value={formData.TOTAL}
+            readOnly
           />
         </FormGroup>
 
         <FormGroup>
-          <Button type="submit" style={{backgroundColor:'#000D6B'}}>Submit Your Cab Details</Button>
+          <Button 
+            type="submit" 
+            style={{
+              backgroundColor: isFormValid() ? '#000D6B' : '#808080',
+              cursor: isFormValid() ? 'pointer' : 'not-allowed'
+            }}
+            disabled={!isFormValid() || isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Spinner size="sm" className="me-2">
+                  Loading...
+                </Spinner>
+                Submitting...
+              </>
+            ) : (
+              'Submit Cab Details'
+            )}
+          </Button>
         </FormGroup>
       </Form>
     </>

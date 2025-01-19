@@ -21,6 +21,9 @@
     .imageMargin{
         margin-left: -5%;
     }
+    .table-row{
+        flex-direction: column;
+    }
 }
 
 @media only screen and (max-width: 767px) and (min-width: 411px) {
@@ -33,6 +36,9 @@
     }
     .imageMargin{
         margin-left: -0.9%;
+    }
+    .table-row{
+        flex-direction: column;
     }
 }
 @media only screen and (max-width: 800px) and (min-width: 768px) {
@@ -54,4 +60,47 @@
     .imageMargin{
         margin-left: -5%;
     }
+    .table-row{
+        flex-direction: column;
+    }
 }
+
+
+
+/* PriceTable.css */
+.price-table {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+  
+  .table-row {
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+  }
+  
+  .table-cell {
+    flex: 1;
+    margin: 5px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .heading-style {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .price-style {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+    text-align: left;
+  }
+  

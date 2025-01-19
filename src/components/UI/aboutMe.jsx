@@ -73,7 +73,7 @@ const AboutMe = ({ aboutClass }) => {
                   <p className="section__description">
                     <p>
                       Meet <b>Mr. Sachin Verma</b>, the accomplished <b>proprietor
-                      of UnionCabs India.</b> Armed with a background in <b>Civil
+                      of UNION CABS .</b> Armed with a background in <b>Civil
                       Engineering</b> and over <b>3 years of experience</b>, he has
                       transitioned seamlessly into entrepreneurship. As the
                       driving force behind UnionCabs India, Mr. Verma continues

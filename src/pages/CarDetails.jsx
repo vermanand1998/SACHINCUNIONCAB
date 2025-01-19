@@ -6,7 +6,7 @@ import Helmet from "../components/Helmet/Helmet";
 import { useParams } from "react-router-dom";
 import BookingForm from "../components/UI/BookingForm";
 import PaymentMethod from "../components/UI/PaymentMethod";
-
+import "../styles/global.css";
 const CarDetails = () => {
   const { slug } = useParams();
 
@@ -15,21 +15,109 @@ const CarDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [singleCarItem]);
+  const headingStyle = {
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+    margin: "0",
+    marginBottom: "5px",
+  };
 
+  const priceStyle = {
+    margin: "0",
+    marginBottom: "10px",
+  };
   return (
     <Helmet title={singleCarItem.carName}>
       <section>
         <Container>
           <Row>
-            <Col lg="6">
+            <Col lg="5">
               <img src={singleCarItem.imgUrl} alt="" className="w-100" />
+              <img src={singleCarItem.imgUrlSeats} alt="" className="w-100" />
             </Col>
 
-            <Col lg="6">
+            <Col lg="7">
               <div className="car__info">
                 <h2 className="section__title">{singleCarItem.carName}</h2>
+                <p className="section__description">
+                  {singleCarItem.description}
+                </p>
+                <div className="price-table">
+                  <div className="table-row">
+                    {Object.keys(singleCarItem).includes("local") && (
+                      <div className="table-cell">
+                        <h4
+                          className="heading-style"
+                          style={{ color: "#000D6B" }}
+                        >
+                          <i class="ri-car-line"></i> Local
+                        </h4>
+                        {singleCarItem.local.map((item, subIndex) => (
+                          <div key={subIndex} className="price-style">
+                            {item.key1.map((value, innerIndex) => (
+                              <div
+                                key={innerIndex}
+                                style={{ color: "#336600" }}
+                              >
+                                {" "}
+                                <i className="ri-star-s-fill"></i> {value}
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
-                <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
+                    {Object.keys(singleCarItem).includes("outStation") && (
+                      <div className="table-cell">
+                        <h4
+                          className="heading-style"
+                          style={{ color: "#000D6B" }}
+                        >
+                          <i class="ri-car-line"></i> Out Station
+                        </h4>
+                        {singleCarItem.outStation.map((item, subIndex) => (
+                          <div key={subIndex} className="price-style">
+                            {item.key1.map((value, innerIndex) => (
+                              <div
+                                key={innerIndex}
+                                style={{ color: "#336600" }}
+                              >
+                                <i className="ri-star-s-fill"></i> {value}
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {Object.keys(singleCarItem).includes("monthly") && (
+                      <div className="table-cell">
+                        <h4
+                          className="heading-style"
+                          style={{ color: "#000D6B" }}
+                        >
+                          {" "}
+                          <i class="ri-car-line"></i> Monthly
+                        </h4>
+                        {singleCarItem.monthly.map((item, subIndex) => (
+                          <div key={subIndex} className="price-style">
+                            {item.key1.map((value, innerIndex) => (
+                              <div
+                                key={innerIndex}
+                                style={{ color: "#336600" }}
+                              >
+                                {" "}
+                                <i className="ri-star-s-fill"></i> {value}
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
                     {singleCarItem.price}.00 Rupee/ Day
                   </h6>
@@ -44,9 +132,9 @@ const CarDetails = () => {
                     </span>
                     ({singleCarItem.rating} ratings)
                   </span>
-                </div>
+                </div> */}
 
-                <p className="section__description">
+                {/* <p className="section__description">
                   {singleCarItem.description}
                 </p>
 
@@ -77,9 +165,9 @@ const CarDetails = () => {
                     ></i>{" "}
                     {singleCarItem.speed}
                   </span>
-                </div>
+                </div> */}
 
-                <div
+                {/* <div
                   className=" d-flex align-items-center mt-3"
                   style={{ columnGap: "2.8rem" }}
                 >
@@ -103,7 +191,7 @@ const CarDetails = () => {
                     ></i>{" "}
                     {singleCarItem.brand}
                   </span>
-                </div>
+                </div> */}
               </div>
             </Col>
 

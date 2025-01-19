@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/global.css"
+import img01 from "../../assets/all-images/companyLogo.png"
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -140,7 +141,7 @@ const Header = () => {
       <header className="header">
         <div className="header__top_instruction">
           <marquee direction="left" behavior="scroll" scrollamount="5">
-          Our Application will be live soon. Please stay tuned and don\'t take any action. We apologize for the inconvenience.
+          Great news! Our application is now live, and you can start booking your cab right away. We appreciate your patience and apologize for any inconvenience during the wait. Thank you for choosing our service!
           </marquee>
         </div>
         <span
@@ -166,7 +167,7 @@ const Header = () => {
               </Col>
 
               <Col lg="6" md="6" sm="6">
-                {userToken === "null" || userToken === undefined ? (
+                {(userToken === undefined || userToken === "null" || userToken === null)  ? (
                   <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
                     <span
                       style={{marginRight:'24%'}}
@@ -231,9 +232,11 @@ const Header = () => {
                       to="/home"
                       className="d-flex align-items-center gap-2"
                     >
-                      <i className="ri-car-line"></i>
+                      <img src={img01} alt="" height={'40px'} width={'40px'} />
+                      {/* <i className="ri-car-line"></i> */}
+
                       <span className="ShowthisText">
-                        Union Cabs India <br /> Service
+                        Union Cabs
                       </span>
                       <span className="ShowthisTextMobile">
                         Union Cabs India Service
@@ -261,8 +264,8 @@ const Header = () => {
                     <i className="ri-time-line"></i>
                   </span>
                   <div className="header__location-content">
-                    <h4>Monday to Saturday</h4>
-                    <h6>7am - 6pm</h6>
+                    <h4>Monday to Sunday</h4>
+                    <h6>Our service is available 24/7</h6>
                   </div>
                 </div>
               </Col>

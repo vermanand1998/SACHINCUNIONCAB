@@ -52,8 +52,8 @@ function AuthPopup() {
       const json = await response.json();
       setuserData(json.data)
       localStorage.setItem("Token",json.token);
-      {login ?(localStorage.setItem("UserEmail",json.data.email)):(localStorage.setItem("UserEmail",json.data.user.email))}
-      {login ?(localStorage.setItem("Name",json.data.name)):(localStorage.setItem("Name",json.data.user.name))}
+      {login ?(localStorage.setItem("UserEmail",json.data.user.email)):(localStorage.setItem("UserEmail",json.data.user.email))}
+      {login ?(localStorage.setItem("Name",json.data.user.name)):(localStorage.setItem("Name",json.data.user.name))}
       window.location.reload();
       handleClose();
 
