@@ -6,43 +6,77 @@ import 'react-toastify/dist/ReactToastify.css';
 import {googleSheetUrl} from "../urlandKeys"
 import "../../src/styles/global.css";
 
-// Driver and Cab Data
+// Driver and Cab Data with linked employees and escort
 const driversData = [
-  { id: 1, cabNo: "CAB-1", driverName: "SIDDHARTH", driverMobile: "9876543210", vendorName: "Union Services", vehicleNo: "UP32TN5393" },
-  { id: 2, cabNo: "CAB-2", driverName: "RAHUL", driverMobile: "9876543211", vendorName: "Union Services", vehicleNo: "UP32ZN7576" },
-  { id: 3, cabNo: "CAB-3", driverName: "FAIZ KHAN", driverMobile: "9876543212", vendorName: "Union Services", vehicleNo: "UP32TN4911" },
+  { 
+    id: 1, 
+    cabNo: "CAB-1", 
+    driverName: "SIDDHARTH SINGH", 
+    driverMobile: "6388499177", 
+    driverEmpId: "UC-0009",
+    vendorName: "Union Services", 
+    vehicleNo: "UP32TN5393",
+    escortId: 3, // DEEPAK YADAV
+    employees: [
+      { id: 1, name: "Sujata Sharma", mobile: "9554763649", location: "SAFEDABAD", time: "4:00PM" },
+      { id: 2, name: "Swetha Pandey", mobile: "8919977434", location: "VIJYANT KHAND", time: "4:20PM" },
+      { id: 3, name: "Veena Nigam", mobile: "8115499215", location: "Ismail Ganj", time: "4:40PM" },
+    ]
+  },
+  { 
+    id: 2, 
+    cabNo: "CAB-2", 
+    driverName: "RAHUL KASHYAP", 
+    driverMobile: "7355713216", 
+    driverEmpId: "UC-0008",
+    vendorName: "Union Services", 
+    vehicleNo: "UP32ZN7576",
+    escortId: 2, // ANUJ SINGH
+    employees: [
+      { id: 4, name: "Riya Kumari", mobile: "9682723081", location: "DUBAGGA", time: "4:00PM" },
+      { id: 5, name: "Pragati Pandey", mobile: "8318225261", location: "JANKIPURAM", time: "4:30PM" },
+      { id: 6, name: "Ananya Singh", mobile: "9076977449", location: "JANKIPURAM", time: "4:45PM" },
+    ]
+  },
+  { 
+    id: 3, 
+    cabNo: "CAB-3", 
+    driverName: "FAIZ KHAN", 
+    driverMobile: "6388320195", 
+    driverEmpId: "UC-0007",
+    vendorName: "Union Services", 
+    vehicleNo: "UP32TN4911",
+    escortId: 1, // DHEERAJ RATHORE
+    employees: [
+      { id: 7, name: "Reet Tandon", mobile: "8707755900", location: "CHOWK", time: "3:30PM" },
+      { id: 8, name: "Anamika Rani", mobile: "9608028357", location: "DUBAGGA", time: "3:50PM" },
+      { id: 9, name: "Garima Singh", mobile: "8840026499", location: "PATEL NAGAR", time: "4:10PM" },
+    ]
+  },
 ];
 
-// Employee Data
+// All Employees Data (for dropdown)
 const employeesData = [
-  { id: 1, name: "ABHISHEK KUMAR", empId: "EMP001" },
-  { id: 2, name: "PRIYA SHARMA", empId: "EMP002" },
-  { id: 3, name: "RAJESH SINGH", empId: "EMP003" },
-  { id: 4, name: "NEHA GUPTA", empId: "EMP004" },
-  { id: 5, name: "AMIT VERMA", empId: "EMP005" },
-  { id: 6, name: "SUNITA YADAV", empId: "EMP006" },
-  { id: 7, name: "VIKASH KUMAR", empId: "EMP007" },
-  { id: 8, name: "POOJA MISHRA", empId: "EMP008" },
-  { id: 9, name: "ROHIT TIWARI", empId: "EMP009" },
-  { id: 10, name: "ANITA PANDEY", empId: "EMP010" },
+  { id: 1, name: "Sujata Sharma", empId: "EMP01-9554763649", cabId: 1 },
+  { id: 2, name: "Swetha Pandey", empId: "EMP02-8919977434", cabId: 1 },
+  { id: 3, name: "Veena Nigam", empId: "EMP03-8115499215", cabId: 1 },
+  { id: 4, name: "Riya Kumari", empId: "EMP04-9682723081", cabId: 2 },
+  { id: 5, name: "Pragati Pandey", empId: "EMP05-8318225261", cabId: 2 },
+  { id: 6, name: "Ananya Singh", empId: "EMP06-9076977449", cabId: 2 },
+  { id: 7, name: "Reet Tandon", empId: "EMP07-8707755900", cabId: 3 },
+  { id: 8, name: "Anamika Rani", empId: "EMP08-9608028357", cabId: 3 },
+  { id: 9, name: "Garima Singh", empId: "EMP09-8840026499", cabId: 3 },
 ];
 
-// Location Options
+// Location Options (from actual data)
 const locationOptions = [
   "CHOWK", "DUBAGGA", "PATEL NAGAR", "JANKIPURAM", "SAFEDABAD", 
-  "VIJYANT KHAND", "Ismail Ganj", "NOIDA", "Dhakoli Rehmat Homes Society",
-  "Shimla", "Hazratganj", "Indira Nagar", "Gomti Nagar", "Aliganj",
-  "Aminabad", "Alambagh", "Chinhat", "Mahanagar", "Rajajipuram", "ECLAT Office",
-  "Bhavya Tower"
+  "VIJYANT KHAND", "Ismail Ganj", "Bhavya Tower", "ECLAT Office"
 ];
 
-// Time Options
+// Time Options (from actual data)
 const timeOptions = [
-  "06:00 PM", "06:15 PM", "06:30 PM", "06:45 PM", "07:00 PM", "07:15 PM", "07:30 PM", "07:45 PM",
-  "08:00 PM", "08:15 PM", "08:30 PM", "08:45 PM", "09:00 PM", "09:15 PM", "09:30 PM", "09:45 PM",
-  "10:00 PM", "10:15 PM", "10:30 PM", "10:45 PM", "11:00 PM", "11:15 PM", "11:30 PM", "11:45 PM",
-  "12:00 AM", "12:15 AM", "12:30 AM", "12:45 AM", "01:00 AM", "01:30 AM", "02:00 AM", "02:30 AM",
-  "03:00 AM", "03:30 AM", "04:00 AM", "04:30 AM", "05:00 AM", "05:30 AM", "06:00 AM"
+  "3:30PM", "3:50PM", "4:00PM", "4:10PM", "4:20PM", "4:30PM", "4:40PM", "4:45PM"
 ];
 
 // Shift Options
@@ -57,6 +91,13 @@ const shiftOptions = [
 
 // Trip Type Options
 const tripTypeOptions = ["PU (Pick-Up)", "DO (Drop-Off)", "PU/DO (Both)"];
+
+// Escort Data (linked to cab)
+const escortsData = [
+  { id: 1, name: "DHEERAJ RATHORE", mobile: "7275003552", empId: "UC-0010", cabId: 3 },
+  { id: 2, name: "ANUJ SINGH", mobile: "9936892195", empId: "UC-0011", cabId: 2 },
+  { id: 3, name: "DEEPAK YADAV", mobile: "9369510161", empId: "UC-0012", cabId: 1 },
+];
 
 const CabDetailsForm = () => {
   const generateTripId = () => {
@@ -79,17 +120,18 @@ const CabDetailsForm = () => {
   });
 
   const [selectedEmployees, setSelectedEmployees] = useState([]);
+  const [selectedEscort, setSelectedEscort] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   // Dropdown visibility states
   const [dropdowns, setDropdowns] = useState({
-    driver: false, employee: false, pickupLoc: false, dropoffLoc: false,
+    driver: false, employee: false, escort: false, pickupLoc: false, dropoffLoc: false,
     pickupTime: false, dropoffTime: false, tripType: false, shift: false
   });
   
   // Other/Custom states
   const [showOther, setShowOther] = useState({
-    driver: false, tripType: false, shift: false
+    driver: false, escort: false, tripType: false, shift: false
   });
   
   const [customValues, setCustomValues] = useState({
@@ -98,24 +140,86 @@ const CabDetailsForm = () => {
 
   const toggleDropdown = (name) => {
     setDropdowns(prev => {
-      const newState = { driver: false, employee: false, pickupLoc: false, dropoffLoc: false, pickupTime: false, dropoffTime: false, tripType: false, shift: false };
+      const newState = { driver: false, employee: false, escort: false, pickupLoc: false, dropoffLoc: false, pickupTime: false, dropoffTime: false, tripType: false, shift: false };
       newState[name] = !prev[name];
       return newState;
     });
   };
 
+  // Handle Escort Selection
+  const handleEscortChange = (escortId) => {
+    if (escortId === "other") {
+      setShowOther(prev => ({ ...prev, escort: true }));
+      setSelectedEscort(null);
+      setFormData(prev => ({ ...prev, ESCORTNAME: "", ESCORTIDMOBILE: "" }));
+    } else if (escortId === "none") {
+      setShowOther(prev => ({ ...prev, escort: false }));
+      setSelectedEscort(null);
+      setFormData(prev => ({ ...prev, ESCORTNAME: "", ESCORTIDMOBILE: "" }));
+    } else if (escortId) {
+      setShowOther(prev => ({ ...prev, escort: false }));
+      const escort = escortsData.find(e => e.id === parseInt(escortId));
+      if (escort) {
+        setSelectedEscort(escort);
+        setFormData(prev => ({
+          ...prev, 
+          ESCORTNAME: escort.name, 
+          ESCORTIDMOBILE: `${escort.mobile} (${escort.empId})`
+        }));
+      }
+    }
+    toggleDropdown('escort');
+  };
+
   const handleDriverChange = (driverId) => {
     if (driverId === "other") {
-      setShowOther(prev => ({ ...prev, driver: true }));
-      setFormData(prev => ({ ...prev, CABNO: "", VEHICLENO: "", VENDORNAME: "Union Services", DRIVERNAME: "", DRIVERMOBILE: "" }));
+      setShowOther(prev => ({ ...prev, driver: true, escort: true }));
+      setFormData(prev => ({ 
+        ...prev, 
+        CABNO: "", VEHICLENO: "", VENDORNAME: "Union Services", DRIVERNAME: "", DRIVERMOBILE: "", 
+        ESCORTNAME: "", ESCORTIDMOBILE: "",
+        PICKUPLOCATION: [], PICKUPTIME: [], DROPOFFLOCATION: [], DROPOFFTIME: []
+      }));
+      setSelectedEmployees([]);
+      setSelectedEscort(null);
     } else if (driverId) {
-      setShowOther(prev => ({ ...prev, driver: false }));
+      setShowOther(prev => ({ ...prev, driver: false, escort: false }));
       const driver = driversData.find(d => d.id === parseInt(driverId));
       if (driver) {
+        // Get linked employees with their locations and times
+        const linkedEmployees = employeesData.filter(e => e.cabId === driver.id);
+        
+        // Extract unique locations and times from linked employees
+        const linkedLocations = driver.employees ? driver.employees.map(e => e.location) : [];
+        const linkedTimes = driver.employees ? driver.employees.map(e => e.time) : [];
+        
+        // Auto-populate driver details and locations/times
         setFormData(prev => ({
-          ...prev, CABNO: driver.cabNo, VEHICLENO: driver.vehicleNo,
-          VENDORNAME: driver.vendorName, DRIVERNAME: driver.driverName, DRIVERMOBILE: driver.driverMobile
+          ...prev, 
+          CABNO: driver.cabNo, 
+          VEHICLENO: driver.vehicleNo,
+          VENDORNAME: driver.vendorName, 
+          DRIVERNAME: driver.driverName, 
+          DRIVERMOBILE: driver.driverMobile,
+          PICKUPLOCATION: linkedLocations,
+          PICKUPTIME: linkedTimes,
+          DROPOFFLOCATION: linkedLocations, // Same as pickup locations
+          DROPOFFTIME: linkedTimes
         }));
+        
+        // Auto-populate linked employees
+        setSelectedEmployees(linkedEmployees);
+        
+        // Auto-populate linked escort
+        const linkedEscort = escortsData.find(e => e.id === driver.escortId);
+        if (linkedEscort) {
+          setSelectedEscort(linkedEscort);
+          setFormData(prev => ({
+            ...prev,
+            ESCORTNAME: linkedEscort.name,
+            ESCORTIDMOBILE: `${linkedEscort.mobile} (${linkedEscort.empId})`
+          }));
+        }
       }
     }
     toggleDropdown('driver');
@@ -175,7 +279,8 @@ const CabDetailsForm = () => {
           TOTALKM: "", SHIFTTIMING: "", GPSENABLED: "", DELAY: "", REMARKS: "",
         });
         setSelectedEmployees([]);
-        setShowOther({ driver: false, tripType: false, shift: false });
+        setSelectedEscort(null);
+        setShowOther({ driver: false, escort: false, tripType: false, shift: false });
       } else {
         toast.error('❌ Submission failed: ' + response.statusText);
       }
@@ -446,14 +551,50 @@ const CabDetailsForm = () => {
         <div style={s.section}>
           <div style={s.sectionTitle}>👥 Escort & Employee Details</div>
           <div style={s.grid}>
-            <div style={s.field}>
-              <label style={s.label}>Escort Name <span style={s.hint}>(Optional)</span></label>
-              <input type="text" name="ESCORTNAME" value={formData.ESCORTNAME} onChange={handleInputChange} placeholder="Enter escort name" style={s.input} />
+            {/* Escort Dropdown */}
+            <div style={{ ...s.field, position: 'relative' }}>
+              <label style={s.label}>Select Escort <span style={s.hint}>(Optional)</span></label>
+              <button type="button" onClick={() => toggleDropdown('escort')} style={s.dropBtn}>
+                <span style={{ color: selectedEscort ? '#333' : '#999' }}>
+                  {selectedEscort ? `${selectedEscort.name} - ${selectedEscort.mobile}` : '-- Select Escort --'}
+                </span>
+                <span>{dropdowns.escort ? '▲' : '▼'}</span>
+              </button>
+              {dropdowns.escort && (
+                <div style={s.dropMenu}>
+                  <div style={{ ...s.dropItem, color: '#888' }} onClick={() => handleEscortChange('none')}>
+                    -- No Escort --
+                  </div>
+                  {escortsData.map(e => (
+                    <div key={e.id} style={{ ...s.dropItem, background: selectedEscort?.id === e.id ? '#e8f4fc' : '#fff' }} onClick={() => handleEscortChange(e.id)}>
+                      <strong>{e.name}</strong> - {e.mobile} <span style={{ color: '#888', fontSize: '12px' }}>({e.empId})</span>
+                    </div>
+                  ))}
+                  <div style={{ ...s.dropItem, color: '#000D6B', fontWeight: '600' }} onClick={() => handleEscortChange('other')}>
+                    🔧 Other (Enter Manually)
+                  </div>
+                </div>
+              )}
             </div>
-            <div style={s.field}>
-              <label style={s.label}>Escort ID/Mobile <span style={s.hint}>(Optional)</span></label>
-              <input type="text" name="ESCORTIDMOBILE" value={formData.ESCORTIDMOBILE} onChange={handleInputChange} placeholder="Enter ID or mobile" style={s.input} />
-            </div>
+
+            {/* Escort Details - Auto-filled or Manual */}
+            {showOther.escort ? (
+              <>
+                <div style={s.field}>
+                  <label style={s.label}>Escort Name</label>
+                  <input type="text" name="ESCORTNAME" value={formData.ESCORTNAME} onChange={handleInputChange} placeholder="Enter escort name" style={s.input} />
+                </div>
+                <div style={s.field}>
+                  <label style={s.label}>Escort ID/Mobile</label>
+                  <input type="text" name="ESCORTIDMOBILE" value={formData.ESCORTIDMOBILE} onChange={handleInputChange} placeholder="Enter ID or mobile" style={s.input} />
+                </div>
+              </>
+            ) : selectedEscort && (
+              <div style={s.field}>
+                <label style={s.label}>Escort ID/Mobile</label>
+                <input type="text" value={formData.ESCORTIDMOBILE} readOnly style={s.inputReadonly} />
+              </div>
+            )}
             
             <Dropdown
               label="Employee Name & ID"
