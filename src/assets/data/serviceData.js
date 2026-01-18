@@ -24,7 +24,7 @@ const serviceData = [
     id: 4,
     title: "Fast & Easy Booking",
     icon: "ri-timer-flash-line",
-    desc: "Quick and hassle-free booking with UNION CABS. User-friendly platform, seamless experience. Save time and secure your ride in just a few clicks.",
+    desc: "Quick and hassle-free booking with UNION SERVICES. User-friendly platform, seamless experience. Save time and secure your ride in just a few clicks.",
   },
 
   {

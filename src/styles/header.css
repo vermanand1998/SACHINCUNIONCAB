@@ -170,7 +170,38 @@
 }
 
 
+/* ================ Header Logo Responsive Styles =========== */
+.header-logo-img {
+  height: 55px;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+/* Large screens (desktops) */
+@media only screen and (min-width: 1200px) {
+  .header-logo-img {
+    height: 60px;
+    max-width: 300px;
+  }
+}
+
+/* Medium screens (tablets) */
+@media only screen and (max-width: 991px) {
+  .header-logo-img {
+    height: 50px;
+    max-width: 240px;
+  }
+}
+
+/* Small screens (mobile landscape) */
 @media only screen and (max-width: 768px) {
+  .header-logo-img {
+    height: 42px;
+    max-width: 200px;
+  }
+  
   /* .header__top,
   .header__middle,
   .nav__right {
@@ -217,5 +248,21 @@
 
   .menu__active {
     display: block;
+  }
+}
+
+/* Extra small screens (mobile portrait) */
+@media only screen and (max-width: 576px) {
+  .header-logo-img {
+    height: 38px;
+    max-width: 180px;
+  }
+}
+
+/* Very small screens */
+@media only screen and (max-width: 400px) {
+  .header-logo-img {
+    height: 32px;
+    max-width: 150px;
   }
 }

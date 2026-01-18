@@ -44,10 +44,10 @@ const AboutMe = ({ aboutClass }) => {
                   satisfaction
                 </p>
               </p>
-              <h4 className="section__subtitle">WHY CHOOSE UNION CABS?</h4>
+              <h4 className="section__subtitle">WHY CHOOSE UNION SERVICES?</h4>
               <p className="section__description">
                 <p>
-                  Here at Union Cabs, we take pride in connecting people during
+                  Here at Union Services, we take pride in connecting people during
                   their important events in life. After all, people don’t just
                   rent vehicles for transportation but also a means for
                   accomplishing major tasks like moving to a new house or
@@ -73,7 +73,7 @@ const AboutMe = ({ aboutClass }) => {
                   <p className="section__description">
                     <p>
                       Meet <b>Mr. Sachin Verma</b>, the accomplished <b>proprietor
-                      of UNION CABS .</b> Armed with a background in <b>Civil
+                      of UNION SERVICES .</b> Armed with a background in <b>Civil
                       Engineering</b> and over <b>3 years of experience</b>, he has
                       transitioned seamlessly into entrepreneurship. As the
                       driving force behind UnionCabs India, Mr. Verma continues

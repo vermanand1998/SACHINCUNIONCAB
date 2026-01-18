@@ -23,7 +23,7 @@ const HeroSlider = () => {
         <Container>
           <div className="slider__content ">
             <h4 className="text-light mb-3">We hope to deliver you the best services always and make you smile</h4>
-            <h1 className="text-light mb-4">Welcome to Union Cabs</h1>
+            <h1 className="text-light mb-4">Welcome to Union Services</h1>
 
             <button className="btn reserve__btn mt-4">
               <Link to="/cars">Book Now</Link>
@@ -36,7 +36,7 @@ const HeroSlider = () => {
         <Container>
           <div className="slider__content ">
             <h4 className="text-light mb-3">We hope to deliver you the best services always and make you smile</h4>
-            <h1 className="text-light mb-4">Welcome to Union Cabs</h1>
+            <h1 className="text-light mb-4">Welcome to Union Services</h1>
 
             <button className="btn reserve__btn mt-4">
               <Link to="/cars">Book Now</Link>
@@ -49,7 +49,7 @@ const HeroSlider = () => {
         <Container>
           <div className="slider__content ">
             <h4 className="text-light mb-3">We hope to deliver you the best services always and make you smile</h4>
-            <h1 className="text-light mb-4">Welcome to Union Cabs</h1>
+            <h1 className="text-light mb-4">Welcome to Union Services</h1>
 
             <button className="btn reserve__btn mt-4">
               <Link to="/cars">Book Now</Link>

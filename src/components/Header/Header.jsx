@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/global.css"
-import img01 from "../../assets/all-images/companyLogo.png"
+import img01 from "../../assets/all-images/unionServicesLogo.png"
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -232,15 +232,11 @@ const Header = () => {
                       to="/home"
                       className="d-flex align-items-center gap-2"
                     >
-                      <img src={img01} alt="" height={'40px'} width={'40px'} />
-                      {/* <i className="ri-car-line"></i> */}
-
-                      <span className="ShowthisText">
-                        Union Cabs
-                      </span>
-                      <span className="ShowthisTextMobile">
-                        Union Cabs India Service
-                      </span>
+                      <img 
+                        src={img01} 
+                        alt="Union Services" 
+                        className="header-logo-img"
+                      />
                     </Link>
                   </h1>
                 </div>
