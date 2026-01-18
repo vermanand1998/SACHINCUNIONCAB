@@ -72,7 +72,7 @@ const Footer = () => {
             <div className="mb-4">
               <h5 className="footer__link-title mb-4">Head Office</h5>
               <p className="office__info">39,Pragati Nagar, Takrohi,Indira Nagar,Lucknow,Uttar Pradesh,India 226016</p>
-              <p className="office__info">Phone:+919956237689, +919598232023 +919506726327</p>
+              <p className="office__info">Phone:+919598232023 +919506726327</p>
 
               <p className="office__info">Email: unioncabsindia@gmail.com</p>
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import "../../styles/about-section.css";
 // import ava01 from "../../assets/all-images/ava-1.jpg";
-import ava01 from "../../assets/all-images/Sachin.png";
+import ava01 from "../../assets/all-images/sachin.jpg";
 import "../../styles/our-member.css";
 const AboutMe = ({ aboutClass }) => {
   return (

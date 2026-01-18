@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, FormGroup, Button, Spinner } from "reactstrap";
+import { Form, Button, Spinner } from "reactstrap";
 import CommonSection from "../components/UI/CommonSection";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,13 +8,57 @@ import "../../src/styles/global.css";
 
 // Driver and Cab Data
 const driversData = [
-  { id: 1, cabNo: "CAB-001", driverName: "SIDDHARTH", driverMobile: "9876543210", vendorName: "Union Services" },
-  { id: 2, cabNo: "CAB-002", driverName: "RAHUL", driverMobile: "9876543211", vendorName: "Union Services" },
-  { id: 3, cabNo: "CAB-003", driverName: "FAIZ KHAN", driverMobile: "9876543212", vendorName: "Union Services" },
+  { id: 1, cabNo: "CAB-1", driverName: "SIDDHARTH", driverMobile: "9876543210", vendorName: "Union Services", vehicleNo: "UP32TN5393" },
+  { id: 2, cabNo: "CAB-2", driverName: "RAHUL", driverMobile: "9876543211", vendorName: "Union Services", vehicleNo: "UP32ZN7576" },
+  { id: 3, cabNo: "CAB-3", driverName: "FAIZ KHAN", driverMobile: "9876543212", vendorName: "Union Services", vehicleNo: "UP32TN4911" },
 ];
 
+// Employee Data
+const employeesData = [
+  { id: 1, name: "ABHISHEK KUMAR", empId: "EMP001" },
+  { id: 2, name: "PRIYA SHARMA", empId: "EMP002" },
+  { id: 3, name: "RAJESH SINGH", empId: "EMP003" },
+  { id: 4, name: "NEHA GUPTA", empId: "EMP004" },
+  { id: 5, name: "AMIT VERMA", empId: "EMP005" },
+  { id: 6, name: "SUNITA YADAV", empId: "EMP006" },
+  { id: 7, name: "VIKASH KUMAR", empId: "EMP007" },
+  { id: 8, name: "POOJA MISHRA", empId: "EMP008" },
+  { id: 9, name: "ROHIT TIWARI", empId: "EMP009" },
+  { id: 10, name: "ANITA PANDEY", empId: "EMP010" },
+];
+
+// Location Options
+const locationOptions = [
+  "CHOWK", "DUBAGGA", "PATEL NAGAR", "JANKIPURAM", "SAFEDABAD", 
+  "VIJYANT KHAND", "Ismail Ganj", "NOIDA", "Dhakoli Rehmat Homes Society",
+  "Shimla", "Hazratganj", "Indira Nagar", "Gomti Nagar", "Aliganj",
+  "Aminabad", "Alambagh", "Chinhat", "Mahanagar", "Rajajipuram", "ECLAT Office",
+  "Bhavya Tower"
+];
+
+// Time Options
+const timeOptions = [
+  "06:00 PM", "06:15 PM", "06:30 PM", "06:45 PM", "07:00 PM", "07:15 PM", "07:30 PM", "07:45 PM",
+  "08:00 PM", "08:15 PM", "08:30 PM", "08:45 PM", "09:00 PM", "09:15 PM", "09:30 PM", "09:45 PM",
+  "10:00 PM", "10:15 PM", "10:30 PM", "10:45 PM", "11:00 PM", "11:15 PM", "11:30 PM", "11:45 PM",
+  "12:00 AM", "12:15 AM", "12:30 AM", "12:45 AM", "01:00 AM", "01:30 AM", "02:00 AM", "02:30 AM",
+  "03:00 AM", "03:30 AM", "04:00 AM", "04:30 AM", "05:00 AM", "05:30 AM", "06:00 AM"
+];
+
+// Shift Options
+const shiftOptions = [
+  "Shift 1 (06:30PM - 3:30AM)",
+  "Shift 2 (09:00PM - 6:00AM)",
+  "Morning (6AM - 2PM)",
+  "Afternoon (2PM - 10PM)",
+  "General (9AM - 6PM)",
+  "Full Day"
+];
+
+// Trip Type Options
+const tripTypeOptions = ["PU (Pick-Up)", "DO (Drop-Off)", "PU/DO (Both)"];
+
 const CabDetailsForm = () => {
-  // Generate Trip ID
   const generateTripId = () => {
     const date = new Date();
     const year = date.getFullYear().toString().slice(-2);
@@ -27,83 +71,78 @@ const CabDetailsForm = () => {
   const [formData, setFormData] = useState({
     DATE: new Date().toISOString().split('T')[0],
     TRIPID: generateTripId(),
-    CABNO: "",
-    VENDORNAME: "",
-    DRIVERNAME: "",
-    DRIVERMOBILE: "",
-    ESCORTNAME: "",
-    ESCORTIDMOBILE: "",
-    EMPLOYEENAME: "",
-    EMPID: "",
-    TRIPTYPE: "",
-    PICKUPLOCATION: "",
-    PICKUPTIME: "",
-    PICKUPMETERREADING: "",
-    DROPOFFLOCATION: "",
-    DROPOFFTIME: "",
-    DROPOFFMETERREADING: "",
-    TOTALKM: "",
-    SHIFTTIMING: "",
-    GPSENABLED: "",
-    DELAY: "",
-    REMARKS: "",
+    CABNO: "", VEHICLENO: "", VENDORNAME: "", DRIVERNAME: "", DRIVERMOBILE: "",
+    ESCORTNAME: "", ESCORTIDMOBILE: "", TRIPTYPE: "",
+    PICKUPLOCATION: [], PICKUPTIME: [], PICKUPMETERREADING: "",
+    DROPOFFLOCATION: [], DROPOFFTIME: [], DROPOFFMETERREADING: "",
+    TOTALKM: "", SHIFTTIMING: "", GPSENABLED: "", DELAY: "", REMARKS: "",
   });
+
+  const [selectedEmployees, setSelectedEmployees] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleDriverChange = (e) => {
-    const selectedDriverId = e.target.value;
-    if (selectedDriverId === "") {
-      setFormData(prevData => ({
-        ...prevData,
-        CABNO: "",
-        VENDORNAME: "",
-        DRIVERNAME: "",
-        DRIVERMOBILE: "",
-      }));
-      return;
+  // Dropdown visibility states
+  const [dropdowns, setDropdowns] = useState({
+    driver: false, employee: false, pickupLoc: false, dropoffLoc: false,
+    pickupTime: false, dropoffTime: false, tripType: false, shift: false
+  });
+  
+  // Other/Custom states
+  const [showOther, setShowOther] = useState({
+    driver: false, tripType: false, shift: false
+  });
+  
+  const [customValues, setCustomValues] = useState({
+    tripType: "", shift: ""
+  });
+
+  const toggleDropdown = (name) => {
+    setDropdowns(prev => {
+      const newState = { driver: false, employee: false, pickupLoc: false, dropoffLoc: false, pickupTime: false, dropoffTime: false, tripType: false, shift: false };
+      newState[name] = !prev[name];
+      return newState;
+    });
+  };
+
+  const handleDriverChange = (driverId) => {
+    if (driverId === "other") {
+      setShowOther(prev => ({ ...prev, driver: true }));
+      setFormData(prev => ({ ...prev, CABNO: "", VEHICLENO: "", VENDORNAME: "Union Services", DRIVERNAME: "", DRIVERMOBILE: "" }));
+    } else if (driverId) {
+      setShowOther(prev => ({ ...prev, driver: false }));
+      const driver = driversData.find(d => d.id === parseInt(driverId));
+      if (driver) {
+        setFormData(prev => ({
+          ...prev, CABNO: driver.cabNo, VEHICLENO: driver.vehicleNo,
+          VENDORNAME: driver.vendorName, DRIVERNAME: driver.driverName, DRIVERMOBILE: driver.driverMobile
+        }));
+      }
     }
-    
-    const selectedDriver = driversData.find(driver => driver.id === parseInt(selectedDriverId));
-    if (selectedDriver) {
-      setFormData(prevData => ({
-        ...prevData,
-        CABNO: selectedDriver.cabNo,
-        VENDORNAME: selectedDriver.vendorName,
-        DRIVERNAME: selectedDriver.driverName,
-        DRIVERMOBILE: selectedDriver.driverMobile,
-      }));
-    }
+    toggleDropdown('driver');
+  };
+
+  const handleArrayToggle = (field, value) => {
+    setFormData(prev => {
+      const arr = prev[field];
+      return { ...prev, [field]: arr.includes(value) ? arr.filter(v => v !== value) : [...arr, value] };
+    });
+  };
+
+  const handleEmployeeToggle = (emp) => {
+    setSelectedEmployees(prev => {
+      const exists = prev.find(e => e.id === emp.id);
+      return exists ? prev.filter(e => e.id !== emp.id) : [...prev, emp];
+    });
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
-    // Only allow letters and spaces for name fields
-    if (name === 'EMPLOYEENAME' || name === 'ESCORTNAME') {
-      if (/^[a-zA-Z\s]*$/.test(value) || value === '') {
-        setFormData(prevData => ({
-          ...prevData,
-          [name]: value
-        }));
-      }
-      return;
-    }
-    
-    // Calculate Total KM when meter readings change
     if (name === 'PICKUPMETERREADING' || name === 'DROPOFFMETERREADING') {
-      const pickupKM = name === 'PICKUPMETERREADING' ? Number(value) : Number(formData.PICKUPMETERREADING);
-      const dropoffKM = name === 'DROPOFFMETERREADING' ? Number(value) : Number(formData.DROPOFFMETERREADING);
-      
-      setFormData(prevData => ({
-        ...prevData,
-        [name]: value,
-        TOTALKM: dropoffKM && pickupKM ? (dropoffKM - pickupKM).toString() : ""
-      }));
+      const pickup = name === 'PICKUPMETERREADING' ? Number(value) : Number(formData.PICKUPMETERREADING);
+      const dropoff = name === 'DROPOFFMETERREADING' ? Number(value) : Number(formData.DROPOFFMETERREADING);
+      setFormData(prev => ({ ...prev, [name]: value, TOTALKM: dropoff && pickup ? String(dropoff - pickup) : "" }));
     } else {
-      setFormData(prevData => ({
-        ...prevData,
-        [name]: value
-      }));
+      setFormData(prev => ({ ...prev, [name]: value }));
     }
   };
 
@@ -111,446 +150,482 @@ const CabDetailsForm = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Create FormData with all form fields (matching spreadsheet columns)
-    const formDataObject = new FormData();
-    formDataObject.append('DATE', formData.DATE);
-    formDataObject.append('TRIPID', formData.TRIPID);
-    formDataObject.append('CABNO', formData.CABNO);
-    formDataObject.append('VENDORNAME', formData.VENDORNAME);
-    formDataObject.append('DRIVERNAME', formData.DRIVERNAME);
-    formDataObject.append('DRIVERMOBILE', formData.DRIVERMOBILE);
-    formDataObject.append('ESCORTNAME', formData.ESCORTNAME);
-    formDataObject.append('ESCORTIDMOBILE', formData.ESCORTIDMOBILE);
-    formDataObject.append('EMPLOYEENAME', formData.EMPLOYEENAME);
-    formDataObject.append('EMPID', formData.EMPID);
-    formDataObject.append('TRIPTYPE', formData.TRIPTYPE);
-    formDataObject.append('PICKUPLOCATION', formData.PICKUPLOCATION);
-    formDataObject.append('PICKUPTIME', formData.PICKUPTIME);
-    formDataObject.append('PICKUPMETERREADING', formData.PICKUPMETERREADING);
-    formDataObject.append('DROPOFFLOCATION', formData.DROPOFFLOCATION);
-    formDataObject.append('DROPOFFTIME', formData.DROPOFFTIME);
-    formDataObject.append('DROPOFFMETERREADING', formData.DROPOFFMETERREADING);
-    formDataObject.append('TOTALKM', formData.TOTALKM);
-    formDataObject.append('SHIFTTIMING', formData.SHIFTTIMING);
-    formDataObject.append('GPSENABLED', formData.GPSENABLED);
-    formDataObject.append('DELAY', formData.DELAY);
-    formDataObject.append('REMARKS', formData.REMARKS);
-    
-    try {
-      const response = await fetch(googleSheetUrl, {
-        method: "POST",
-        body: formDataObject,
-      });
+    const formDataObj = new FormData();
+    Object.entries({
+      ...formData,
+      EMPLOYEENAME: selectedEmployees.map(e => e.name).join(', '),
+      EMPID: selectedEmployees.map(e => e.empId).join(', '),
+      PICKUPLOCATION: formData.PICKUPLOCATION.join(', '),
+      PICKUPTIME: formData.PICKUPTIME.join(', '),
+      DROPOFFLOCATION: formData.DROPOFFLOCATION.join(', '),
+      DROPOFFTIME: formData.DROPOFFTIME.join(', ')
+    }).forEach(([key, val]) => formDataObj.append(key, val));
 
+    try {
+      const response = await fetch(googleSheetUrl, { method: "POST", body: formDataObj });
       if (response.ok) {
-        toast.success('Cab Details Sent Successfully!');
-        // Reset form
+        toast.success('✅ Cab Details Submitted Successfully!');
+        // Reset
         setFormData({
-          DATE: new Date().toISOString().split('T')[0],
-          TRIPID: generateTripId(),
-          CABNO: "",
-          VENDORNAME: "",
-          DRIVERNAME: "",
-          DRIVERMOBILE: "",
-          ESCORTNAME: "",
-          ESCORTIDMOBILE: "",
-          EMPLOYEENAME: "",
-          EMPID: "",
-          TRIPTYPE: "",
-          PICKUPLOCATION: "",
-          PICKUPTIME: "",
-          PICKUPMETERREADING: "",
-          DROPOFFLOCATION: "",
-          DROPOFFTIME: "",
-          DROPOFFMETERREADING: "",
-          TOTALKM: "",
-          SHIFTTIMING: "",
-          GPSENABLED: "",
-          DELAY: "",
-          REMARKS: "",
+          DATE: new Date().toISOString().split('T')[0], TRIPID: generateTripId(),
+          CABNO: "", VEHICLENO: "", VENDORNAME: "", DRIVERNAME: "", DRIVERMOBILE: "",
+          ESCORTNAME: "", ESCORTIDMOBILE: "", TRIPTYPE: "",
+          PICKUPLOCATION: [], PICKUPTIME: [], PICKUPMETERREADING: "",
+          DROPOFFLOCATION: [], DROPOFFTIME: [], DROPOFFMETERREADING: "",
+          TOTALKM: "", SHIFTTIMING: "", GPSENABLED: "", DELAY: "", REMARKS: "",
         });
+        setSelectedEmployees([]);
+        setShowOther({ driver: false, tripType: false, shift: false });
       } else {
-        toast.error('Request failed: ' + response.statusText);
+        toast.error('❌ Submission failed: ' + response.statusText);
       }
     } catch (error) {
-      toast.error('Error submitting form: ' + error.message);
+      toast.error('❌ Error: ' + error.message);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Check if required form fields are valid
-  const isFormValid = () => {
+  const isFormValid = () => (
+    formData.DATE && formData.CABNO && formData.DRIVERNAME && selectedEmployees.length > 0 &&
+    formData.TRIPTYPE && formData.PICKUPLOCATION.length > 0 && formData.PICKUPTIME.length > 0 &&
+    formData.DROPOFFLOCATION.length > 0 && formData.DROPOFFTIME.length > 0 && formData.SHIFTTIMING &&
+    formData.GPSENABLED && formData.DELAY
+  );
+
+  // Styles
+  const s = {
+    container: { maxWidth: '1100px', margin: '0 auto', padding: '25px', fontFamily: "'Segoe UI', sans-serif" },
+    section: { background: '#fff', borderRadius: '12px', padding: '25px', marginBottom: '20px', boxShadow: '0 2px 12px rgba(0,0,0,0.08)' },
+    sectionTitle: { fontSize: '16px', fontWeight: '700', color: '#000D6B', marginBottom: '20px', paddingBottom: '10px', borderBottom: '2px solid #000D6B', display: 'flex', alignItems: 'center', gap: '10px' },
+    grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' },
+    field: { marginBottom: '5px' },
+    label: { display: 'block', fontSize: '13px', fontWeight: '600', color: '#444', marginBottom: '6px' },
+    hint: { color: '#888', fontWeight: 'normal', fontSize: '11px' },
+    input: { width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '14px', outline: 'none', transition: 'border 0.2s', boxSizing: 'border-box' },
+    inputReadonly: { width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '14px', background: '#f8f9fa', color: '#666', boxSizing: 'border-box' },
+    select: { width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '14px', background: '#fff', cursor: 'pointer', boxSizing: 'border-box' },
+    dropBtn: { width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: '8px', background: '#fff', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '14px', boxSizing: 'border-box' },
+    dropMenu: { position: 'absolute', top: '100%', left: 0, right: 0, background: '#fff', border: '1px solid #ddd', borderRadius: '8px', marginTop: '4px', maxHeight: '220px', overflowY: 'auto', zIndex: 100, boxShadow: '0 4px 12px rgba(0,0,0,0.15)' },
+    dropItem: { display: 'flex', alignItems: 'center', padding: '10px 12px', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', fontSize: '14px', gap: '10px' },
+    checkbox: { width: '16px', height: '16px', accentColor: '#000D6B', cursor: 'pointer', flexShrink: 0 },
+    customBox: { padding: '10px 12px', borderTop: '1px solid #ddd', background: '#fafafa' },
+    addBtn: { background: '#28a745', color: '#fff', border: 'none', padding: '6px 14px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: '500' },
+    submitBtn: { background: 'linear-gradient(135deg, #000D6B, #1a237e)', color: '#fff', border: 'none', padding: '14px 50px', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', width: '100%', maxWidth: '350px' },
+    submitBtnDisabled: { background: '#aaa', cursor: 'not-allowed' }
+  };
+
+  // Reusable Dropdown Component - Tags shown inside the input field
+  const Dropdown = ({ label, options, selected, onToggle, isOpen, setOpen, color, placeholder, onAddCustom, isEmployee, inputType = 'text', inputPlaceholder = 'Enter value' }) => {
+    const [localCustomValue, setLocalCustomValue] = React.useState('');
+    const [localCustomValue2, setLocalCustomValue2] = React.useState(''); // For employee ID
+    const inputRef = React.useRef(null);
+    const inputRef2 = React.useRef(null);
+
+    const handleAddCustom = () => {
+      if (isEmployee) {
+        if (localCustomValue.trim() && localCustomValue2.trim()) {
+          onAddCustom(localCustomValue.trim(), localCustomValue2.trim());
+          setLocalCustomValue('');
+          setLocalCustomValue2('');
+        }
+      } else {
+        if (localCustomValue.trim()) {
+          onAddCustom(localCustomValue.trim());
+          setLocalCustomValue('');
+        }
+      }
+    };
+
     return (
-      formData.DATE &&
-      formData.TRIPID &&
-      formData.CABNO &&
-      formData.DRIVERNAME &&
-      formData.EMPLOYEENAME &&
-      formData.EMPID &&
-      formData.TRIPTYPE &&
-      formData.PICKUPLOCATION &&
-      formData.PICKUPTIME &&
-      formData.PICKUPMETERREADING &&
-      formData.DROPOFFLOCATION &&
-      formData.DROPOFFTIME &&
-      formData.DROPOFFMETERREADING &&
-      formData.SHIFTTIMING &&
-      formData.GPSENABLED &&
-      formData.DELAY
+      <div style={{ ...s.field, position: 'relative' }}>
+        <label style={s.label}>{label} <span style={s.hint}>(Multi-select)</span></label>
+        
+        {/* Input field with tags inside */}
+        <div 
+          onClick={() => setOpen(!isOpen)} 
+          style={{
+            width: '100%',
+            minHeight: '42px',
+            padding: '6px 35px 6px 10px',
+            border: '1px solid #ddd',
+            borderRadius: '8px',
+            background: '#fff',
+            cursor: 'pointer',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            gap: '5px',
+            position: 'relative',
+            boxSizing: 'border-box'
+          }}
+        >
+          {selected.length > 0 ? (
+            selected.map((item, i) => (
+              <span 
+                key={i} 
+                style={{ 
+                  display: 'inline-flex', 
+                  alignItems: 'center', 
+                  gap: '4px', 
+                  padding: '3px 8px', 
+                  borderRadius: '4px', 
+                  fontSize: '12px', 
+                  color: '#fff', 
+                  fontWeight: '500',
+                  background: color 
+                }}
+              >
+                {isEmployee ? item.name : item}
+                <button 
+                  type="button" 
+                  onClick={(e) => { e.stopPropagation(); onToggle(item); }} 
+                  style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: '14px', padding: 0, lineHeight: 1 }}
+                >×</button>
+              </span>
+            ))
+          ) : (
+            <span style={{ color: '#999', fontSize: '14px' }}>{placeholder}</span>
+          )}
+          <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: '#666' }}>
+            {isOpen ? '▲' : '▼'}
+          </span>
+        </div>
+
+        {/* Dropdown Menu */}
+        {isOpen && (
+          <div style={{ ...s.dropMenu, maxHeight: 'none', overflow: 'visible', display: 'flex', flexDirection: 'column' }}>
+            {/* Scrollable Options List */}
+            <div style={{ maxHeight: '180px', overflowY: 'auto' }}>
+              {options.map((opt, i) => {
+                const isSelected = isEmployee ? selected.some(s => s.id === opt.id) : selected.includes(opt);
+                return (
+                  <div key={i} style={{ ...s.dropItem, background: isSelected ? '#e8f4fc' : '#fff' }} onClick={() => onToggle(opt)}>
+                    <input type="checkbox" checked={isSelected} readOnly style={s.checkbox} />
+                    <span style={{ flex: 1 }}>{isEmployee ? opt.name : opt}</span>
+                    {isEmployee && <span style={{ color: '#888', fontSize: '12px' }}>({opt.empId})</span>}
+                  </div>
+                );
+              })}
+            </div>
+            {/* Fixed Custom Input Section */}
+            <div 
+              style={{ ...s.customBox, position: 'sticky', bottom: 0, background: '#fafafa', borderTop: '2px solid #000D6B' }} 
+              onClick={(e) => e.stopPropagation()} 
+              onMouseDown={(e) => e.stopPropagation()}
+            >
+              <div style={{ fontSize: '12px', color: '#666', marginBottom: '6px', fontWeight: '600' }}>➕ Add Custom</div>
+              {isEmployee ? (
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  <input 
+                    ref={inputRef}
+                    type="text" 
+                    value={localCustomValue} 
+                    onChange={e => setLocalCustomValue(e.target.value)} 
+                    onClick={e => e.stopPropagation()} 
+                    onMouseDown={e => e.stopPropagation()}
+                    placeholder="Name" 
+                    style={{ ...s.input, flex: 1, minWidth: '100px' }} 
+                  />
+                  <input 
+                    ref={inputRef2}
+                    type="text" 
+                    value={localCustomValue2} 
+                    onChange={e => setLocalCustomValue2(e.target.value)} 
+                    onClick={e => e.stopPropagation()} 
+                    onMouseDown={e => e.stopPropagation()}
+                    placeholder="ID" 
+                    style={{ ...s.input, width: '80px' }} 
+                  />
+                </div>
+              ) : (
+                <input 
+                  ref={inputRef}
+                  type={inputType} 
+                  value={localCustomValue} 
+                  onChange={e => setLocalCustomValue(e.target.value)} 
+                  onClick={e => e.stopPropagation()} 
+                  onMouseDown={e => e.stopPropagation()}
+                  placeholder={inputPlaceholder} 
+                  style={s.input} 
+                />
+              )}
+              <button type="button" onClick={(e) => { e.stopPropagation(); handleAddCustom(); }} style={{ ...s.addBtn, marginTop: '6px' }}>Add</button>
+            </div>
+          </div>
+        )}
+      </div>
     );
   };
 
   return (
     <>
-      <CommonSection title="Cab Details" />
-      <Form className="marginFormArround" onSubmit={handleSubmit}>
-        {/* Row 1: Date & Trip ID */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="date">Date:</label>
-          <input
-            type="date"
-            id="date"
-            name="DATE"
-            value={formData.DATE}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
+      <CommonSection title="Driver Cab Details" />
+      <Form style={s.container} onSubmit={handleSubmit}>
+        
+        {/* Trip Info */}
+        <div style={s.section}>
+          <div style={s.sectionTitle}>📋 Trip Information</div>
+          <div style={s.grid}>
+            <div style={s.field}>
+              <label style={s.label}>Date</label>
+              <input type="date" name="DATE" value={formData.DATE} onChange={handleInputChange} style={s.input} required />
+            </div>
+            <div style={s.field}>
+              <label style={s.label}>Trip ID</label>
+              <input type="text" value={formData.TRIPID} readOnly style={s.inputReadonly} />
+            </div>
+          </div>
+        </div>
 
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="tripId">Trip ID:</label>
-          <input
-            type="text"
-            id="tripId"
-            name="TRIPID"
-            value={formData.TRIPID}
-            readOnly
-            style={{ backgroundColor: '#e9ecef' }}
-          />
-        </FormGroup>
-
-        {/* Row 2: Select Driver/Cab & Cab No */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="selectDriver">Select Driver/Cab:</label>
-          <select
-            id="selectDriver"
-            name="SELECTDRIVER"
-            onChange={handleDriverChange}
-            required
-          >
-            <option value="">-- Select Driver --</option>
-            {driversData.map((driver) => (
-              <option key={driver.id} value={driver.id}>
-                {driver.cabNo} - {driver.driverName}
-              </option>
-            ))}
-          </select>
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="cabNo">Cab No.:</label>
-          <input
-            type="text"
-            id="cabNo"
-            name="CABNO"
-            value={formData.CABNO}
-            readOnly
-            placeholder="Auto-filled"
-            style={{ backgroundColor: '#e9ecef' }}
-          />
-        </FormGroup>
-
-        {/* Row 3: Vendor Name & Driver Name */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="vendorName">Vendor Name:</label>
-          <input
-            type="text"
-            id="vendorName"
-            name="VENDORNAME"
-            value={formData.VENDORNAME}
-            readOnly
-            placeholder="Auto-filled"
-            style={{ backgroundColor: '#e9ecef' }}
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="driverName">Driver Name:</label>
-          <input
-            type="text"
-            id="driverName"
-            name="DRIVERNAME"
-            value={formData.DRIVERNAME}
-            readOnly
-            placeholder="Auto-filled"
-            style={{ backgroundColor: '#e9ecef' }}
-          />
-        </FormGroup>
-
-        {/* Row 4: Driver Mobile & Escort Name */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="driverMobile">Driver Mobile:</label>
-          <input
-            type="text"
-            id="driverMobile"
-            name="DRIVERMOBILE"
-            value={formData.DRIVERMOBILE}
-            readOnly
-            placeholder="Auto-filled"
-            style={{ backgroundColor: '#e9ecef' }}
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="escortName">Escort Name:</label>
-          <input
-            type="text"
-            id="escortName"
-            name="ESCORTNAME"
-            value={formData.ESCORTNAME}
-            onChange={handleInputChange}
-            placeholder="Enter escort name (optional)"
-          />
-        </FormGroup>
-
-        {/* Row 5: Escort ID/Mobile & Employee Name */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="escortIdMobile">Escort ID / Mobile:</label>
-          <input
-            type="text"
-            id="escortIdMobile"
-            name="ESCORTIDMOBILE"
-            value={formData.ESCORTIDMOBILE}
-            onChange={handleInputChange}
-            placeholder="Enter escort ID or mobile (optional)"
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="employeeName">Employee Name:</label>
-          <input
-            type="text"
-            id="employeeName"
-            name="EMPLOYEENAME"
-            value={formData.EMPLOYEENAME}
-            onChange={handleInputChange}
-            placeholder="Enter employee name"
-            required
-          />
-        </FormGroup>
-
-        {/* Row 6: Emp ID & Trip Type */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="empId">Emp ID:</label>
-          <input
-            type="text"
-            id="empId"
-            name="EMPID"
-            value={formData.EMPID}
-            onChange={handleInputChange}
-            placeholder="Enter employee ID"
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="tripType">Trip Type (PU/DO):</label>
-          <select
-            id="tripType"
-            name="TRIPTYPE"
-            value={formData.TRIPTYPE}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">-- Select Trip Type --</option>
-            <option value="PU">PU (Pick-Up)</option>
-            <option value="DO">DO (Drop-Off)</option>
-            <option value="PU/DO">PU/DO (Both)</option>
-          </select>
-        </FormGroup>
-
-        {/* Row 7: Pick-Up Location & Pick-Up Time */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="pickupLocation">Pick-Up Location:</label>
-          <input
-            type="text"
-            id="pickupLocation"
-            name="PICKUPLOCATION"
-            value={formData.PICKUPLOCATION}
-            onChange={handleInputChange}
-            placeholder="Enter pick-up location"
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="pickupTime">Pick-Up Time:</label>
-          <input
-            type="time"
-            id="pickupTime"
-            name="PICKUPTIME"
-            value={formData.PICKUPTIME}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
-
-        {/* Row 8: Pick-Up Meter Reading & Drop-Off Location */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="pickupMeterReading">Pick-Up Meter Reading (KM):</label>
-          <input
-            type="number"
-            id="pickupMeterReading"
-            name="PICKUPMETERREADING"
-            value={formData.PICKUPMETERREADING}
-            onChange={handleInputChange}
-            placeholder="Enter pick-up KM"
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="dropoffLocation">Drop-Off Location:</label>
-          <input
-            type="text"
-            id="dropoffLocation"
-            name="DROPOFFLOCATION"
-            value={formData.DROPOFFLOCATION}
-            onChange={handleInputChange}
-            placeholder="Enter drop-off location"
-            required
-          />
-        </FormGroup>
-
-        {/* Row 9: Drop-Off Time & Drop-Off Meter Reading */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="dropoffTime">Drop-Off Time:</label>
-          <input
-            type="time"
-            id="dropoffTime"
-            name="DROPOFFTIME"
-            value={formData.DROPOFFTIME}
-            onChange={handleInputChange}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="dropoffMeterReading">Drop-Off Meter Reading (KM):</label>
-          <input
-            type="number"
-            id="dropoffMeterReading"
-            name="DROPOFFMETERREADING"
-            value={formData.DROPOFFMETERREADING}
-            onChange={handleInputChange}
-            placeholder="Enter drop-off KM"
-            required
-          />
-        </FormGroup>
-
-        {/* Row 10: Total KM & Shift Timing */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="totalKm">Total KM:</label>
-          <input
-            type="number"
-            id="totalKm"
-            name="TOTALKM"
-            value={formData.TOTALKM}
-            readOnly
-            placeholder="Auto-calculated"
-            style={{ backgroundColor: '#e9ecef', fontWeight: 'bold' }}
-          />
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="shiftTiming">Shift Timing:</label>
-          <select
-            id="shiftTiming"
-            name="SHIFTTIMING"
-            value={formData.SHIFTTIMING}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">-- Select Shift --</option>
-            <option value="Morning (6AM - 2PM)">Morning (6AM - 2PM)</option>
-            <option value="Afternoon (2PM - 10PM)">Afternoon (2PM - 10PM)</option>
-            <option value="Night (10PM - 6AM)">Night (10PM - 6AM)</option>
-            <option value="General (9AM - 6PM)">General (9AM - 6PM)</option>
-            <option value="Full Day">Full Day</option>
-          </select>
-        </FormGroup>
-
-        {/* Row 11: GPS Enabled & Delay */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4">
-          <label htmlFor="gpsEnabled">GPS Enabled (Y/N):</label>
-          <select
-            id="gpsEnabled"
-            name="GPSENABLED"
-            value={formData.GPSENABLED}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">-- Select --</option>
-            <option value="Y">Y (Yes)</option>
-            <option value="N">N (No)</option>
-          </select>
-        </FormGroup>
-
-        <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-          <label htmlFor="delay">Delay (Y/N):</label>
-          <select
-            id="delay"
-            name="DELAY"
-            value={formData.DELAY}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">-- Select --</option>
-            <option value="Y">Y (Yes)</option>
-            <option value="N">N (No)</option>
-          </select>
-        </FormGroup>
-
-        {/* Row 12: Remarks */}
-        <FormGroup className="booking__form d-inline-block me-4 mb-4" style={{ width: '100%', maxWidth: '600px' }}>
-          <label htmlFor="remarks">Remarks:</label>
-          <input
-            type="text"
-            id="remarks"
-            name="REMARKS"
-            value={formData.REMARKS}
-            onChange={handleInputChange}
-            placeholder="Any additional notes (optional)"
-            style={{ width: '100%' }}
-          />
-        </FormGroup>
-
-        {/* Submit Button */}
-        <FormGroup>
-          <Button 
-            type="submit" 
-            style={{
-              backgroundColor: isFormValid() ? '#000D6B' : '#808080',
-              cursor: isFormValid() ? 'pointer' : 'not-allowed',
-              padding: '12px 30px',
-              fontSize: '16px',
-              fontWeight: '600'
-            }}
-            disabled={!isFormValid() || isLoading}
-          >
-            {isLoading ? (
+        {/* Driver Info */}
+        <div style={s.section}>
+          <div style={s.sectionTitle}>🚗 Driver & Vehicle</div>
+          <div style={s.grid}>
+            <div style={{ ...s.field, position: 'relative' }}>
+              <label style={s.label}>Select Driver/Cab</label>
+              <button type="button" onClick={() => toggleDropdown('driver')} style={s.dropBtn}>
+                <span style={{ color: formData.DRIVERNAME ? '#333' : '#999' }}>
+                  {formData.DRIVERNAME ? `${formData.CABNO} - ${formData.DRIVERNAME}` : '-- Select Driver --'}
+                </span>
+                <span>{dropdowns.driver ? '▲' : '▼'}</span>
+              </button>
+              {dropdowns.driver && (
+                <div style={s.dropMenu}>
+                  {driversData.map(d => (
+                    <div key={d.id} style={{ ...s.dropItem, background: formData.DRIVERNAME === d.driverName ? '#e8f4fc' : '#fff' }} onClick={() => handleDriverChange(d.id)}>
+                      <strong>{d.cabNo}</strong> - {d.driverName} <span style={{ color: '#888' }}>({d.vehicleNo})</span>
+                    </div>
+                  ))}
+                  <div style={{ ...s.dropItem, color: '#000D6B', fontWeight: '600' }} onClick={() => handleDriverChange('other')}>
+                    🔧 Other (Enter Manually)
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {showOther.driver ? (
               <>
-                <Spinner size="sm" className="me-2">
-                  Loading...
-                </Spinner>
-                Submitting...
+                <div style={s.field}>
+                  <label style={s.label}>Cab No</label>
+                  <input type="text" name="CABNO" value={formData.CABNO} onChange={handleInputChange} placeholder="e.g., CAB-4" style={s.input} required />
+                </div>
+                <div style={s.field}>
+                  <label style={s.label}>Vehicle No</label>
+                  <input type="text" name="VEHICLENO" value={formData.VEHICLENO} onChange={handleInputChange} placeholder="e.g., UP32XX1234" style={s.input} required />
+                </div>
+                <div style={s.field}>
+                  <label style={s.label}>Driver Name</label>
+                  <input type="text" name="DRIVERNAME" value={formData.DRIVERNAME} onChange={handleInputChange} placeholder="Enter name" style={s.input} required />
+                </div>
+                <div style={s.field}>
+                  <label style={s.label}>Driver Mobile</label>
+                  <input type="text" name="DRIVERMOBILE" value={formData.DRIVERMOBILE} onChange={handleInputChange} placeholder="Enter mobile" style={s.input} maxLength="10" />
+                </div>
               </>
             ) : (
-              'Submit Cab Details'
+              <>
+                <div style={s.field}>
+                  <label style={s.label}>Cab No / Vehicle No</label>
+                  <input type="text" value={formData.CABNO ? `${formData.CABNO} / ${formData.VEHICLENO}` : ''} readOnly style={s.inputReadonly} placeholder="Auto-filled" />
+                </div>
+                <div style={s.field}>
+                  <label style={s.label}>Driver Name</label>
+                  <input type="text" value={formData.DRIVERNAME} readOnly style={s.inputReadonly} placeholder="Auto-filled" />
+                </div>
+                <div style={s.field}>
+                  <label style={s.label}>Driver Mobile</label>
+                  <input type="text" value={formData.DRIVERMOBILE} readOnly style={s.inputReadonly} placeholder="Auto-filled" />
+                </div>
+              </>
             )}
+          </div>
+        </div>
+
+        {/* Escort & Employee */}
+        <div style={s.section}>
+          <div style={s.sectionTitle}>👥 Escort & Employee Details</div>
+          <div style={s.grid}>
+            <div style={s.field}>
+              <label style={s.label}>Escort Name <span style={s.hint}>(Optional)</span></label>
+              <input type="text" name="ESCORTNAME" value={formData.ESCORTNAME} onChange={handleInputChange} placeholder="Enter escort name" style={s.input} />
+            </div>
+            <div style={s.field}>
+              <label style={s.label}>Escort ID/Mobile <span style={s.hint}>(Optional)</span></label>
+              <input type="text" name="ESCORTIDMOBILE" value={formData.ESCORTIDMOBILE} onChange={handleInputChange} placeholder="Enter ID or mobile" style={s.input} />
+            </div>
+            
+            <Dropdown
+              label="Employee Name & ID"
+              options={employeesData}
+              selected={selectedEmployees}
+              onToggle={handleEmployeeToggle}
+              isOpen={dropdowns.employee}
+              setOpen={() => toggleDropdown('employee')}
+              color="#6f42c1"
+              placeholder="Select employees..."
+              isEmployee={true}
+              onAddCustom={(name, id) => setSelectedEmployees(prev => [...prev, { id: Date.now(), name, empId: id }])}
+            />
+          </div>
+        </div>
+
+        {/* Trip Type & Location */}
+        <div style={s.section}>
+          <div style={s.sectionTitle}>📍 Trip Details</div>
+          <div style={s.grid}>
+            <div style={{ ...s.field, position: 'relative' }}>
+              <label style={s.label}>Trip Type (PU/DO)</label>
+              <button type="button" onClick={() => toggleDropdown('tripType')} style={s.dropBtn}>
+                <span style={{ color: formData.TRIPTYPE ? '#333' : '#999' }}>{formData.TRIPTYPE || '-- Select Trip Type --'}</span>
+                <span>{dropdowns.tripType ? '▲' : '▼'}</span>
+              </button>
+              {dropdowns.tripType && (
+                <div style={s.dropMenu}>
+                  {tripTypeOptions.map((t, i) => (
+                    <div key={i} style={{ ...s.dropItem, background: formData.TRIPTYPE === t ? '#e8f4fc' : '#fff' }} onClick={() => { setFormData(p => ({ ...p, TRIPTYPE: t })); setShowOther(p => ({ ...p, tripType: false })); toggleDropdown('tripType'); }}>
+                      {t}
+                    </div>
+                  ))}
+                  <div style={{ ...s.dropItem, color: '#000D6B', fontWeight: '600' }} onClick={() => { setShowOther(p => ({ ...p, tripType: true })); toggleDropdown('tripType'); }}>
+                    🔧 Other
+                  </div>
+                </div>
+              )}
+              {showOther.tripType && (
+                <input type="text" value={customValues.tripType} onChange={e => { setCustomValues(p => ({ ...p, tripType: e.target.value })); setFormData(p => ({ ...p, TRIPTYPE: e.target.value })); }} placeholder="Enter trip type" style={{ ...s.input, marginTop: '8px' }} />
+              )}
+            </div>
+
+            <Dropdown
+              label="Pick-Up Location"
+              options={locationOptions}
+              selected={formData.PICKUPLOCATION}
+              onToggle={(loc) => handleArrayToggle('PICKUPLOCATION', loc)}
+              isOpen={dropdowns.pickupLoc}
+              setOpen={() => toggleDropdown('pickupLoc')}
+              color="#000D6B"
+              placeholder="Select locations..."
+              inputType="text"
+              inputPlaceholder="Enter location"
+              onAddCustom={(val) => setFormData(prev => ({ ...prev, PICKUPLOCATION: [...prev.PICKUPLOCATION, val] }))}
+            />
+
+            <Dropdown
+              label="Pick-Up Time"
+              options={timeOptions}
+              selected={formData.PICKUPTIME}
+              onToggle={(t) => handleArrayToggle('PICKUPTIME', t)}
+              isOpen={dropdowns.pickupTime}
+              setOpen={() => toggleDropdown('pickupTime')}
+              color="#17a2b8"
+              placeholder="Select times..."
+              inputType="time"
+              inputPlaceholder="Select time"
+              onAddCustom={(val) => setFormData(prev => ({ ...prev, PICKUPTIME: [...prev.PICKUPTIME, val] }))}
+            />
+          </div>
+          
+          <div style={{ ...s.grid, marginTop: '15px' }}>
+            <Dropdown
+              label="Drop-Off Location"
+              options={locationOptions}
+              selected={formData.DROPOFFLOCATION}
+              onToggle={(loc) => handleArrayToggle('DROPOFFLOCATION', loc)}
+              isOpen={dropdowns.dropoffLoc}
+              setOpen={() => toggleDropdown('dropoffLoc')}
+              color="#dc3545"
+              placeholder="Select locations..."
+              inputType="text"
+              inputPlaceholder="Enter location"
+              onAddCustom={(val) => setFormData(prev => ({ ...prev, DROPOFFLOCATION: [...prev.DROPOFFLOCATION, val] }))}
+            />
+
+            <Dropdown
+              label="Drop-Off Time"
+              options={timeOptions}
+              selected={formData.DROPOFFTIME}
+              onToggle={(t) => handleArrayToggle('DROPOFFTIME', t)}
+              isOpen={dropdowns.dropoffTime}
+              setOpen={() => toggleDropdown('dropoffTime')}
+              color="#e83e8c"
+              placeholder="Select times..."
+              inputType="time"
+              inputPlaceholder="Select time"
+              onAddCustom={(val) => setFormData(prev => ({ ...prev, DROPOFFTIME: [...prev.DROPOFFTIME, val] }))}
+            />
+          </div>
+        </div>
+
+        {/* Meter & Other */}
+        <div style={s.section}>
+          <div style={s.sectionTitle}>📊 Meter & Additional Info</div>
+          <div style={s.grid}>
+            <div style={s.field}>
+              <label style={s.label}>Pick-Up Meter Reading (KM)</label>
+              <input type="number" name="PICKUPMETERREADING" value={formData.PICKUPMETERREADING} onChange={handleInputChange} placeholder="Enter KM" style={s.input} required />
+            </div>
+            <div style={s.field}>
+              <label style={s.label}>Drop-Off Meter Reading (KM)</label>
+              <input type="number" name="DROPOFFMETERREADING" value={formData.DROPOFFMETERREADING} onChange={handleInputChange} placeholder="Enter KM" style={s.input} required />
+            </div>
+            <div style={s.field}>
+              <label style={s.label}>Total KM</label>
+              <input type="text" value={formData.TOTALKM} readOnly style={s.inputReadonly} placeholder="Auto-calculated" />
+            </div>
+            
+            <div style={{ ...s.field, position: 'relative' }}>
+              <label style={s.label}>Shift Timing</label>
+              <button type="button" onClick={() => toggleDropdown('shift')} style={s.dropBtn}>
+                <span style={{ color: formData.SHIFTTIMING ? '#333' : '#999' }}>{formData.SHIFTTIMING || '-- Select Shift --'}</span>
+                <span>{dropdowns.shift ? '▲' : '▼'}</span>
+              </button>
+              {dropdowns.shift && (
+                <div style={s.dropMenu}>
+                  {shiftOptions.map((sh, i) => (
+                    <div key={i} style={{ ...s.dropItem, background: formData.SHIFTTIMING === sh ? '#e8f4fc' : '#fff' }} onClick={() => { setFormData(p => ({ ...p, SHIFTTIMING: sh })); setShowOther(p => ({ ...p, shift: false })); toggleDropdown('shift'); }}>
+                      {sh}
+                    </div>
+                  ))}
+                  <div style={{ ...s.dropItem, color: '#000D6B', fontWeight: '600' }} onClick={() => { setShowOther(p => ({ ...p, shift: true })); toggleDropdown('shift'); }}>
+                    🔧 Other
+                  </div>
+                </div>
+              )}
+              {showOther.shift && (
+                <input type="text" value={customValues.shift} onChange={e => { setCustomValues(p => ({ ...p, shift: e.target.value })); setFormData(p => ({ ...p, SHIFTTIMING: e.target.value })); }} placeholder="Enter shift timing" style={{ ...s.input, marginTop: '8px' }} />
+              )}
+            </div>
+
+            <div style={s.field}>
+              <label style={s.label}>GPS Enabled (Y/N)</label>
+              <select name="GPSENABLED" value={formData.GPSENABLED} onChange={handleInputChange} style={s.select} required>
+                <option value="">-- Select --</option>
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+              </select>
+            </div>
+            <div style={s.field}>
+              <label style={s.label}>Delay (Y/N)</label>
+              <select name="DELAY" value={formData.DELAY} onChange={handleInputChange} style={s.select} required>
+                <option value="">-- Select --</option>
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+              </select>
+            </div>
+            <div style={{ ...s.field, gridColumn: '1 / -1' }}>
+              <label style={s.label}>Remarks <span style={s.hint}>(Optional)</span></label>
+              <input type="text" name="REMARKS" value={formData.REMARKS} onChange={handleInputChange} placeholder="Any additional notes..." style={s.input} />
+            </div>
+          </div>
+        </div>
+
+        {/* Submit */}
+        <div style={{ textAlign: 'center', padding: '20px 0' }}>
+          <Button type="submit" disabled={!isFormValid() || isLoading} style={isFormValid() ? s.submitBtn : { ...s.submitBtn, ...s.submitBtnDisabled }}>
+            {isLoading ? <><Spinner size="sm" /> Submitting...</> : '💾 Submit Cab Details'}
           </Button>
-        </FormGroup>
+        </div>
       </Form>
     </>
   );

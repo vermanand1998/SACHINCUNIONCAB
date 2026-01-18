@@ -7,32 +7,32 @@ import { Link } from "react-router-dom";
 // import ava03 from "../../assets/all-images/ava-3.jpg";
 import ava01 from "../../assets/all-images/DeveAnand.png";
 import ava02 from "../../assets/all-images/Shidharth.png";
-import ava03 from "../../assets/all-images/Anand.png";
+import ava03 from "../../assets/all-images/Anand1.png";
 import ava04 from "../../assets/all-images/ava-3.jpg";
 const OUR__MEMBERS = [
-  {
-    name: "Mr. Deva Nand",
-    experience: "Senior Cab Manager (3+ years experience)",
-    fbUrl: "#",
-    instUrl: "#",
-    twitUrl: "#",
-    linkedinUrl: "#",
-    imgUrl: ava01,
-  },
+  // {
+  //   name: "Mr. Deva Nand",
+  //   experience: "Senior Cab Manager (3+ years experience)",
+  //   fbUrl: "#",
+  //   instUrl: "#",
+  //   twitUrl: "#",
+  //   linkedinUrl: "#",
+  //   imgUrl: ava01,
+  // },
 
-  {
-    name: "Mr. Siddharth Singh",
-    experience: "Cab Manager (3+ years experience)",
-    fbUrl: "#",
-    instUrl: "#",
-    twitUrl: "#",
-    linkedinUrl: "#",
-    imgUrl: ava02,
-  },
+  // {
+  //   name: "Mr. Siddharth Singh",
+  //   experience: "Cab Manager (3+ years experience)",
+  //   fbUrl: "#",
+  //   instUrl: "#",
+  //   twitUrl: "#",
+  //   linkedinUrl: "#",
+  //   imgUrl: ava02,
+  // },
 
   {
     name: "Mr. Anand Verma",
-    experience: "Website Developer and IT Engineer",
+    experience: "Freelancer/Team Leader (Full Stack Developer +5 years experience)",
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",

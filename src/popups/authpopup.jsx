@@ -36,6 +36,18 @@ function AuthPopup() {
     e.preventDefault();
     console.log("Form data submitted:", formData);
 
+    // Local login for ECLAT user (restricted access - only Cab Details)
+    if (login && formData.email === "eclatcabs@unioncabs.in" && formData.password === "eclatcabs@2026") {
+      localStorage.setItem("Token", "eclat-local-token-2026");
+      localStorage.setItem("UserEmail", "eclatcabs@unioncabs.in");
+      localStorage.setItem("Name", "ECLAT Cabs");
+      localStorage.setItem("UserType", "eclat"); // Restricted user
+      toast.success("Login Successful! Welcome ECLAT Cabs");
+      handleClose();
+      window.location.reload();
+      return;
+    }
+
     const url = login
       ? "https://academics.newtonschool.co/api/v1/user/login"
       : "https://academics.newtonschool.co/api/v1/user/signup";
@@ -54,6 +66,7 @@ function AuthPopup() {
       localStorage.setItem("Token",json.token);
       {login ?(localStorage.setItem("UserEmail",json.data.user.email)):(localStorage.setItem("UserEmail",json.data.user.email))}
       {login ?(localStorage.setItem("Name",json.data.user.name)):(localStorage.setItem("Name",json.data.user.name))}
+      localStorage.setItem("UserType", "admin"); // Full access user
       window.location.reload();
       handleClose();
 

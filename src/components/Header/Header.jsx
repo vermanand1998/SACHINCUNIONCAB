@@ -118,6 +118,26 @@ const Header = () => {
 
         return prevNavLinks;
       });
+    }else if(UserEmail!==null && UserEmail ==='eclatcabs@unioncabs.in' && token!==null){
+      // ECLAT user - only Cab Details, NO Admin Panel
+      setNavLinks((prevNavLinks) => {
+        const existingCabDetailLink = prevNavLinks.find(
+          (link) => link.path === "/drivercabsdetails"
+        );
+
+        // Add the Cab Detail link only if it doesn't exist in the array
+        if (!existingCabDetailLink) {
+          return [
+            ...prevNavLinks,
+            {
+              path: "/drivercabsdetails",
+              display: "Cab Detail",
+            },
+          ];
+        }
+
+        return prevNavLinks;
+      });
     }
   }, []);
   const openModal = (val) => {
@@ -127,6 +147,7 @@ const Header = () => {
     localStorage.setItem("Token", null);
     localStorage.setItem("UserEmail", null);
     localStorage.setItem("Name", null);
+    localStorage.setItem("UserType", null);
     navigate("/home");
     window.location.reload();
   };
@@ -160,8 +181,7 @@ const Header = () => {
                 <div className="header__top__left showinMobOnlyCallbutton">
                   <span>Need Help?</span>
                   <span className="header__top__help">
-                    <i className="ri-phone-fill"></i> +919956237689,
-                    +919506726327 (7am-6pm only)
+                    <i className="ri-phone-fill"></i> +919506726327 (7am-6pm only)
                   </span>
                 </div>
               </Col>
