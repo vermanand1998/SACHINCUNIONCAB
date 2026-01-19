@@ -118,37 +118,57 @@ function DriverCabDetailsAccess() {
     }).replace(/\d+/, day + suffix);
   };
 
-  // Helper function to format time in Indian format (12-hour with AM/PM)
+  // Helper function to format a single time value to 12-hour format
+  const formatSingleTime = (timeStr) => {
+    if (!timeStr) return '';
+    const trimmed = timeStr.trim();
+    
+    // Check if it's an ISO date string (from Google Sheets)
+    if (trimmed.includes('T')) {
+      const date = new Date(trimmed);
+      if (isNaN(date)) return trimmed;
+      const hours = date.getUTCHours();
+      const minutes = date.getUTCMinutes();
+      const period = hours >= 12 ? 'PM' : 'AM';
+      const hour12 = hours % 12 || 12;
+      return `${hour12}:${minutes.toString().padStart(2, '0')} ${period}`;
+    }
+    
+    // Check if already in 12-hour format with AM/PM (e.g., "3:30PM", "3:30 PM", "3:30pm")
+    const ampmMatch = trimmed.match(/^(\d{1,2}):(\d{2})\s*(AM|PM|am|pm)$/i);
+    if (ampmMatch) {
+      const hour = parseInt(ampmMatch[1], 10);
+      const min = ampmMatch[2];
+      const period = ampmMatch[3].toUpperCase();
+      return `${hour}:${min} ${period}`;
+    }
+    
+    // Check if it's in 24-hour HH:MM format (e.g., "17:50", "09:30")
+    const time24Match = trimmed.match(/^(\d{1,2}):(\d{2})$/);
+    if (time24Match) {
+      const hours = parseInt(time24Match[1], 10);
+      const minutes = time24Match[2];
+      const period = hours >= 12 ? 'PM' : 'AM';
+      const hour12 = hours % 12 || 12;
+      return `${hour12}:${minutes} ${period}`;
+    }
+    
+    return trimmed;
+  };
+
+  // Helper function to format time (handles multiple comma-separated times)
   const formatTime = (timeValue) => {
     if (!timeValue) return '-';
     
-    let hours, minutes;
-    
-    // Check if it's an ISO date string (from Google Sheets)
-    if (timeValue.includes('T')) {
-      const date = new Date(timeValue);
-      if (isNaN(date)) return timeValue;
-      hours = date.getUTCHours();
-      minutes = date.getUTCMinutes();
-    } 
-    // Check if it's already in HH:MM format
-    else if (timeValue.includes(':')) {
-      const parts = timeValue.split(':');
-      hours = parseInt(parts[0], 10);
-      minutes = parseInt(parts[1], 10);
-    } else {
-      return timeValue;
+    // Handle multiple comma-separated times
+    if (typeof timeValue === 'string' && timeValue.includes(',')) {
+      const times = timeValue.split(',').map(t => formatSingleTime(t)).filter(Boolean);
+      return times.join(', ') || '-';
     }
     
-    // Convert to 12-hour format
-    const period = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours === 0 ? 12 : hours; // Handle midnight (0) and noon (12)
-    
-    // Format minutes with leading zero if needed
-    const formattedMinutes = minutes.toString().padStart(2, '0');
-    
-    return `${hours}:${formattedMinutes} ${period}`;
+    // Single time value
+    const formatted = formatSingleTime(timeValue);
+    return formatted || '-';
   };
 
   // Helper function to safely display data

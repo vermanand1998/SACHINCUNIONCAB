@@ -36,7 +36,8 @@ const OUR__MEMBERS = [
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",
-    linkedinUrl: "#",
+    linkedinUrl: "https://www.linkedin.com/in/anand-verma-768363185/",
+    websiteUrl: "https://avfreelancer.vercel.app/",
     imgUrl: ava03,
   },
 
@@ -62,25 +63,71 @@ const OurMembers = () => {
 
               <div className="single__member-social">
                 <Link to={item.fbUrl}>
-                  <i class="ri-facebook-line"></i>
+                  <i className="ri-facebook-line"></i>
                 </Link>
                 <Link to={item.twitUrl}>
-                  <i class="ri-twitter-line"></i>
+                  <i className="ri-twitter-line"></i>
                 </Link>
 
-                <Link to={item.linkedinUrl}>
-                  <i class="ri-linkedin-line"></i>
-                </Link>
+                {item.linkedinUrl && item.linkedinUrl !== "#" ? (
+                  <a href={item.linkedinUrl} target="_blank" rel="noopener noreferrer">
+                    <i className="ri-linkedin-line"></i>
+                  </a>
+                ) : (
+                  <Link to={item.linkedinUrl || "#"}>
+                    <i className="ri-linkedin-line"></i>
+                  </Link>
+                )}
 
                 <Link to={item.instUrl}>
-                  <i class="ri-instagram-line"></i>
+                  <i className="ri-instagram-line"></i>
                 </Link>
+
+                {item.websiteUrl && (
+                  <a href={item.websiteUrl} target="_blank" rel="noopener noreferrer">
+                    <i className="ri-global-line"></i>
+                  </a>
+                )}
               </div>
             </div>
 
-            <h6 className="text-center mb-0 mt-3">{item.name}</h6>
+            <h6 className="text-center mb-0 mt-3">
+              {item.websiteUrl ? (
+                <a 
+                  href={item.websiteUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ 
+                    color: '#000d6b', 
+                    textDecoration: 'none',
+                    transition: 'color 0.3s ease'
+                  }}
+                  onMouseOver={(e) => e.target.style.color = '#f9a826'}
+                  onMouseOut={(e) => e.target.style.color = '#000d6b'}
+                >
+                  {item.name}
+                </a>
+              ) : (
+                item.name
+              )}
+            </h6>
             <p className="section__description text-center">
-              {item.experience}
+              {item.websiteUrl ? (
+                <a 
+                  href={item.websiteUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ 
+                    color: '#f9a826', 
+                    textDecoration: 'none',
+                    fontStyle: 'italic'
+                  }}
+                >
+                  {item.experience}
+                </a>
+              ) : (
+                item.experience
+              )}
             </p>
           </div>
         </Col>

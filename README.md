@@ -1,4 +1,20 @@
-# Getting Started with Create React App
+# Union Cabs - Cab Booking Platform
+
+> 🚕 A complete cab booking website designed and developed for Union Services, featuring online booking system, driver management, customer feedback, and admin portal.
+
+## 👨‍💻 Developer
+
+**Anand Verma** - Full Stack Developer & Freelancer
+
+- 🌐 Portfolio: [https://avfreelancer.vercel.app/](https://avfreelancer.vercel.app/)
+- 📧 Email: anandai.official26@gmail.com
+- 📱 Phone: +91 735 598 2638
+
+*Looking for a skilled Full Stack Developer for your next project? Visit my portfolio or reach out directly!*
+
+---
+
+## 🚀 Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

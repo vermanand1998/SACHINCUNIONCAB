@@ -79,6 +79,16 @@ const timeOptions = [
   "3:30PM", "3:50PM", "4:00PM", "4:10PM", "4:20PM", "4:30PM", "4:40PM", "4:45PM"
 ];
 
+// Helper function to convert 24-hour format (HH:MM) to 12-hour format (H:MMAM/PM)
+const formatTimeTo12Hour = (time24) => {
+  if (!time24) return '';
+  const [hours, minutes] = time24.split(':');
+  const hour = parseInt(hours, 10);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const hour12 = hour % 12 || 12;
+  return `${hour12}:${minutes}${ampm}`;
+};
+
 // Shift Options
 const shiftOptions = [
   "Shift 1 (06:30PM - 3:30AM)",
@@ -663,7 +673,12 @@ const CabDetailsForm = () => {
               placeholder="Select times..."
               inputType="time"
               inputPlaceholder="Select time"
-              onAddCustom={(val) => setFormData(prev => ({ ...prev, PICKUPTIME: [...prev.PICKUPTIME, val] }))}
+              onAddCustom={(val) => {
+                const formattedTime = formatTimeTo12Hour(val);
+                if (formattedTime && !formData.PICKUPTIME.includes(formattedTime)) {
+                  setFormData(prev => ({ ...prev, PICKUPTIME: [...prev.PICKUPTIME, formattedTime] }));
+                }
+              }}
             />
           </div>
           
@@ -693,7 +708,12 @@ const CabDetailsForm = () => {
               placeholder="Select times..."
               inputType="time"
               inputPlaceholder="Select time"
-              onAddCustom={(val) => setFormData(prev => ({ ...prev, DROPOFFTIME: [...prev.DROPOFFTIME, val] }))}
+              onAddCustom={(val) => {
+                const formattedTime = formatTimeTo12Hour(val);
+                if (formattedTime && !formData.DROPOFFTIME.includes(formattedTime)) {
+                  setFormData(prev => ({ ...prev, DROPOFFTIME: [...prev.DROPOFFTIME, formattedTime] }));
+                }
+              }}
             />
           </div>
         </div>
