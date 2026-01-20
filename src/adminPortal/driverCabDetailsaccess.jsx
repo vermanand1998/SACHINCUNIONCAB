@@ -121,18 +121,7 @@ function DriverCabDetailsAccess() {
   // Helper function to format a single time value to 12-hour format
   const formatSingleTime = (timeStr) => {
     if (!timeStr) return '';
-    const trimmed = timeStr.trim();
-    
-    // Check if it's an ISO date string (from Google Sheets)
-    if (trimmed.includes('T')) {
-      const date = new Date(trimmed);
-      if (isNaN(date)) return trimmed;
-      const hours = date.getUTCHours();
-      const minutes = date.getUTCMinutes();
-      const period = hours >= 12 ? 'PM' : 'AM';
-      const hour12 = hours % 12 || 12;
-      return `${hour12}:${minutes.toString().padStart(2, '0')} ${period}`;
-    }
+    const trimmed = String(timeStr).trim();
     
     // Check if already in 12-hour format with AM/PM (e.g., "3:30PM", "3:30 PM", "3:30pm")
     const ampmMatch = trimmed.match(/^(\d{1,2}):(\d{2})\s*(AM|PM|am|pm)$/i);
@@ -151,6 +140,30 @@ function DriverCabDetailsAccess() {
       const period = hours >= 12 ? 'PM' : 'AM';
       const hour12 = hours % 12 || 12;
       return `${hour12}:${minutes} ${period}`;
+    }
+    
+    // Check if it's an ISO date string (from Google Sheets)
+    if (trimmed.includes('T')) {
+      const date = new Date(trimmed);
+      if (isNaN(date)) return trimmed;
+      // Use local time, not UTC - this fixes timezone issues
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const period = hours >= 12 ? 'PM' : 'AM';
+      const hour12 = hours % 12 || 12;
+      return `${hour12}:${minutes.toString().padStart(2, '0')} ${period}`;
+    }
+    
+    // Handle Google Sheets serial date number (decimal representing time)
+    // e.g., 0.5 = 12:00 PM, 0.75 = 6:00 PM
+    const numValue = parseFloat(trimmed);
+    if (!isNaN(numValue) && numValue >= 0 && numValue < 1) {
+      const totalMinutes = Math.round(numValue * 24 * 60);
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      const period = hours >= 12 ? 'PM' : 'AM';
+      const hour12 = hours % 12 || 12;
+      return `${hour12}:${minutes.toString().padStart(2, '0')} ${period}`;
     }
     
     return trimmed;
