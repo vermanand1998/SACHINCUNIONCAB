@@ -1,58 +1,73 @@
+/* ============ Footer - Cab Theme =========== */
 .footer {
-  background: #000d6b;
-  padding-top: 50px;
+  background: #1a1a2e;
+  padding-top: 40px;
   padding-bottom: 15px;
 }
 
 .footer__logo i {
-  color: #fff;
+  color: #f9a826;
   font-weight: 400;
 }
 
 .footer__logo span {
   color: #fff;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .footer__logo-content {
-  color: rgba(255, 255, 255, 0.715);
-  margin-top: 15px;
-  line-height: 30px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 12px;
+  line-height: 1.7;
+  font-size: 0.9rem;
 }
 
 .quick__link {
   border: none !important;
   background: transparent !important;
+  padding: 5px 0;
 }
 
 .quick__link a {
-  color: rgba(255, 255, 255, 0.715);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  font-weight: 300;
-  transition: 0.3s;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
 }
 
 .quick__link a:hover {
   color: #f9a826;
+  padding-left: 5px;
 }
 
 .footer__link-title {
-  color: #fff;
+  color: #f9a826;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 15px;
 }
 
 .office__info {
-  color: rgba(255, 255, 255, 0.715);
-  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.office__info i {
+  color: #f9a826;
+  margin-right: 8px;
 }
 
 .newsletter {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 8px 12px;
-  border: 1px solid #7c8a972f;
-  border-radius: 50px;
-  background: #020a4de9;
+  border: 2px solid #f9a826;
+  border-radius: 5px;
+  background: transparent;
 }
 
 .newsletter input {
@@ -60,89 +75,200 @@
   color: #fff;
   border: none;
   outline: none;
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.newsletter input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletter span {
+  background: #f9a826;
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newsletter span:hover {
+  background: #e6951d;
 }
 
 .newsletter span i {
-  color: #fff;
+  color: #1a1a2e;
 }
 
 .footer__bottom {
-  border-top: 1px solid #7c8a972f;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 25px;
+  padding-top: 15px;
 }
 
-/* ================ Footer Logo Responsive Styles =========== */
-.footer-logo-img {
-  height: 55px;
-  width: auto;
-  max-width: 250px;
-  object-fit: contain;
+.footer__bottom p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+.footer__copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.copyright-line1,
+.copyright-line2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.developer-link {
+  color: #f9a826;
+  font-weight: 600;
+  text-decoration: none;
   transition: all 0.3s ease;
-  background-color: #ffffff;
-  padding: 8px 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
-/* Large screens */
+.developer-link:hover {
+  text-decoration: underline;
+  color: #ffc107;
+}
+
+/* ============ Footer Logo =========== */
+.footer-logo-img {
+  height: 50px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  background-color: #fff;
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+
 @media only screen and (min-width: 1200px) {
   .footer-logo-img {
-    height: 60px;
-    max-width: 280px;
-    padding: 10px 18px;
+    height: 55px;
+    max-width: 250px;
   }
 }
 
-/* Medium screens */
 @media only screen and (max-width: 991px) {
+  .footer {
+    padding-top: 35px;
+  }
   .footer-logo-img {
-    height: 50px;
-    max-width: 220px;
-    padding: 8px 15px;
+    height: 45px;
+    max-width: 200px;
+  }
+  .footer__link-title {
+    margin-top: 20px;
   }
 }
 
 @media only screen and (max-width: 768px) {
+  .footer {
+    padding: 30px 20px 15px;
+    text-align: left;
+  }
+  .footer__logo {
+    margin-bottom: 10px;
+  }
+  .footer__logo-content {
+    font-size: 0.85rem;
+    text-align: left;
+    line-height: 1.8;
+  }
+  .quick__link {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+  .quick__link a {
+    display: inline-block;
+    padding: 4px 0;
+  }
+  .office__info {
+    font-size: 0.85rem;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 10px;
+  }
+  .office__info i {
+    margin-right: 10px;
+    min-width: 18px;
+    margin-top: 3px;
+  }
+  .footer__link-title {
+    font-size: 1.1rem;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f9a826;
+    display: inline-block;
+  }
+  .footer__bottom {
+    margin-top: 25px;
+  }
+  .footer__bottom p {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+  .footer__copyright {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .copyright-line1,
+  .copyright-line2 {
+    display: block;
+    text-align: center;
+  }
+  .footer-logo-img {
+    height: 45px;
+    max-width: 200px;
+    padding: 10px 20px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .footer {
+    padding: 25px 15px 15px;
+  }
   .footer__logo-content {
     font-size: 0.8rem;
   }
-
-  .quick__link,
-  .office__info {
-    font-size: 0.8rem;
-    line-height: 1.5rem;
+  .footer-logo-img {
+    height: 40px;
+    max-width: 180px;
+    padding: 8px 15px;
   }
-
   .footer__link-title {
     font-size: 1rem;
-    margin-top: 15px;
+    margin-top: 22px;
   }
-
+  .quick__link a {
+    font-size: 0.85rem;
+  }
+  .office__info {
+    font-size: 0.8rem;
+  }
   .footer__bottom p {
     font-size: 0.7rem;
+    line-height: 1.6;
   }
-
-  .footer-logo-img {
-    height: 42px;
-    max-width: 200px;
-    padding: 6px 12px;
+  .footer__copyright {
+    gap: 3px;
   }
-}
-
-/* Extra small screens */
-@media only screen and (max-width: 576px) {
-  .footer-logo-img {
-    height: 38px;
-    max-width: 180px;
-    padding: 5px 10px;
-  }
-}
-
-/* Very small screens */
-@media only screen and (max-width: 400px) {
-  .footer-logo-img {
-    height: 32px;
-    max-width: 150px;
-    padding: 4px 8px;
-    border-radius: 6px;
+  .copyright-line1,
+  .copyright-line2 {
+    font-size: 0.7rem;
   }
 }

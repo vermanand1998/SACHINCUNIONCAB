@@ -55,23 +55,31 @@ const driversData = [
   },
 ];
 
-// All Employees Data (for dropdown)
+// All Employees Data (for dropdown) - Updated with actual Employee IDs
 const employeesData = [
-  { id: 1, name: "Sujata Sharma", empId: "EMP01-9554763649", cabId: 1 },
-  { id: 2, name: "Swetha Pandey", empId: "EMP02-8919977434", cabId: 1 },
-  { id: 3, name: "Veena Nigam", empId: "EMP03-8115499215", cabId: 1 },
-  { id: 4, name: "Riya Kumari", empId: "EMP04-9682723081", cabId: 2 },
-  { id: 5, name: "Pragati Pandey", empId: "EMP05-8318225261", cabId: 2 },
-  { id: 6, name: "Ananya Singh", empId: "EMP06-9076977449", cabId: 2 },
-  { id: 7, name: "Reet Tandon", empId: "EMP07-8707755900", cabId: 3 },
-  { id: 8, name: "Anamika Rani", empId: "EMP08-9608028357", cabId: 3 },
-  { id: 9, name: "Garima Singh", empId: "EMP09-8840026499", cabId: 3 },
+  { id: 1, name: "Sujata Sharma", empId: "EHS5665", cabId: 1 },
+  { id: 2, name: "Swetha Pandey", empId: "EHS3072", cabId: 1 },
+  { id: 3, name: "Veena Nigam", empId: "EHS5667", cabId: 1 },
+  { id: 4, name: "Riya Kumari", empId: "EHS5661", cabId: 2 },
+  { id: 5, name: "Pragati Pandey", empId: "EHS5804", cabId: 2 },
+  { id: 6, name: "Ananya Singh", empId: "EHS5644", cabId: 2 },
+  { id: 7, name: "Reet Tandon", empId: "EHS5660", cabId: 3 },
+  { id: 8, name: "Anamika Rani", empId: "EHS5643", cabId: 3 },
+  { id: 9, name: "Garima Singh", empId: "EHS5652", cabId: 3 },
 ];
 
-// Location Options (from actual data)
+// Location Options (from actual data) - Updated with all pickup/drop locations
 const locationOptions = [
-  "CHOWK", "DUBAGGA", "PATEL NAGAR", "JANKIPURAM", "SAFEDABAD", 
-  "VIJYANT KHAND", "Ismail Ganj", "Bhavya Tower", "ECLAT Office"
+  "DUBAGGA - Hussainabad, Pani Tanki Power House",
+  "CHOWK - Sarai Mali Khan",
+  "PATEL NAGAR - Sector 8, Near Doon Valley School, Indira Nagar",
+  "ISMAIL GANJ - Near Primary School",
+  "BARABANKI - Shalimar Mannat, Block B3, Faizabad Road",
+  "VIJAYANT KHAND - Gomti Nagar",
+  "JANKIPURAM - Abhishek Puram Colony, 60 Feet Road",
+  "BBD - Royal Enclave Apartment, Atif Vihar",
+  "SAFEDABAD",
+  "ECLAT Office"
 ];
 
 // Time Options (from actual data)
@@ -310,10 +318,17 @@ const CabDetailsForm = () => {
 
   // Styles
   const s = {
-    container: { maxWidth: '1100px', margin: '0 auto', padding: '25px', fontFamily: "'Segoe UI', sans-serif" },
-    section: { background: '#fff', borderRadius: '12px', padding: '25px', marginBottom: '20px', boxShadow: '0 2px 12px rgba(0,0,0,0.08)' },
+    outerWrapper: {
+      background: 'linear-gradient(180deg, #dce3ed 0%, #e8ecf3 20%, #f0f3f7 50%, #f8f9fc 100%)',
+    },
+    pageWrapper: { 
+      padding: '0 15px 40px 15px',
+      position: 'relative'
+    },
+    container: { maxWidth: '1400px', margin: '0 auto', padding: '30px 25px', fontFamily: "'Segoe UI', sans-serif" },
+    section: { background: '#fff', borderRadius: '12px', padding: '28px', marginBottom: '20px', boxShadow: '0 4px 20px rgba(0,0,0,0.06)', border: '1px solid rgba(0,0,0,0.04)' },
     sectionTitle: { fontSize: '16px', fontWeight: '700', color: '#000D6B', marginBottom: '20px', paddingBottom: '10px', borderBottom: '2px solid #000D6B', display: 'flex', alignItems: 'center', gap: '10px' },
-    grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' },
+    grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '22px' },
     field: { marginBottom: '5px' },
     label: { display: 'block', fontSize: '13px', fontWeight: '600', color: '#444', marginBottom: '6px' },
     hint: { color: '#888', fontWeight: 'normal', fontSize: '11px' },
@@ -321,8 +336,8 @@ const CabDetailsForm = () => {
     inputReadonly: { width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '14px', background: '#f8f9fa', color: '#666', boxSizing: 'border-box' },
     select: { width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '14px', background: '#fff', cursor: 'pointer', boxSizing: 'border-box' },
     dropBtn: { width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: '8px', background: '#fff', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '14px', boxSizing: 'border-box' },
-    dropMenu: { position: 'absolute', top: '100%', left: 0, right: 0, background: '#fff', border: '1px solid #ddd', borderRadius: '8px', marginTop: '4px', maxHeight: '220px', overflowY: 'auto', zIndex: 100, boxShadow: '0 4px 12px rgba(0,0,0,0.15)' },
-    dropItem: { display: 'flex', alignItems: 'center', padding: '10px 12px', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', fontSize: '14px', gap: '10px' },
+    dropMenu: { position: 'absolute', top: '100%', left: 0, background: '#fff', border: '1px solid #ddd', borderRadius: '8px', marginTop: '4px', maxHeight: '250px', overflowY: 'auto', overflowX: 'hidden', zIndex: 100, boxShadow: '0 4px 12px rgba(0,0,0,0.15)', minWidth: '350px', width: 'max-content' },
+    dropItem: { display: 'flex', alignItems: 'center', padding: '12px 16px', cursor: 'pointer', borderBottom: '1px solid #f0f0f0', fontSize: '14px', gap: '10px', whiteSpace: 'nowrap' },
     checkbox: { width: '16px', height: '16px', accentColor: '#000D6B', cursor: 'pointer', flexShrink: 0 },
     customBox: { padding: '10px 12px', borderTop: '1px solid #ddd', background: '#fafafa' },
     addBtn: { background: '#28a745', color: '#fff', border: 'none', padding: '6px 14px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: '500' },
@@ -474,8 +489,9 @@ const CabDetailsForm = () => {
   };
 
   return (
-    <>
+    <div style={s.outerWrapper}>
       <CommonSection title="Driver Cab Details" />
+      <div style={s.pageWrapper}>
       <Form style={s.container} onSubmit={handleSubmit}>
         
         {/* Trip Info */}
@@ -488,7 +504,7 @@ const CabDetailsForm = () => {
             </div>
             <div style={s.field}>
               <label style={s.label}>Trip ID</label>
-              <input type="text" value={formData.TRIPID} readOnly style={s.inputReadonly} />
+              <input type="text" name="TRIPID" value={formData.TRIPID} onChange={handleInputChange} placeholder="Enter Trip ID or use auto-generated" style={s.input} required />
             </div>
           </div>
         </div>
@@ -509,7 +525,10 @@ const CabDetailsForm = () => {
                 <div style={s.dropMenu}>
                   {driversData.map(d => (
                     <div key={d.id} style={{ ...s.dropItem, background: formData.DRIVERNAME === d.driverName ? '#e8f4fc' : '#fff' }} onClick={() => handleDriverChange(d.id)}>
-                      <strong>{d.cabNo}</strong> - {d.driverName} <span style={{ color: '#888' }}>({d.vehicleNo})</span>
+                      <span style={{ fontWeight: '700', minWidth: '55px' }}>{d.cabNo}</span>
+                      <span style={{ margin: '0 4px' }}>-</span>
+                      <span style={{ flex: 1 }}>{d.driverName}</span>
+                      <span style={{ color: '#888', fontSize: '13px' }}>({d.vehicleNo})</span>
                     </div>
                   ))}
                   <div style={{ ...s.dropItem, color: '#000D6B', fontWeight: '600' }} onClick={() => handleDriverChange('other')}>
@@ -577,7 +596,10 @@ const CabDetailsForm = () => {
                   </div>
                   {escortsData.map(e => (
                     <div key={e.id} style={{ ...s.dropItem, background: selectedEscort?.id === e.id ? '#e8f4fc' : '#fff' }} onClick={() => handleEscortChange(e.id)}>
-                      <strong>{e.name}</strong> - {e.mobile} <span style={{ color: '#888', fontSize: '12px' }}>({e.empId})</span>
+                      <span style={{ fontWeight: '700' }}>{e.name}</span>
+                      <span style={{ margin: '0 4px' }}>-</span>
+                      <span>{e.mobile}</span>
+                      <span style={{ color: '#888', fontSize: '12px', marginLeft: 'auto' }}>({e.empId})</span>
                     </div>
                   ))}
                   <div style={{ ...s.dropItem, color: '#000D6B', fontWeight: '600' }} onClick={() => handleEscortChange('other')}>
@@ -788,7 +810,8 @@ const CabDetailsForm = () => {
           </Button>
         </div>
       </Form>
-    </>
+      </div>
+    </div>
   );
 };
 

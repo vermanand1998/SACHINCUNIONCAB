@@ -1,106 +1,326 @@
-.marginFormArround{
-    margin-left: 30px;
+/* ============ Global Utility - Cab Theme =========== */
+.marginFormArround {
+  margin-left: 30px;
 }
-.ShowthisText{
-    display: block;
+
+.ShowthisText {
+  display: block;
 }
-.ShowthisTextMobile{
-    display: none;
+
+.ShowthisTextMobile {
+  display: none;
 }
-.imageMargin{
-    margin-left: 18%;
+
+.imageMargin {
+  margin-left: 0;
 }
+
+/* ============ About Page Image Fix =========== */
+.about__section .single__member-img {
+  display: inline-block;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
+
+.about__section .single__member-img img {
+  display: block;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.about__section .single__member-img:hover img {
+  transform: scale(1.03);
+}
+
+/* ============ Pricing Table - Yellow Cab Theme =========== */
+.price-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 20px 0;
+  gap: 15px;
+}
+
+.table-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 100%;
+}
+
+.table-cell {
+  flex: 1;
+  min-width: 280px;
+  max-width: 320px;
+  padding: 25px;
+  text-align: left;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-top: 4px solid #f9a826;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.table-cell:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(249, 168, 38, 0.2);
+}
+
+.heading-style {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  color: #f9a826 !important;
+  margin-bottom: 15px !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.heading-style i {
+  font-size: 1.4rem;
+}
+
+.price-style {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-align: left;
+  line-height: 1.8;
+}
+
+.price-style div {
+  color: rgba(255, 255, 255, 0.85) !important;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-style div:last-child {
+  border-bottom: none;
+}
+
+.price-style i {
+  color: #f9a826 !important;
+  margin-right: 8px;
+}
+
+/* Client Image */
+.mobileHeight {
+  height: 100px;
+  object-fit: contain;
+  background: #fff;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.mobileWidth {
+  width: 100%;
+}
+
+/* ============ Floating Call/WhatsApp Buttons =========== */
+.floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.floating-btn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+}
+
+.floating-btn.call-btn {
+  background: linear-gradient(135deg, #f9a826, #ffc107);
+  animation: pulse-yellow 2s infinite;
+}
+
+.floating-btn.whatsapp-btn {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  animation: pulse-green 2s infinite;
+  animation-delay: 0.5s;
+}
+
+.floating-btn img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.floating-btn i {
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Pulse Animations */
+@keyframes pulse-yellow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(249, 168, 38, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(249, 168, 38, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(249, 168, 38, 0);
+  }
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* ============ Yellow Buttons =========== */
+.btn,
+button[type="submit"],
+.contact__btn,
+.reserve__btn,
+.find__car-btn {
+  background: linear-gradient(135deg, #f9a826, #ffc107) !important;
+  color: #1a1a2e !important;
+  border: none !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn:hover,
+button[type="submit"]:hover,
+.contact__btn:hover,
+.reserve__btn:hover,
+.find__car-btn:hover {
+  background: linear-gradient(135deg, #e6951d, #f9a826) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 20px rgba(249, 168, 38, 0.4) !important;
+}
+
+/* Responsive */
 @media only screen and (min-width: 355px) and (max-width: 410px) {
-    .classMarginGap{
-      margin-right: 32% !important;
-    }
-    .marginFormArround{
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-    .imageMargin{
-        margin-left: -5%;
-    }
-    .table-row{
-        flex-direction: column;
-    }
+  .classMarginGap {
+    margin-right: 32% !important;
+  }
+  .marginFormArround {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .imageMargin {
+    margin-left: 0;
+  }
+  .table-row {
+    flex-direction: column;
+  }
+  .table-cell {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  .mobileHeight {
+    height: 80px;
+  }
+  .floating-btn {
+    width: 50px;
+    height: 50px;
+  }
+  .floating-btn img,
+  .floating-btn i {
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+  }
 }
 
 @media only screen and (max-width: 767px) and (min-width: 411px) {
-    .classMarginGap{
-      margin-right: 42% !important;
-    }
-    .marginFormArround{
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-    .imageMargin{
-        margin-left: -0.9%;
-    }
-    .table-row{
-        flex-direction: column;
-    }
-}
-@media only screen and (max-width: 800px) and (min-width: 768px) {
-    .marginFormArround{
-        margin:10px;
-    }
-    .ShowthisText{
-        display: none;
-    }
-    .ShowthisTextMobile{
-        display: block !important;
-    }
-    .mobileHeight{
-        height: 110px;
-    }
-    .mobileWidth{
-        width: 10px;
-    }
-    .imageMargin{
-        margin-left: -5%;
-    }
-    .table-row{
-        flex-direction: column;
-    }
-}
-
-
-
-/* PriceTable.css */
-.price-table {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 20px 0;
+  .classMarginGap {
+    margin-right: 42% !important;
   }
-  
+  .marginFormArround {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .imageMargin {
+    margin-left: 0;
+  }
   .table-row {
-    display: flex;
-    flex-wrap: wrap;
-    /* flex-direction: column; */
+    flex-direction: column;
   }
-  
   .table-cell {
-    flex: 1;
-    margin: 5px;
-    padding: 15px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 100%;
+    max-width: 100%;
+  }
+  .mobileHeight {
+    height: 90px;
+  }
+}
+
+@media only screen and (max-width: 800px) and (min-width: 768px) {
+  .marginFormArround {
+    margin: 10px;
+  }
+  .ShowthisText {
+    display: none;
+  }
+  .ShowthisTextMobile {
+    display: block !important;
+  }
+  .mobileHeight {
+    height: 100px;
+  }
+  .mobileWidth {
+    width: 100%;
+  }
+  .imageMargin {
+    margin-left: 0;
+  }
+  .table-row {
+    flex-direction: column;
+  }
+  .table-cell {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .table-cell {
+    min-width: 100%;
+    max-width: 100%;
+    padding: 20px;
   }
   .heading-style {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 1.1rem !important;
   }
-  
   .price-style {
-    margin: 0;
-    font-size: 1rem;
-    color: #555;
-    text-align: left;
+    font-size: 0.85rem;
   }
-  
+  .floating-buttons {
+    bottom: 15px;
+    right: 15px;
+    gap: 10px;
+  }
+  .floating-btn {
+    width: 48px;
+    height: 48px;
+  }
+}

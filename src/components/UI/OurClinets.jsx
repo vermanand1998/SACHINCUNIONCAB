@@ -7,6 +7,7 @@ import companyLogo02 from "../../assets/all-images/carnationInfoTechlogo.png";
 import companyLogo03 from "../../assets/all-images/pcggroup.png";
 import companyLogo04 from "../../assets/all-images/entigrity.jpeg";
 import companyLogo05 from "../../assets/all-images/madhu.jpg";
+import companyLogo06 from "../../assets/all-images/eclat-logo.jpeg";
 import "../../styles/global.css"
 const OUR__CLINETS = [
   {
@@ -42,23 +43,29 @@ const OUR__CLINETS = [
     websiteurl: "https://www.facebook.com/madhuengineeringservices/",
     imgUrl: companyLogo05,
   },
+  {
+    name: "PRIVATE SECTOR",
+    experience: "ECLAT Health Solutions, Lucknow",
+    websiteurl: "#",
+    imgUrl: companyLogo06,
+  },
 ];
 
 const OurClients = () => {
   return (
     <>
       {OUR__CLINETS.map((item, index) => (
-        <Col  key={index} className="mb-4" xs="6" md="">
-          <div >
-            <div className="single__member-img">
-            <Link to={item.websiteurl}>
-              <img height={'150px'} width={'50px'} src={item.imgUrl} alt="" className="w-100 mobileHeight mobileWidth" />
-            </Link>
+        <Col key={index} lg="4" md="6" sm="6" xs="12" className="mb-4">
+          <div className="client__card">
+            <div className="client__card-img">
+              <a href={item.websiteurl} target="_blank" rel="noopener noreferrer">
+                <img src={item.imgUrl} alt={item.name} />
+              </a>
             </div>
-            <h6 className="text-center mb-0 mt-3">{item.name}</h6>
-            <p className="section__description text-center">
-              {item.experience}
-            </p>
+            <div className="client__card-content">
+              <span className="client__badge">{item.name}</span>
+              <p className="client__description">{item.experience}</p>
+            </div>
           </div>
         </Col>
       ))}

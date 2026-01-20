@@ -60,30 +60,23 @@ const AboutMe = ({ aboutClass }) => {
             </div>
           </Col>
           <Col lg="6" md="6">
-            <Col>
-              <div>
-                <div
-                  className="single__member-img imageMargin"
-                >
-                  <img height={300} width={400} src={ava01} alt="" />
-                </div>
-
-                <h6 className="text-center mb-0 mt-3">
-                  <h4 className="section__subtitle">ABOUT THE PROPRIETOR</h4>
-                  <p className="section__description">
-                    <p>
-                      Meet <b>Mr. Sachin Verma</b>, the accomplished <b>proprietor
-                      of UNION SERVICES .</b> Armed with a background in <b>Civil
-                      Engineering</b> and over <b>3 years of experience</b>, he has
-                      transitioned seamlessly into entrepreneurship. As the
-                      driving force behind UnionCabs India, Mr. Verma continues
-                      to showcase his leadership and expertise in steering the
-                      success of the business.
-                    </p>
-                  </p>
-                </h6>
+            <div className="about__proprietor-card">
+              <div className="single__member-img">
+                <img src={ava01} alt="Mr. Sachin Verma" style={{ width: '100%', maxWidth: '450px', height: 'auto' }} />
               </div>
-            </Col>
+              <div className="text-center mt-4">
+                <h4 className="section__subtitle">ABOUT THE PROPRIETOR</h4>
+                <p className="section__description" style={{ maxWidth: '450px', margin: '0 auto' }}>
+                  Meet <b>Mr. Sachin Verma</b>, the accomplished <b>proprietor
+                  of UNION SERVICES.</b> Armed with a background in <b>Civil
+                  Engineering</b> and over <b>3 years of experience</b>, he has
+                  transitioned seamlessly into entrepreneurship. As the
+                  driving force behind UnionCabs India, Mr. Verma continues
+                  to showcase his leadership and expertise in steering the
+                  success of the business.
+                </p>
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>

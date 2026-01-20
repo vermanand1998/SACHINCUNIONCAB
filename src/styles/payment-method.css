@@ -1,13 +1,105 @@
+/* ============ Payment Method - Cab Theme =========== */
+.payment {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.payment h6 {
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
 .payment label {
   font-weight: 600;
-  color: #000d6b;
+  color: #1a1a2e;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 12px 15px;
+  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.payment label:hover {
+  border-color: #f9a826;
+}
+
+.payment label i {
+  font-size: 1.3rem;
+  color: #f9a826;
+}
+
+.payment input[type="radio"] {
+  accent-color: #f9a826;
+  width: 18px;
+  height: 18px;
 }
 
 .payment button {
-  padding: 8px 15px;
+  padding: 12px 30px;
   border-radius: 5px;
-  background: #000d6b;
-  color: #fff;
+  background: #f9a826;
+  color: #1a1a2e;
   border: none;
   outline: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.payment button:hover {
+  background: #e6951d;
+  transform: translateY(-2px);
+}
+
+.booking__summary {
+  background: #1a1a2e;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.booking__summary h5 {
+  color: #f9a826;
+  margin-bottom: 20px;
+}
+
+.booking__summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.booking__summary-item:last-child {
+  border-bottom: none;
+  color: #f9a826;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .payment {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .payment button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+  .payment label {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  .booking__summary {
+    padding: 20px;
+  }
 }

@@ -10,7 +10,7 @@ const AboutUnionCabs = ({ aboutClass }) => {
       style={
         aboutClass === "aboutPage"
           ? { marginTop: "0px" }
-          : { marginTop: "280px" }
+          : { marginTop: "0px" }
       }
     >
       <Container>

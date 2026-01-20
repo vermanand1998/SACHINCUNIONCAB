@@ -1,15 +1,17 @@
+/* ============ Find Car Form - Cab Theme =========== */
 .find__cars-left {
-  background: linear-gradient(rgb(249, 168, 38, 0.9), rgb(249, 168, 38, 0.9)),
+  background: linear-gradient(135deg, rgba(249, 168, 38, 0.95), rgba(255, 193, 7, 0.95)),
     url("../assets/all-images/toyota-offer-2.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 65px 35px;
+  padding: 50px 30px;
 }
 
 .find__cars-left h2 {
-  font-weight: 600;
-  font-size: 2.8rem;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #1a1a2e;
 }
 
 .form__group {
@@ -18,22 +20,25 @@
 }
 
 .form__group input {
-  border: 1px solid #7c8a972a;
-  padding: 8px 12px;
-
+  border: 2px solid #f0f0f0;
+  padding: 10px 12px;
   width: 100%;
   outline: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
+
+.form__group input:focus {
+  border-color: #f9a826;
+}
+
 .form__group input::placeholder {
-  color: #7c8a97;
+  color: #777;
 }
 
 .form {
   background: #fff;
-  padding-top: 55px;
-  padding-bottom: 50px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 40px 20px;
 }
 
 .select__group {
@@ -43,65 +48,80 @@
 .select__group select {
   width: 100%;
   padding: 10px 15px;
-  border: 1px solid #7c8a972a;
+  border: 2px solid #f0f0f0;
   outline: none;
-  color: #7c8a97;
+  color: #555;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.select__group select:focus {
+  border-color: #f9a826;
 }
 
 .hero__slider-section {
   position: relative;
   z-index: 10;
-  margin-bottom: 200px;
+  margin-bottom: 180px;
 }
 
 .hero__form {
   position: absolute;
-  bottom: -150px;
+  bottom: -130px;
   z-index: 11;
   width: 100%;
 }
 
 .form__row {
   background: #fff;
-  box-shadow: 5px 5px 15px -5px #7c8a97;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .journey__time::before {
   content: "Journey time";
   margin-right: 0.8rem;
-  color: #7c8a97;
+  color: #555;
+  font-weight: 500;
 }
 
 .find__car-btn {
-  background: #000d6b !important;
-  color: #fff !important;
-  padding: 8px 15px;
+  background: #f9a826 !important;
+  color: #1a1a2e !important;
+  padding: 10px 20px;
   width: 100%;
   border: none;
   outline: none;
+  font-weight: 700;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.find__car-btn:hover {
+  background: #e6951d !important;
 }
 
 @media only screen and (max-width: 992px) {
   .find__cars-left {
-    padding: 65px 22px;
+    padding: 40px 20px;
   }
-
   .find__cars-left h2 {
     font-size: 1.5rem;
   }
-
   .form {
-    padding: 30px 10px;
+    padding: 25px 15px;
   }
-
   .form__group input,
   .select__group select {
-    padding: 7px 10px;
-    font-size: 0.8rem;
+    padding: 8px 10px;
+    font-size: 0.85rem;
   }
-
   .hero__form {
     bottom: -100px;
+  }
+  .hero__slider-section {
+    margin-bottom: 150px;
   }
 }
 
@@ -112,9 +132,21 @@
     background: #fff;
     text-align: center;
   }
-
+  .find__cars-left h2 {
+    color: #1a1a2e;
+    font-size: 1.3rem;
+  }
   .form {
-    padding: 20px 10px;
+    padding: 20px 15px;
+  }
+  .hero__form {
+    bottom: -150px;
+  }
+  .hero__slider-section {
+    margin-bottom: 180px;
+  }
+  .form__row {
+    margin: 0 10px;
   }
 }
 
@@ -122,28 +154,55 @@
   .form__group {
     width: 100%;
     margin: auto;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
-
   .form__group input {
-    font-size: 0.7rem !important;
+    font-size: 0.85rem !important;
+    padding: 12px 15px;
   }
-
   .select__group {
     width: 100%;
-    padding-right: 10px;
-    font-size: 0.7rem;
+    padding-right: 0;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
   }
-
+  .select__group select {
+    padding: 12px 15px;
+  }
   .find__car-btn {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    padding: 12px 20px;
+    margin-top: 5px;
   }
-
+  .find__cars-left {
+    padding: 15px;
+  }
   .find__cars-left h2 {
-    font-size: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
   }
-
+  .form {
+    padding: 20px 15px;
+  }
+  .form__row {
+    margin: 0 5px;
+    border-radius: 12px;
+  }
   .hero__form {
-    bottom: -250px;
+    position: relative;
+    bottom: auto;
+    margin-top: -40px;
+    padding: 0 10px;
+  }
+  .hero__slider-section {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .header-logo-img {
+    height: 40px;
+    max-width: 150px;
+    padding: 6px 12px;
   }
 }

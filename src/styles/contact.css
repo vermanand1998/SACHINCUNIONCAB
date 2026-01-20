@@ -1,23 +1,79 @@
+/* ============ Contact - Cab Theme =========== */
 .social__link-icon {
   text-decoration: none;
+  color: #1a1a2e;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
 
-  color: #000d6b;
-  font-weight: 500;
-  font-size: 1.2rem;
+.social__link-icon:hover {
+  color: #f9a826;
+}
+
+.social__link-icon i {
+  width: 40px;
+  height: 40px;
+  background: #f9a826;
+  color: #1a1a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.social__link-icon:hover i {
+  background: #1a1a2e;
+  color: #f9a826;
 }
 
 .contact__btn {
-  padding: 7px 15px;
-  background: #000d6b;
-  color: #fff;
+  padding: 12px 30px;
+  background: #f9a826;
+  color: #1a1a2e;
   border: none;
   outline: none;
   border-radius: 5px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.contact__btn:hover {
+  background: #e6951d;
+  transform: translateY(-2px);
+}
+
+.contact__info {
+  background: #1a1a2e;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.contact__info h6 {
+  color: #f9a826;
+  margin-bottom: 15px;
+}
+
+.contact__info p {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 @media only screen and (max-width: 768px) {
   .contact__btn {
-    margin-bottom: 40px;
-    font-size: 0.8rem;
+    margin-bottom: 30px;
+    font-size: 0.85rem;
+    padding: 10px 25px;
+  }
+  .social__link-icon {
+    font-size: 1rem;
+  }
+  .social__link-icon i {
+    width: 35px;
+    height: 35px;
   }
 }

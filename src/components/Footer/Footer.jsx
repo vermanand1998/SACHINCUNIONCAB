@@ -101,23 +101,21 @@ const Footer = () => {
 
           <Col lg="12">
             <div className="footer__bottom">
-              <p className="section__description d-flex align-items-center justify-content-center gap-1 pt-4">
-                <i className="ri-copyright-line"></i>Copyright {year} UNION SERVICES, Developed by{" "}
-                <a 
-                  href="https://avfreelancer.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  style={{ 
-                    color: '#f9a826', 
-                    fontWeight: '600', 
-                    textDecoration: 'none',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => e.target.style.textDecoration = 'underline'}
-                  onMouseOut={(e) => e.target.style.textDecoration = 'none'}
-                >
-                  Anand Verma
-                </a>. All rights reserved.
+              <p className="section__description footer__copyright pt-4">
+                <span className="copyright-line1">
+                  <i className="ri-copyright-line"></i> Copyright {year} UNION SERVICES
+                </span>
+                <span className="copyright-line2">
+                  Developed by{" "}
+                  <a 
+                    href="https://avfreelancer.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="developer-link"
+                  >
+                    Anand Verma
+                  </a>. All rights reserved.
+                </span>
               </p>
             </div>
           </Col>

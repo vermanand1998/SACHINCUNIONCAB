@@ -1,43 +1,76 @@
+/* ============ Booking Form - Cab Theme =========== */
 .booking__form {
   width: 47.5%;
 }
 
 .booking__form input {
-  padding: 8px 15px;
-  border: 1px solid #7c8a972a;
-  color: #7c8a97;
+  padding: 10px 15px;
+  border: 2px solid #f0f0f0;
+  color: #333;
   width: 100%;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.booking__form input:focus {
+  border-color: #f9a826;
+  box-shadow: 0 0 0 3px rgba(249, 168, 38, 0.1);
 }
 
 .booking__form select,
 .textarea {
   width: 100%;
   padding: 10px 15px;
-  color: #7c8a97;
-  border: 1px solid #7c8a972a;
-  border-radius: 4px;
+  color: #333;
+  border: 2px solid #f0f0f0;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.booking__form select:focus,
+.textarea:focus {
+  border-color: #f9a826;
+  box-shadow: 0 0 0 3px rgba(249, 168, 38, 0.1);
+  outline: none;
 }
 
 .time__picker::before {
   content: "Journey Time";
-  color: #7c8a97;
+  color: #555;
   margin-right: 0.5rem;
+  font-weight: 500;
 }
 
-.textarea:focus,
-.booking__form input:focus,
-.booking__form select:focus {
-  outline: none;
+.booking__form label {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 5px;
+}
+
+.booking__form .btn {
+  background: #f9a826;
+  color: #1a1a2e;
+  font-weight: 700;
+  padding: 12px 25px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.booking__form .btn:hover {
+  background: #e6951d;
+  transform: translateY(-2px);
 }
 
 @media only screen and (max-width: 768px) {
   .booking__form {
     width: 100%;
   }
-
   .booking__form input,
   .textarea,
   .booking__form select {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    padding: 8px 12px;
   }
 }

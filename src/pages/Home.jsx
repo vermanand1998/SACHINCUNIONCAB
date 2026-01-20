@@ -42,10 +42,10 @@ const Home = () => {
       {/* <AboutSection /> */}
       <AboutUnionCabs />
       {/* ========== services section ============ */}
-      <section>
+      <section className="services__section">
         <Container>
           <Row>
-            <Col lg="12" className="mb-5 text-center">
+            <Col lg="12" className="mb-4 text-center">
               <h6 className="section__subtitle">See our</h6>
               <h2 className="section__title">Popular Services</h2>
             </Col>
@@ -55,10 +55,10 @@ const Home = () => {
         </Container>
       </section>
       {/* =========== car offer section ============= */}
-      <section>
+      <section className="car__offer-section">
         <Container>
           <Row>
-            <Col lg="12" className="text-center mb-5">
+            <Col lg="12" className="text-center mb-4">
               <h6 className="section__subtitle">Come with</h6>
               <h2 className="section__title">Hot Offers</h2>
             </Col>
@@ -73,7 +73,7 @@ const Home = () => {
       <BecomeDriverSection />
 
       {/* =========== testimonial section =========== */}
-      <section>
+      <section className="testimonial__section">
         <Container>
           <Row>
             <Col lg="12" className="mb-4 text-center">
@@ -87,10 +87,10 @@ const Home = () => {
       </section>
 
       {/* =============== blog section =========== */}
-      <section>
+      <section className="blog__section">
         <Container>
           <Row>
-            <Col lg="12" className="mb-5 text-center">
+            <Col lg="12" className="mb-4 text-center">
               <h6 className="section__subtitle">Explore our blogs</h6>
               <h2 className="section__title">Latest Blogs</h2>
             </Col>
@@ -100,10 +100,10 @@ const Home = () => {
         </Container>
       </section>
       {/* ===============OUR CLIENTS======================== */}
-      <section>
+      <section className="clients__section">
         <Container>
-          <Row >
-            <Col lg="12" className="mb-5 text-center">
+          <Row>
+            <Col lg="12" className="mb-4 text-center">
               <h6 className="section__subtitle">Clients</h6>
               <h2 className="section__title">Our Clients</h2>
             </Col>

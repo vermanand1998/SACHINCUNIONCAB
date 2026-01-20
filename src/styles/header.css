@@ -1,14 +1,24 @@
+/* ============ Header - Cab Theme =========== */
 .header__top {
-  padding: 10px 0px;
-  background: #000d6b;
+  padding: 8px 0px;
+  background: #1a1a2e;
   color: #fff;
 }
+
 .header__top_instruction {
-  /* padding: 10px 0px; */
-  background: black;
-  color: #fff;
-  height: 25px;
+  background: #f9a826;
+  color: #1a1a2e;
+  min-height: 30px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  justify-content: center;
+  line-height: 1.4;
 }
+
 .header__top__left {
   display: flex;
   align-items: center;
@@ -16,7 +26,10 @@
 }
 
 .header__top__left span {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .header__top__help {
@@ -26,9 +39,9 @@
 }
 
 .header__top__help i {
-  background: #fff;
-  color: #000d6b;
-  padding: 2px 4px;
+  background: #f9a826;
+  color: #1a1a2e;
+  padding: 3px 5px;
   border-radius: 50px;
   font-size: 0.7rem;
 }
@@ -36,17 +49,19 @@
 .header__top__right a {
   text-decoration: none;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
 }
 
 .header__top__right a:hover {
-  color: #fff;
+  color: #f9a826;
 }
 
-/* ============ header middle style =========== */
-
+/* ============ Header Middle =========== */
 .header__middle {
-  padding: 20px 0px;
+  padding: 15px 0px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .logo h1 a span {
@@ -54,13 +69,14 @@
 }
 
 .logo h1 a i {
-  font-size: 2.2rem;
+  font-size: 2rem;
+  color: #f9a826;
 }
 
 .logo h1 a {
   text-decoration: none;
-  color: #000d6b;
-  font-weight: 700;
+  color: #1a1a2e;
+  font-weight: 800;
 }
 
 .logo h1 {
@@ -68,26 +84,33 @@
 }
 
 .header__location span i {
-  font-size: 2.2rem;
-  color: #000d6b;
+  font-size: 2rem;
+  color: #f9a826;
 }
 
 .header__location-content h4 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: #000d6b;
+  color: #1a1a2e;
 }
 
 .header__location-content h6 {
-  font-weight: 600;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.85rem;
 }
 
 .header__btn {
-  background: #000d6b !important;
+  background: #f9a826 !important;
   padding: 10px 20px;
   border: none;
-  outline: none;
   border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.header__btn:hover {
+  background: #e6951d !important;
+  transform: translateY(-2px);
 }
 
 .header__btn a {
@@ -95,25 +118,23 @@
   align-items: center;
   column-gap: 0.4rem;
   text-decoration: none;
-  color: #fff;
-  justify-content: end;
+  color: #1a1a2e;
   font-size: 0.9rem;
+  font-weight: 700;
 }
 
-.header__btn a:hover {
-  color: #fff;
-}
-
-/* ================ main navbar styles =========== */
-
+/* ============ Main Navbar =========== */
 .main__navbar {
-  padding: 15px 0px;
-  background: #000d6b;
+  padding: 12px 0px;
+  background: #1a1a2e;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .mobile__menu i {
-  color: #fff;
-  font-size: 1.3rem;
+  color: #f9a826;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 
@@ -124,26 +145,47 @@
 .menu {
   display: flex;
   align-items: center;
-  column-gap: 2.7rem;
+  column-gap: 2rem;
 }
 
 .nav__item {
   color: #fff;
   text-decoration: none;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 5px 0;
+  position: relative;
 }
 
-.nav__item:hover {
+.nav__item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #f9a826;
+  transition: width 0.3s ease;
+}
+
+.nav__item:hover::after,
+.nav__active::after {
+  width: 100%;
+}
+
+.nav__item:hover,
+.nav__active {
   color: #f9a826;
 }
 
 .search__box {
-  border: 1px solid #7c8a972f;
-  padding: 7px 12px;
+  border: 2px solid #f9a826;
+  padding: 6px 12px;
   display: flex;
   align-items: center;
-  border-radius: 50px;
-  background: #020a4de9;
+  border-radius: 5px;
+  background: transparent;
 }
 
 .search__box input {
@@ -151,74 +193,73 @@
   border: none;
   outline: none;
   color: #fff;
-  cursor: pointer;
+  width: 120px;
 }
 
 .search__box input::placeholder {
   font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
 }
+
 .search__box span i {
-  color: rgba(255, 255, 255, 0.555);
+  color: #f9a826;
   cursor: pointer;
 }
 
-.nav__active {
-  color: #f9a826;
-}
-.showinMobOnly{
+.showinMobOnly {
   display: none;
 }
 
-
-/* ================ Header Logo Responsive Styles =========== */
+/* ============ Header Logo Responsive =========== */
 .header-logo-img {
-  height: 55px;
+  height: 60px;
   width: auto;
-  max-width: 280px;
+  max-width: 300px;
   object-fit: contain;
-  transition: all 0.3s ease;
 }
 
-/* Large screens (desktops) */
 @media only screen and (min-width: 1200px) {
   .header-logo-img {
-    height: 60px;
-    max-width: 300px;
+    height: 55px;
+    max-width: 280px;
   }
 }
 
-/* Medium screens (tablets) */
 @media only screen and (max-width: 991px) {
   .header-logo-img {
-    height: 50px;
-    max-width: 240px;
+    height: 45px;
+    max-width: 220px;
+  }
+  .menu {
+    column-gap: 1.5rem;
   }
 }
 
-/* Small screens (mobile landscape) */
 @media only screen and (max-width: 768px) {
   .header-logo-img {
-    height: 42px;
-    max-width: 200px;
+    height: 55px;
+    max-width: 240px;
   }
-  
-  /* .header__top,
-  .header__middle,
-  .nav__right {
-    display: none;
-  } */
-  .showinMobOnlyCallbutton{
+  .header__top {
+    padding: 8px 15px;
+  }
+  .header__top__left {
+    width: auto;
+  }
+  .header__top__left span {
+    font-size: 0.85rem;
+  }
+  .showinMobOnlyCallbutton {
     display: none !important;
   }
-  .showinMobOnly{
+  .showinMobOnly {
     display: block;
   }
   .mobile__menu {
     display: block;
   }
-
   .navigation {
-    background: rgb(0, 13, 107, 0.6);
+    background: rgba(26, 26, 46, 0.95);
     width: 100%;
     height: 100%;
     position: fixed;
@@ -227,42 +268,80 @@
     z-index: 9999;
     display: none;
   }
-
   .menu {
-    width: 250px;
+    width: 260px;
     height: 100%;
-    background: #fff;
+    background: #1a1a2e;
     display: flex;
     align-items: center;
     flex-direction: column;
-    row-gap: 2rem;
+    row-gap: 1.5rem;
     justify-content: center;
-    background-color: #ccddff;
   }
-
   .menu a {
-    color: #000d6b;
+    color: #fff;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    padding: 10px 20px;
+    width: 80%;
+    text-align: center;
+    border-radius: 5px;
   }
-
+  .menu a:hover,
+  .menu a.nav__active {
+    background: #f9a826;
+    color: #1a1a2e;
+  }
   .menu__active {
     display: block;
   }
 }
 
-/* Extra small screens (mobile portrait) */
 @media only screen and (max-width: 576px) {
   .header-logo-img {
-    height: 38px;
-    max-width: 180px;
+    height: 70px;
+    max-width: 350px;
+    margin-left: -50px;
+  }
+  .header__top {
+    padding: 10px 15px;
+  }
+  .header__top .gap-1 {
+    gap: 0.25rem !important;
+    margin-right: -5px;
+  }
+  .header__top_instruction {
+    font-size: 0.7rem;
+    min-height: 28px;
+    padding: 4px 8px;
+  }
+  .header__top__left {
+    display: none;
+  }
+  .header__top__right {
+    width: 100%;
+    justify-content: flex-start !important;
+    gap: 15px !important;
+  }
+  .header__top__right .showinMobOnly {
+    display: flex !important;
+    font-size: 0.9rem;
+    margin-right: auto;
+  }
+  .header__middle {
+    padding: 12px 10px;
+  }
+  .header__location {
+    display: none;
+  }
+  .logo {
+    width: auto;
   }
 }
 
-/* Very small screens */
 @media only screen and (max-width: 400px) {
   .header-logo-img {
-    height: 32px;
-    max-width: 150px;
+    height: 60px;
+    max-width: 240px;
   }
 }

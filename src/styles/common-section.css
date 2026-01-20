@@ -1,8 +1,80 @@
+/* ============ Common Section - Cab Theme =========== */
 .common__section {
-  background: linear-gradient(rgb(0, 13, 107, 0.6), rgb(0, 13, 107, 0.6)),
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.92) 0%, rgba(249, 168, 38, 0.4) 100%),
     url("../assets/all-images/drive.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 80px 0px;
+  padding: 80px 0px 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.common__section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f9a826' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.common__section h1 {
+  color: #fff;
+  font-weight: 800;
+  font-size: 2.5rem;
+  text-shadow: 2px 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.common__section h1::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #f9a826;
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+.common__section span {
+  color: #f9a826;
+}
+
+@media only screen and (max-width: 992px) {
+  .common__section {
+    padding: 60px 0px 100px;
+  }
+  .common__section h1 {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .common__section {
+    padding: 50px 0px 80px;
+  }
+  .common__section h1 {
+    font-size: 1.6rem;
+  }
+  .common__section h1::after {
+    width: 60px;
+    height: 3px;
+    margin-top: 12px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .common__section {
+    padding: 40px 0px 60px;
+  }
+  .common__section h1 {
+    font-size: 1.3rem;
+  }
+  .common__section h1::after {
+    width: 50px;
+  }
 }

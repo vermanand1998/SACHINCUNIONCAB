@@ -1,10 +1,17 @@
+/* ============ Hero Slider - Cab Theme =========== */
+.hero__slider {
+  overflow: hidden;
+}
+
 .slider__item {
   max-width: 100%;
-  height: 650px;
+  height: 500px;
+  display: flex;
+  align-items: center;
 }
 
 .slider__item-01 {
-  background: linear-gradient(rgb(0, 13, 107, 0.5), rgb(0, 13, 107, 0.5)),
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(249, 168, 38, 0.3) 100%),
     url("../assets/all-images/slider-img/slider-1.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -12,7 +19,7 @@
 }
 
 .slider__item-02 {
-  background: linear-gradient(rgb(0, 13, 107, 0.5), rgb(0, 13, 107, 0.5)),
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(249, 168, 38, 0.3) 100%),
     url("../assets/all-images/slider-img/slider-2.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -20,65 +27,122 @@
 }
 
 .slider__item-03 {
-  background: linear-gradient(rgb(0, 13, 107, 0.5), rgb(0, 13, 107, 0.5)),
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(249, 168, 38, 0.3) 100%),
     url("../assets/all-images/slider-img/slider-3.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.hero__slider {
-  overflow: hidden;
+.slider__content {
+  padding-top: 80px;
 }
 
-.slider__content {
-  padding-top: 150px;
+.slider__content h4 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #f9a826;
+  margin-bottom: 10px;
 }
 
 .slider__content h1 {
-  font-size: 3.2rem;
-  font-weight: 600;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 .reserve__btn {
-  background: #fff !important;
-  color: #000d6b !important;
+  background: #f9a826 !important;
+  color: #1a1a2e !important;
   border: none;
-  outline: none;
+  padding: 12px 35px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
 .reserve__btn a {
   text-decoration: none;
-  font-weight: 600;
-  color: #000d6b;
+  font-weight: 700;
+  color: #1a1a2e;
 }
 
 .reserve__btn:hover {
-  background: #000d6b;
+  background: #e6951d !important;
+  transform: scale(1.05);
+}
+
+.reserve__btn:hover a {
   color: #fff;
 }
 
+/* Slick Dots */
+.hero__slider .slick-dots {
+  bottom: 20px;
+}
+
+.hero__slider .slick-dots li button:before {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hero__slider .slick-dots li.slick-active button:before {
+  color: #f9a826;
+}
+
+/* Responsive */
 @media only screen and (max-width: 992px) {
   .slider__item {
-    height: 530px;
-    max-width: 100vw;
+    height: 400px;
   }
-
   .slider__content {
-    margin-top: -50px;
+    padding-top: 60px;
   }
-
   .slider__content h1 {
     font-size: 2rem;
+  }
+  .slider__content h4 {
+    font-size: 0.9rem;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .slider__item {
-    height: 450px;
+    height: 350px;
   }
-
   .slider__content h1 {
     font-size: 1.5rem;
+  }
+  .slider__content h4 {
+    font-size: 0.85rem;
+  }
+  .reserve__btn {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .slider__item {
+    height: 280px;
+  }
+  .slider__content {
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .slider__content h1 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  .slider__content h4 {
+    font-size: 0.8rem;
+  }
+  .reserve__btn {
+    padding: 8px 20px;
+    font-size: 0.8rem;
   }
 }

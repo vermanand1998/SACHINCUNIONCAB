@@ -1,93 +1,171 @@
+/* ============ Car Offer Section - Cab Theme =========== */
+.car__offer-section {
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.car__offer-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 80% 30%, rgba(249, 168, 38, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 20% 70%, rgba(26, 26, 46, 0.03) 0%, transparent 35%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23f9a826' fill-opacity='0.03'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.car__offer-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============ Car Item Card =========== */
 .car__item {
-  border: 1px solid #7c8a9736;
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.car__item-info span i {
-  color: #f9a826;
-  font-size: 1.1rem;
-}
-
-.car__item-btn {
-  border-radius: 0;
+  background: #fff;
   border: none;
-  outline: none;
-  background: #000d6b;
-  padding: 8px 0px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
 }
 
-.car__item-btn a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 500;
+.car__item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(249, 168, 38, 0.2);
 }
 
-.car__item-btn a:hover {
-  color: #fff;
-}
-.car__btn-details {
-  background: #f9a826;
-  border-radius: 0px 4px 4px 0px;
+.car__item-top {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f5f5, #fff);
+  padding: 15px;
 }
 
-.car__btn-rent {
-  border-radius: 4px 0px 0px 4px;
+.car__item-top img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.car__item:hover .car__item-top img {
+  transform: scale(1.05);
+}
+
+.car__item-content {
+  padding: 15px;
+  background: #1a1a2e;
 }
 
 .car__item-content h4 {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
 }
 
 .car__item-content h6 {
   font-size: 1.2rem;
+  font-weight: 700;
+  color: #f9a826;
+  margin-bottom: 10px;
+}
+
+.car__item-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 10px;
+}
+
+.car__item-info span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+}
+
+.car__item-info span i {
+  color: #f9a826;
+  font-size: 0.9rem;
+}
+
+/* Buttons */
+.car__item-btn {
+  border: none;
+  padding: 10px 0px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.car__btn-rent {
+  background: #f9a826;
+  color: #1a1a2e;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.car__btn-rent:hover {
+  background: #e6951d;
+}
+
+.car__btn-details {
+  background: #fff;
+  color: #1a1a2e;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.car__btn-details:hover {
+  background: #f5f5f5;
+}
+
+.car__item-btn a {
+  text-decoration: none;
+  color: inherit;
   font-weight: 600;
 }
 
+/* Responsive */
 @media only screen and (max-width: 992px) {
-  .car__item h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0;
-  }
-
-  .car__item h6 {
+  .car__item-content h4 {
     font-size: 1rem;
-    margin-top: 10px;
   }
-
-  .car__item-info {
-    flex-wrap: wrap;
+  .car__item-content h6 {
+    font-size: 1rem;
   }
-
-  .car__item-info span {
-    font-size: 0.8rem;
-    justify-content: space-between;
-  }
-
-  .car__item-btn {
-    padding: 5px 10px;
-    font-size: 0.9rem;
+  .car__item-top img {
+    height: 120px;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .car__item h4 {
-    font-size: 1rem;
-  }
-
-  .car__item h6 {
+  .car__item-content h4 {
     font-size: 0.9rem;
   }
-
+  .car__item-content h6 {
+    font-size: 0.9rem;
+  }
   .car__item-info span {
     font-size: 0.7rem;
   }
-
-  .car__item-info span i {
-    font-size: 0.9rem;
-  }
-
   .car__item-btn {
     font-size: 0.8rem;
+    padding: 8px 0;
+  }
+  .car__item-top img {
+    height: 100px;
   }
 }

@@ -1,43 +1,53 @@
 /* ======== google fonts ======== */
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+/* ======= CSS Variables - Yellow Cab Theme ====== */
+:root {
+  --primary-yellow: #f9a826;
+  --primary-yellow-dark: #e6951d;
+  --primary-yellow-light: #ffc107;
+  --dark-blue: #1a1a2e;
+  --dark-navy: #16213e;
+  --text-dark: #0f0f0f;
+  --text-gray: #555;
+  --bg-light: #fff;
+  --bg-gray: #f5f5f5;
+}
 
 /* ======= base style ====== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
 }
 
 /* ========= pre-define css ========= */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #000d6b;
-  font-weight: 600;
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dark-blue);
+  font-weight: 700;
   margin-bottom: 0;
 }
 
-h3,
-h4 {
-  font-size: 1.6rem;
-}
-
-h5,
-h6 {
-  font-size: 1.2rem;
-}
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3, h4 { font-size: 1.5rem; }
+h5, h6 { font-size: 1.1rem; }
 
 a {
   text-decoration: none;
   color: unset;
-}
-
-a:hover {
-  color: unset;
+  transition: 0.3s ease;
 }
 
 ul {
@@ -45,53 +55,94 @@ ul {
   list-style: none;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .section__title {
-  color: #000d6b;
-  font-weight: 600;
-  font-size: 2rem;
+  color: var(--dark-blue);
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 5px;
 }
 
 .section__subtitle {
-  color: #f9a826;
+  color: var(--primary-yellow);
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
 }
 
 .section__description {
-  color: #7c8a97;
+  color: var(--text-gray);
   font-size: 0.9rem;
-  line-height: 30px;
+  line-height: 1.7;
 }
 
 section {
-  padding: 50px 0px;
+  padding: 40px 0px;
 }
 
 .btn {
-  padding: 7px 15px;
-  background: #000d6b;
-  color: #fff;
+  padding: 10px 25px;
+  background: var(--primary-yellow);
+  color: var(--dark-blue);
   border: none;
   outline: none;
   border-radius: 5px;
-  transition: 0.3s;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .btn:hover {
+  background: var(--primary-yellow-dark);
   color: #fff !important;
-  background: #000c6bd0;
+  transform: translateY(-2px);
+}
+
+/* Selection */
+::selection {
+  background: var(--primary-yellow);
+  color: var(--dark-blue);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-yellow);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-yellow-dark);
+}
+
+/* Responsive */
+@media only screen and (max-width: 992px) {
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  .section__title { font-size: 1.5rem; }
+  section { padding: 30px 0px; }
 }
 
 @media only screen and (max-width: 768px) {
-  section {
-    padding: 30px 0px;
-  }
+  section { padding: 25px 0px; }
+  .section__title { font-size: 1.3rem; }
+  .section__subtitle { font-size: 0.8rem; }
+  h1 { font-size: 1.5rem; }
+}
 
-  .section__title {
-    font-size: 1.6rem;
-  }
-
-  .section__subtitle {
-    font-size: 1.1rem;
-  }
+@media only screen and (max-width: 576px) {
+  section { padding: 20px 0px; }
+  .section__title { font-size: 1.2rem; }
 }
