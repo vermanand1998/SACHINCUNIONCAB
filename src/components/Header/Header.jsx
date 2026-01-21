@@ -91,6 +91,14 @@ const Header = () => {
               display: "Cab Detail",
             },
             {
+              path: "/gps-tracking",
+              display: "GPS Track",
+            },
+            {
+              path: "/journey-history",
+              display: "Journeys",
+            },
+            {
               path: "/AdminPortal",
               display: "Admin Panel",
             },

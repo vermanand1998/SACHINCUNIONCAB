@@ -20,9 +20,13 @@ function DriverCabDetailsAccess() {
     const fetchData = async () => {
       try {
         if (!dataFetched) {
+          // Use FormData to avoid CORS issues with Google Apps Script
+          const formData = new FormData();
+          formData.append('key', 'C');
+          
           const response = await fetch(googleSheetUrl, {
             method: 'POST',
-            body: JSON.stringify({ key: 'C' }),
+            body: formData,
           });
 
           if (response.ok) {

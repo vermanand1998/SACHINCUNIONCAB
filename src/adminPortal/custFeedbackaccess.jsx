@@ -13,9 +13,13 @@ function CustomerFeedback() {
     const fetchData = async () => {
       try {
         if (!dataFetched) {
+          // Use FormData to avoid CORS issues with Google Apps Script
+          const formData = new FormData();
+          formData.append('key', 'D');
+          
           const response = await fetch(googleSheetUrl, {
             method: 'POST',
-            body: JSON.stringify({ key: 'D' }),
+            body: formData,
           });
 
           if (response.ok) {

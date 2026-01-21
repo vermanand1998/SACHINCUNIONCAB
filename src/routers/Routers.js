@@ -15,6 +15,9 @@ import CabBookingDetails from "../adminPortal/userbookingaccess";
 import CustomerContactDetails from "../adminPortal/usercontactaccess"
 import DriverCabDetailsAccess from "../adminPortal/driverCabDetailsaccess"
 import CustomerFeedbackFrom from "../pages/customerFeedbackForm"
+import GPSTracking from "../pages/GPSTracking"
+import JourneyHistory from "../pages/JourneyHistory"
+
 const Routers = () => {
   return (
     <Routes>
@@ -33,6 +36,8 @@ const Routers = () => {
       <Route path="/driverCabDetailsAccess" element={<DriverCabDetailsAccess/>} />
       <Route path="/customerContactDetails" element={<CustomerContactDetails/>} />
       <Route path="/customerFeedbackFrom" element={<CustomerFeedbackFrom/>} />
+      <Route path="/gps-tracking" element={<GPSTracking/>} />
+      <Route path="/journey-history" element={<JourneyHistory/>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

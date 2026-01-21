@@ -7,6 +7,8 @@ import CommonSection from '../components/UI/CommonSection';
 import CabBookingDetails from "./userbookingaccess";
 import CustomerContactDetails from "./usercontactaccess"
 import DriverCabDetailsAccess from "./driverCabDetailsaccess"
+import GPSJourneyAccess from "./gpsJourneyAccess"
+
 function AdminPortal() {
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -21,6 +23,7 @@ function AdminPortal() {
       >
         <TabList className="custom-tab-list">
           <Tab className="custom-tab">Driver Details</Tab>
+          <Tab className="custom-tab">GPS Journeys</Tab>
           <Tab className="custom-tab">Customer Feedback</Tab>
           <Tab className="custom-tab">Cab Booked</Tab>
           <Tab className="custom-tab">Customer Contacted</Tab>
@@ -28,6 +31,9 @@ function AdminPortal() {
 
         <TabPanel>
          <DriverCabDetailsAccess/>
+        </TabPanel>
+        <TabPanel>
+         <GPSJourneyAccess/>
         </TabPanel>
         <TabPanel>
         <CustomerFeedback/>

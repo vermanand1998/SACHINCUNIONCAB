@@ -1,16 +1,28 @@
 export const googleSheetUrl =
-  "https://script.google.com/macros/s/AKfycbxLyjkqwIonoXNtD4u95agNA4uhIaLvdT0HUg2MlY5Tig5Bym9OVfSt_Z_ZUsbat2UF/exec";
+  "https://script.google.com/macros/s/AKfycbyVA7-0i_D0oylzQnib5NS1eXtXHslwI03sy0Fm9VX4gaVtqLWLKLf-v2R6u7YMAfu2/exec";
 
 // ========================================================================
 // GOOGLE APPS SCRIPT CODE - COPY THIS TO YOUR GOOGLE APPS SCRIPT EDITOR
 // ========================================================================
 // 
-
+// IMPORTANT: Create a new sheet called "GPSJOURNEY" in your Google Spreadsheet
+// with these columns (Row 1):
+// JOURNEYID | DRIVERNAME | DRIVERMOBILE | CABNO | VEHICLENO | DATE | STARTTIME | 
+// ENDTIME | TOTALKM | TOTALSTOPS | STARTLAT | STARTLNG | STARTADDRESS | 
+// ENDLAT | ENDLNG | ENDADDRESS | ALLSTOPS | AUTOLOGS | GPSLOST | RECOVERED | SUSPICIOUS
+//
+// ANTI-CHEAT FIELDS:
+// - AUTOLOGS: Number of auto-logged positions (every 2 min)
+// - GPSLOST: Number of times GPS signal was lost
+// - RECOVERED: Number of session recovery events (driver closed browser)
+// - SUSPICIOUS: YES if journey has issues (recovered session or GPS lost > 3 times)
+//
 // function doPost(e) {
 //   var sheetA = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("CONTACT");
 //   var sheetB = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("CABBOOKING");
 //   var sheetC = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("DRIVERCABDETAIL");
 //   var sheetD = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("FEEDBACKDETAILS");
+//   var sheetG = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("GPSJOURNEY");
 //
 //   let data = e.parameter;
 //
@@ -80,11 +92,44 @@ export const googleSheetUrl =
 //     ]);
 //     return ContentService.createTextOutput("Your message was successfully sent to the FEEDBACKDETAILS database!");
 //   
+//   } else if (data.hasOwnProperty("FORMTYPE") && data.FORMTYPE === "GPSJOURNEY") {
+//     // Request for GPSJOURNEY sheet - GPS Tracking Data
+//     sheetG.appendRow([
+//       data.JOURNEYID,
+//       data.DRIVERNAME,
+//       data.DRIVERMOBILE,
+//       data.CABNO,
+//       data.VEHICLENO,
+//       data.DATE,
+//       data.STARTTIME,
+//       data.ENDTIME,
+//       data.TOTALKM,
+//       data.TOTALSTOPS,
+//       data.STARTLAT,
+//       data.STARTLNG,
+//       data.STARTADDRESS,
+//       data.ENDLAT,
+//       data.ENDLNG,
+//       data.ENDADDRESS,
+//       data.ALLSTOPS,
+//       data.AUTOLOGS || '0',      // Anti-cheat: Auto-logged positions
+//       data.GPSLOST || '0',       // Anti-cheat: GPS lost count
+//       data.RECOVERED || '0',     // Anti-cheat: Session recovery count
+//       data.SUSPICIOUS || 'NO'    // Anti-cheat: Suspicious flag
+//     ]);
+//     return ContentService.createTextOutput("GPS Journey data saved successfully!");
+//   
 //   } else {
 //     // Handle unrecognized request
 //     return ContentService.createTextOutput("Invalid request");
 //   }
 // }
+//
+// // Add this to handle fetching GPS journey data (add to existing doPost function)
+// // In your existing key-based fetch section, add:
+// // else if (keyValue === "G") {
+// //   sheet = sheetG; // GPSJOURNEY sheet
+// // }
 //
 // ========================================================================
 // END OF GOOGLE APPS SCRIPT CODE
