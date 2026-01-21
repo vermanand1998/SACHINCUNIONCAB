@@ -127,19 +127,27 @@ const Header = () => {
         return prevNavLinks;
       });
     }else if(UserEmail!==null && UserEmail ==='eclatcabs@unioncabs.in' && token!==null){
-      // ECLAT user - only Cab Details, NO Admin Panel
+      // ECLAT user - Cab Details, GPS Track, and Journeys (NO Admin Panel)
       setNavLinks((prevNavLinks) => {
         const existingCabDetailLink = prevNavLinks.find(
           (link) => link.path === "/drivercabsdetails"
         );
 
-        // Add the Cab Detail link only if it doesn't exist in the array
+        // Add the Cab Detail, GPS Track and Journeys links only if they don't exist
         if (!existingCabDetailLink) {
           return [
             ...prevNavLinks,
             {
               path: "/drivercabsdetails",
               display: "Cab Detail",
+            },
+            {
+              path: "/gps-tracking",
+              display: "GPS Track",
+            },
+            {
+              path: "/journey-history",
+              display: "Journeys",
             },
           ];
         }
