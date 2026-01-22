@@ -124,7 +124,8 @@ const GPSTracking = () => {
   const [commonFormData, setCommonFormData] = useState({
     shiftTiming: "EVE (3PM-12AM)",
     delay: "",
-    remarks: ""
+    remarks: "",
+    includeEscort: true // New field for escort inclusion
   });
   const [showCustomEmployeeForm, setShowCustomEmployeeForm] = useState(false);
   const [customEmployee, setCustomEmployee] = useState({
@@ -624,7 +625,8 @@ const GPSTracking = () => {
         setCommonFormData({
           shiftTiming: "EVE (3PM-12AM)",
           delay: "",
-          remarks: ""
+          remarks: "",
+          includeEscort: true
         });
         setShowCustomEmployeeForm(false);
         setCustomEmployee({ name: "", empId: "" });
@@ -725,6 +727,7 @@ const GPSTracking = () => {
         shiftTiming: commonFormData.shiftTiming,
         delay: commonFormData.delay,
         remarks: commonFormData.remarks,
+        includeEscort: commonFormData.includeEscort, // Store escort preference
         pickupLocation: pendingStopData.address,
         pickupTime: pendingStopData.time,
         pickupMeterReading: pendingStopData.meterReading,
@@ -763,8 +766,8 @@ const GPSTracking = () => {
           vendorName: selectedDriver.vendorName,
           driverName: selectedDriver.driverName,
           driverMobile: selectedDriver.driverMobile,
-          escortName: selectedDriver.escortName || "",
-          escortMobile: selectedDriver.escortMobile || "",
+          escortName: employee.includeEscort ? (selectedDriver.escortName || "") : "",
+          escortMobile: employee.includeEscort ? (selectedDriver.escortMobile || "") : "",
           employeeName: employee.employeeName,
           empId: employee.empId,
           tripType: employee.tripType,
@@ -806,6 +809,7 @@ const GPSTracking = () => {
     setSelectedEmployees([]);
     setCommonFormData({
       shiftTiming: "EVE (3PM-12AM)",
+      includeEscort: true,
       delay: "",
       remarks: ""
     });
@@ -870,7 +874,8 @@ const GPSTracking = () => {
       setCommonFormData({
         shiftTiming: "EVE (3PM-12AM)",
         delay: "",
-        remarks: ""
+        remarks: "",
+        includeEscort: true
       });
       setShowCustomEmployeeForm(false);
       setCustomEmployee({ name: "", empId: "" });
@@ -1539,9 +1544,30 @@ const GPSTracking = () => {
                           >
                             <option value="MOR (8AM-5PM)">MOR (8AM-5PM)</option>
                             <option value="EVE (3PM-12AM)">EVE (3PM-12AM)</option>
-                            <option value="NIGHT (10PM-7AM)">NIGHT (10PM-7AM)</option>
+                            <option value="EVE2 (6:30PM-3:30AM)">EVE2 (6:30PM-3:30AM)</option>
+                            <option value="NIGHT (9PM-6AM)">NIGHT (9PM-6AM)</option>
+                            <option value="NIGHT2 (10PM-7AM)">NIGHT2 (10PM-7AM)</option>
                             <option value="GEN (9AM-6PM)">GEN (9AM-6PM)</option>
                           </select>
+                        </div>
+
+                        <div className="form-group escort-checkbox-group">
+                          <label className="checkbox-label">
+                            <input
+                              type="checkbox"
+                              checked={commonFormData.includeEscort}
+                              onChange={(e) => setCommonFormData({...commonFormData, includeEscort: e.target.checked})}
+                            />
+                            <span className="checkbox-text">
+                              <i className="ri-shield-user-line"></i>
+                              Include Escort Details in Trip Record
+                            </span>
+                          </label>
+                          <small className="helper-text">
+                            {commonFormData.includeEscort 
+                              ? `✓ Escort: ${selectedDriver?.escortName || 'N/A'} (${selectedDriver?.escortMobile || 'N/A'})` 
+                              : '✗ Escort details will be saved as blank'}
+                          </small>
                         </div>
 
                         <div className="form-group">

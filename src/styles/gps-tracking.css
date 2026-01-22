@@ -1325,6 +1325,57 @@
   min-height: 60px;
 }
 
+/* Escort Checkbox Styling */
+.escort-checkbox-group {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #bae6fd;
+  gap: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #0ea5e9;
+  flex-shrink: 0;
+}
+
+.checkbox-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0c4a6e;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.checkbox-text i {
+  font-size: 18px;
+  color: #0ea5e9;
+}
+
+.helper-text {
+  font-size: 12px;
+  color: #475569;
+  font-style: italic;
+  margin-top: 5px;
+  padding-left: 32px;
+  line-height: 1.4;
+}
+
 .pickup-info {
   background: #ecfdf5;
   border-left: 4px solid #10b981;
