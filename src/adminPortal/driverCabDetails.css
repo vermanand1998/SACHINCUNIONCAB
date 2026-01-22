@@ -1,0 +1,389 @@
+/* Driver Cab Details / Trip Records - Responsive Styles */
+
+.trip-records-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Header */
+.trip-records-header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.header-info h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.header-info p {
+  margin: 5px 0 0 0;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.company-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.company-selector label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.company-selector select {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 2px solid #f59e0b;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 200px;
+  cursor: pointer;
+}
+
+/* Empty & Loading States */
+.empty-state, .loading-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+}
+
+.empty-icon, .no-records-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.empty-state h4 {
+  color: #475569;
+  margin: 0 0 10px 0;
+}
+
+.empty-state p, .loading-state p {
+  color: #94a3b8;
+  margin: 10px 0 0 0;
+}
+
+.no-records {
+  text-align: center;
+  padding: 50px 20px;
+  background: #fef3c7;
+  border-radius: 12px;
+  border: 2px dashed #f59e0b;
+}
+
+.no-records p {
+  color: #92400e;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Filters */
+.trip-filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.trip-filters input,
+.trip-filters select {
+  padding: 10px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  min-width: 150px;
+  background: white;
+}
+
+.trip-filters input:focus,
+.trip-filters select:focus {
+  outline: none;
+  border-color: #f59e0b;
+}
+
+.clear-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #000D6B 0%, #1e3a8a 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.clear-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 13, 107, 0.3);
+}
+
+.record-count {
+  margin-left: auto;
+  background: #dcfce7;
+  color: #166534;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* Table */
+.trip-table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: white;
+}
+
+.trip-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.trip-table th {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: white;
+  padding: 12px 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+
+.trip-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.trip-table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.trip-table tbody tr:hover {
+  background: #f1f5f9;
+}
+
+.trip-id {
+  font-family: monospace;
+  font-size: 10px;
+}
+
+.total-km {
+  font-weight: 700;
+  color: #000D6B;
+}
+
+/* Status Badges */
+.trip-type {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.trip-type.pu, .trip-type.pickup {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.trip-type.do, .trip-type.drop {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.gps-status, .delay-status {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.gps-status.yes {
+  background: #c8e6c9;
+  color: #2e7d32;
+}
+
+.gps-status.no {
+  background: #ffcdd2;
+  color: #c62828;
+}
+
+.delay-status.yes {
+  background: #ffcdd2;
+  color: #c62828;
+}
+
+.delay-status.no {
+  background: #c8e6c9;
+  color: #2e7d32;
+}
+
+/* ==================== RESPONSIVE STYLES ==================== */
+
+@media (max-width: 1024px) {
+  .trip-records-container {
+    padding: 15px;
+  }
+
+  .trip-table th,
+  .trip-table td {
+    padding: 8px 6px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trip-records-container {
+    padding: 10px;
+  }
+
+  .trip-records-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .header-info h3 {
+    font-size: 16px;
+  }
+
+  .header-info p {
+    font-size: 12px;
+  }
+
+  .company-selector {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .company-selector select {
+    width: 100%;
+    min-width: unset;
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .trip-filters {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .trip-filters input,
+  .trip-filters select {
+    width: 100%;
+    min-width: unset;
+    font-size: 13px;
+  }
+
+  .clear-btn {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .record-count {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .trip-table th,
+  .trip-table td {
+    padding: 6px 4px;
+    font-size: 9px;
+  }
+
+  .trip-id {
+    font-size: 8px;
+  }
+
+  .trip-type, .gps-status, .delay-status {
+    font-size: 8px;
+    padding: 2px 5px;
+  }
+
+  .empty-state, .loading-state {
+    padding: 40px 15px;
+  }
+
+  .empty-icon, .no-records-icon {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trip-records-container {
+    padding: 8px;
+  }
+
+  .trip-records-header {
+    padding: 12px;
+  }
+
+  .header-info h3 {
+    font-size: 14px;
+  }
+
+  .trip-table th,
+  .trip-table td {
+    padding: 5px 3px;
+    font-size: 8px;
+  }
+
+  .trip-id {
+    font-size: 7px;
+  }
+
+  .trip-type, .gps-status, .delay-status {
+    font-size: 7px;
+    padding: 2px 4px;
+  }
+}
+
+/* Scrollbar */
+.trip-table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.trip-table-wrapper::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.trip-table-wrapper::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+
+.trip-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}

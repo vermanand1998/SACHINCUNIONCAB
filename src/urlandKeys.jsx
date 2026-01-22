@@ -1,5 +1,5 @@
 export const googleSheetUrl =
-  "https://script.google.com/macros/s/AKfycbyVA7-0i_D0oylzQnib5NS1eXtXHslwI03sy0Fm9VX4gaVtqLWLKLf-v2R6u7YMAfu2/exec";
+  "https://script.google.com/macros/s/AKfycbyplcU6vSwhwhDvAEM6tHw5PmrTnMwzsKg0AXLAyAMWYbZXQ1ujhNuqBOtexaF8FdIn/exec";
 
 // ========================================================================
 // GOOGLE APPS SCRIPT CODE - COPY THIS TO YOUR GOOGLE APPS SCRIPT EDITOR

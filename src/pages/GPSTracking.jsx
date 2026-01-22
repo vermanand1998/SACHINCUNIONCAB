@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useNavigate, useLocation } from "react-router-dom";
 import CommonSection from "../components/UI/CommonSection";
 import { googleSheetUrl } from "../urlandKeys";
+import { fetchAllConfig } from "../services/configService";
 import "../styles/gps-tracking.css";
 
 /**
@@ -36,64 +37,26 @@ import "../styles/gps-tracking.css";
  *    - Inherits uniqueness from journeyId
  *    - Each employee trip = separate row in sheet
  * 
- * ✅ CONCLUSION: 100% safe for simultaneous use by all 3 drivers!
+ * ✅ CONCLUSION: 100% safe for simultaneous use by ALL drivers!
+ * 
+ * 📊 FULLY CONFIGURABLE:
+ *    - Drivers loaded from MASTER_DRIVERS sheet
+ *    - Employees loaded from MASTER_EMPLOYEES sheet
+ *    - Companies loaded from MASTER_COMPANIES sheet
+ *    - Add/Edit/Delete from Admin Config Portal
  */
-
-// Driver Data (same as DriverCabDetails)
-const driversData = [
-  { 
-    id: 1, 
-    cabNo: "CAB-1", 
-    driverName: "SIDDHARTH SINGH", 
-    driverMobile: "6388499177", 
-    vehicleNo: "UP32TN5393",
-    driverEmpId: "UC-0009",
-    vendorName: "Union Services",
-    escortName: "DEEPAK YADAV",
-    escortMobile: "6388320196"
-  },
-  { 
-    id: 2, 
-    cabNo: "CAB-2", 
-    driverName: "RAHUL KASHYAP", 
-    driverMobile: "7355713216", 
-    vehicleNo: "UP32ZN7576",
-    driverEmpId: "UC-0008",
-    vendorName: "Union Services",
-    escortName: "ANUJ SINGH",
-    escortMobile: "7355713217"
-  },
-  { 
-    id: 3, 
-    cabNo: "CAB-3", 
-    driverName: "FAIZ KHAN", 
-    driverMobile: "6388320195", 
-    vehicleNo: "UP32TN4911",
-    driverEmpId: "UC-0007",
-    vendorName: "Union Services",
-    escortName: "DHEERAJ RATHORE",
-    escortMobile: "6388320194"
-  },
-];
-
-// All Employees Data
-const employeesData = [
-  { id: 1, name: "Sujata Sharma", empId: "EHS5665", cabId: 1 },
-  { id: 2, name: "Swetha Pandey", empId: "EHS3072", cabId: 1 },
-  { id: 3, name: "Veena Nigam", empId: "EHS5667", cabId: 1 },
-  { id: 4, name: "Riya Kumari", empId: "EHS5661", cabId: 2 },
-  { id: 5, name: "Pragati Pandey", empId: "EHS5804", cabId: 2 },
-  { id: 6, name: "Ananya Singh", empId: "EHS5644", cabId: 2 },
-  { id: 7, name: "Reet Tandon", empId: "EHS5660", cabId: 3 },
-  { id: 8, name: "Anamika Rani", empId: "EHS5643", cabId: 3 },
-  { id: 9, name: "Garima Singh", empId: "EHS5652", cabId: 3 },
-];
 
 const GPSTracking = () => {
   // Navigation
   const navigate = useNavigate();
   const location = useLocation();
   const isOnJourneyHistoryPage = location.pathname === '/journey-history';
+
+  // Configuration State (loaded from Google Sheets)
+  const [driversData, setDriversData] = useState([]);
+  const [employeesData, setEmployeesData] = useState([]);
+  const [companiesData, setCompaniesData] = useState([]);
+  const [isConfigLoading, setIsConfigLoading] = useState(true);
 
   // Journey State
   const [journeyState, setJourneyState] = useState("idle"); // idle, active, paused
@@ -132,6 +95,51 @@ const GPSTracking = () => {
     name: "",
     empId: ""
   });
+
+  // Load configuration from Google Sheets on component mount
+  useEffect(() => {
+    const loadConfig = async () => {
+      setIsConfigLoading(true);
+      try {
+        console.log("🔄 Loading GPS configuration...");
+        const config = await fetchAllConfig();
+        console.log("📦 Config received:", config);
+        
+        // Set drivers (all drivers - isActive filtering done in display if needed)
+        const allDrivers = config.drivers || [];
+        console.log("🚗 All drivers:", allDrivers);
+        setDriversData(allDrivers);
+        
+        // Set employees
+        const allEmployees = config.employees || [];
+        // Transform to match expected format
+        const transformedEmployees = allEmployees.map(e => ({
+          id: e.id,
+          name: e.name,
+          empId: e.empCode,
+          cabId: e.cabId,
+          companyId: e.companyId
+        }));
+        setEmployeesData(transformedEmployees);
+        
+        // Set companies
+        setCompaniesData(config.companies || []);
+        
+        console.log("✅ GPS Tracking config loaded:", {
+          drivers: allDrivers.length,
+          employees: transformedEmployees.length,
+          companies: (config.companies || []).length
+        });
+      } catch (error) {
+        console.error("❌ Error loading GPS config:", error);
+        toast.error("Failed to load configuration");
+      } finally {
+        setIsConfigLoading(false);
+      }
+    };
+    
+    loadConfig();
+  }, []);
 
   // Generate Unique Journey ID (driver-specific + timestamp + random)
   const generateJourneyId = () => {
@@ -912,17 +920,42 @@ const GPSTracking = () => {
     }
   };
 
-  // Submit Trip Records to Google Sheets (DRIVERCABDETAIL)
+  // Get company sheet name for the selected driver
+  const getCompanySheetName = () => {
+    if (!selectedDriver) return 'DRIVERCABDETAIL'; // Fallback
+    
+    // Find the company for this driver
+    const company = companiesData.find(c => c.id === selectedDriver.companyId);
+    
+    if (company && company.sheetName) {
+      console.log(`📊 Using company sheet: ${company.sheetName} for driver ${selectedDriver.driverName}`);
+      return company.sheetName;
+    }
+    
+    // Fallback to DRIVERCABDETAIL if no company found
+    console.log(`⚠️ No company found for driver, using DRIVERCABDETAIL`);
+    return 'DRIVERCABDETAIL';
+  };
+
+  // Submit Trip Records to Company-Specific Google Sheet
   const submitTripRecordsToSheet = async () => {
     if (tripRecords.length === 0) {
       console.log("No trip records to submit");
       return;
     }
 
-    toast.info(`Submitting ${tripRecords.length} trip record(s)...`);
+    // Get the correct sheet name based on driver's company
+    const sheetName = getCompanySheetName();
+    
+    toast.info(`Submitting ${tripRecords.length} trip record(s) to ${sheetName}...`);
+    console.log(`📤 Submitting ${tripRecords.length} trip records to sheet: ${sheetName}`);
 
     for (const trip of tripRecords) {
       const formData = new FormData();
+      
+      // IMPORTANT: Specify the action and sheet name for company-specific submission
+      formData.append('action', 'addTripRecord');
+      formData.append('SHEET_NAME', sheetName);
       
       // Fill all required fields
       formData.append('DATE', trip.date);
@@ -931,22 +964,22 @@ const GPSTracking = () => {
       formData.append('VENDORNAME', trip.vendorName);
       formData.append('DRIVERNAME', trip.driverName);
       formData.append('DRIVERMOBILE', trip.driverMobile);
-      formData.append('ESCORTNAME', trip.escortName);
-      formData.append('ESCORTIDMOBILE', trip.escortMobile);
+      formData.append('ESCORTNAME', trip.escortName || '');
+      formData.append('ESCORTMOBILE', trip.escortMobile || '');
       formData.append('EMPLOYEENAME', trip.employeeName);
       formData.append('EMPID', trip.empId);
       formData.append('TRIPTYPE', trip.tripType);
       formData.append('PICKUPLOCATION', trip.pickupLocation);
       formData.append('PICKUPTIME', trip.pickupTime);
-      formData.append('PICKUPMETERREADING', trip.pickupMeterReading);
-      formData.append('DROPOFFLOCATION', trip.dropLocation);
-      formData.append('DROPOFFTIME', trip.dropTime);
-      formData.append('DROPOFFMETERREADING', trip.dropMeterReading);
-      formData.append('TOTALKM', trip.totalKm);
+      formData.append('PICKUPMETERREADING', trip.pickupMeterReading || '');
+      formData.append('DROPOFFLOCATION', trip.dropLocation || '');
+      formData.append('DROPOFFTIME', trip.dropTime || '');
+      formData.append('DROPOFFMETERREADING', trip.dropMeterReading || '');
+      formData.append('TOTALKM', trip.totalKm || '');
       formData.append('SHIFTTIMING', trip.shiftTiming);
-      formData.append('GPSENABLED', trip.gpsEnabled);
-      formData.append('DELAY', trip.delay);
-      formData.append('REMARKS', trip.remarks);
+      formData.append('GPSENABLED', trip.gpsEnabled || 'YES');
+      formData.append('DELAY', trip.delay || '');
+      formData.append('REMARKS', trip.remarks || '');
 
       try {
         const response = await fetch(googleSheetUrl, {
@@ -954,18 +987,21 @@ const GPSTracking = () => {
           body: formData
         });
         
-        if (!response.ok) {
-          throw new Error(`Failed to save trip record for ${trip.employeeName}`);
-        }
+        const result = await response.json();
         
-        console.log(`✅ Trip record saved for ${trip.employeeName}`);
+        if (result.success) {
+          console.log(`✅ Trip record saved for ${trip.employeeName} to ${sheetName}`);
+        } else {
+          console.error(`❌ Failed: ${result.message}`);
+          throw new Error(result.message || `Failed to save trip record for ${trip.employeeName}`);
+        }
       } catch (error) {
         console.error(`Error saving trip record for ${trip.employeeName}:`, error);
         toast.error(`Failed to save trip for ${trip.employeeName}`);
       }
     }
 
-    toast.success(`✅ ${tripRecords.length} trip record(s) saved to sheet!`);
+    toast.success(`✅ ${tripRecords.length} trip record(s) saved to ${sheetName}!`);
   };
 
   // Submit Journey to Google Sheets
@@ -1152,34 +1188,47 @@ const GPSTracking = () => {
               <i className="ri-user-3-line"></i>
               Select Driver & Vehicle
             </h3>
+            
             <div className="driver-grid">
-              {driversData.map(driver => (
-                <div
-                  key={driver.id}
-                  className={`driver-card ${selectedDriver?.id === driver.id ? 'selected' : ''}`}
-                  onClick={() => setSelectedDriver(driver)}
-                >
-                  <div className="driver-avatar">
-                    <i className="ri-user-line"></i>
-                  </div>
-                  <div className="driver-info">
-                    <span className="driver-name">{driver.driverName}</span>
-                    <span className="driver-cab">{driver.cabNo} • {driver.vehicleNo}</span>
-                    <span className="driver-mobile">{driver.driverMobile}</span>
-                  </div>
-                  {selectedDriver?.id === driver.id && (
-                    <div className="selected-check">
-                      <i className="ri-checkbox-circle-fill"></i>
-                    </div>
-                  )}
+              {isConfigLoading ? (
+                <div className="config-loading" style={{ gridColumn: '1 / -1' }}>
+                  <Spinner color="warning" />
+                  <p>Loading drivers...</p>
                 </div>
-              ))}
+              ) : driversData.length === 0 ? (
+                <div className="no-drivers-message" style={{ gridColumn: '1 / -1' }}>
+                  <i className="ri-error-warning-line"></i>
+                  <p>No drivers found. Please add drivers in Admin Config.</p>
+                </div>
+              ) : (
+                driversData.map(driver => (
+                  <div
+                    key={driver.id}
+                    className={`driver-card ${selectedDriver?.id === driver.id ? 'selected' : ''}`}
+                    onClick={() => setSelectedDriver(driver)}
+                  >
+                    <div className="driver-avatar">
+                      <i className="ri-user-line"></i>
+                    </div>
+                    <div className="driver-info">
+                      <span className="driver-name">{driver.driverName}</span>
+                      <span className="driver-cab">{driver.cabNo} • {driver.vehicleNo}</span>
+                      <span className="driver-mobile">{driver.driverMobile}</span>
+                    </div>
+                    {selectedDriver?.id === driver.id && (
+                      <div className="selected-check">
+                        <i className="ri-checkbox-circle-fill"></i>
+                      </div>
+                    )}
+                  </div>
+                ))
+              )}
             </div>
             
             <Button
               className="start-journey-btn"
               onClick={handleStartJourney}
-              disabled={!selectedDriver || isLoading}
+              disabled={!selectedDriver || isLoading || isConfigLoading || driversData.length === 0}
             >
               {isLoading ? (
                 <>
@@ -1393,7 +1442,7 @@ const GPSTracking = () => {
               </div>
             </div>
             
-            <div className="multi-driver-info" style={{ marginTop: '10px', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}>
+            <div className="multi-driver-info green">
               <div className="info-icon">🛣️📏</div>
               <div className="info-content">
                 <strong>Accurate Road Distance Tracking</strong>

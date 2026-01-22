@@ -102,6 +102,10 @@ const Header = () => {
               path: "/AdminPortal",
               display: "Admin Panel",
             },
+            {
+              path: "/admin-config",
+              display: "⚙️ Config",
+            },
           ];
         }
 

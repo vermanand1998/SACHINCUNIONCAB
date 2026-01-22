@@ -120,6 +120,48 @@
   margin-bottom: 20px;
 }
 
+/* Config Loading State */
+.config-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 15px;
+}
+
+.config-loading p {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* No Drivers Message */
+.no-drivers-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #fef3c7;
+  border-radius: 12px;
+  border: 2px dashed #f59e0b;
+  margin-bottom: 20px;
+}
+
+.no-drivers-message i {
+  font-size: 40px;
+  color: #f59e0b;
+  margin-bottom: 10px;
+}
+
+.no-drivers-message p {
+  font-size: 14px;
+  color: #92400e;
+  margin: 0;
+  text-align: center;
+}
+
 .driver-card {
   display: flex;
   align-items: center;
@@ -626,43 +668,50 @@
   border-radius: 10px;
 }
 
-/* Info Box */
+/* Info Box - Beautiful Responsive Card */
 .info-box {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  border-radius: 20px;
-  padding: 28px;
-  margin-top: 25px;
-  border: 2px solid rgba(245, 158, 11, 0.3);
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
 }
 
 .info-box h4 {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 18px;
+  gap: 10px;
+  font-size: 16px;
   font-weight: 700;
-  color: #f59e0b;
-  margin-bottom: 20px;
+  color: #1e293b;
+  margin: 0 0 16px 0 !important;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f59e0b;
 }
 
 .info-box h4 i {
-  font-size: 24px;
+  font-size: 20px;
+  color: #f59e0b;
 }
 
 .info-box ul {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 16px 0;
 }
 
 .info-box li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 0;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
+  color: #475569;
+  line-height: 1.5;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .info-box li:last-child {
@@ -671,19 +720,21 @@
 
 .info-box li i {
   color: #10b981;
-  font-size: 20px;
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
-/* Multi-Driver Info Section */
+/* Multi-Driver Info - Blue Card */
 .multi-driver-info {
-  margin-top: 20px;
-  padding: 15px;
-  background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-  border-left: 4px solid #3b82f6;
-  border-radius: 8px;
+  margin-top: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-radius: 12px;
   display: flex;
-  gap: 15px;
+  gap: 14px;
   align-items: flex-start;
+  border: 1px solid #bfdbfe;
 }
 
 .multi-driver-info .info-icon {
@@ -694,12 +745,14 @@
 
 .multi-driver-info .info-content {
   flex: 1;
+  min-width: 0;
 }
 
 .multi-driver-info .info-content strong {
   display: block;
   color: #1e40af;
   font-size: 15px;
+  font-weight: 700;
   margin-bottom: 6px;
 }
 
@@ -707,7 +760,22 @@
   margin: 0;
   color: #1e3a8a;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+/* Green variant for road distance info */
+.multi-driver-info.green {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 1px solid #86efac;
+}
+
+.multi-driver-info.green .info-content strong {
+  color: #065f46;
+}
+
+.multi-driver-info.green .info-content p {
+  color: #047857;
 }
 
 /* Mobile Responsive */
@@ -840,11 +908,57 @@
   }
 
   .info-box {
-    padding: 20px;
+    padding: 18px;
+    margin-top: 16px;
+    border-radius: 14px;
+  }
+
+  .info-box h4 {
+    font-size: 15px;
+    gap: 8px;
+    margin-bottom: 14px !important;
+    padding-bottom: 10px;
+  }
+
+  .info-box h4 i {
+    font-size: 18px;
   }
 
   .info-box li {
     font-size: 13px;
+    padding: 8px 0;
+    gap: 10px;
+  }
+
+  .info-box li i {
+    font-size: 16px;
+  }
+
+  .multi-driver-info {
+    margin-top: 14px;
+    padding: 14px;
+    gap: 12px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .multi-driver-info .info-icon {
+    font-size: 36px;
+  }
+
+  .multi-driver-info .info-content {
+    text-align: center;
+  }
+
+  .multi-driver-info .info-content strong {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .multi-driver-info .info-content p {
+    font-size: 12px;
+    line-height: 1.7;
   }
 }
 

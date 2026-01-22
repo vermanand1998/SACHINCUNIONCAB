@@ -9,8 +9,6 @@ const FindCarForm = () => {
   // State variables for form inputs
   const [fromAddress, setFromAddress] = useState("");
   const [toAddress, setToAddress] = useState("");
-  const [journeyDate, setJourneyDate] = useState("");
-  const [journeyTime, setJourneyTime] = useState("");
   const [carType, setCarType] = useState("ac");
 
   const handleSubmit = (e) => {
@@ -19,8 +17,6 @@ const FindCarForm = () => {
     // Clearing the form fields
     setFromAddress("");
     setToAddress("");
-    setJourneyDate("");
-    setJourneyTime("");
     setCarType("ac");
 
     // Navigate to another screen (replace "/destination" with your desired path)
@@ -46,27 +42,6 @@ const FindCarForm = () => {
             placeholder="To address"
             value={toAddress}
             onChange={(e) => setToAddress(e.target.value)}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="form__group">
-          <input
-            type="date"
-            placeholder="Journey date"
-            value={journeyDate}
-            onChange={(e) => setJourneyDate(e.target.value)}
-            required
-          />
-        </FormGroup>
-
-        <FormGroup className="form__group">
-          <input
-            className="journey__time"
-            type="time"
-            placeholder="Journey time"
-            value={journeyTime}
-            onChange={(e) => setJourneyTime(e.target.value)}
             required
           />
         </FormGroup>

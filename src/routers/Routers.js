@@ -17,6 +17,7 @@ import DriverCabDetailsAccess from "../adminPortal/driverCabDetailsaccess"
 import CustomerFeedbackFrom from "../pages/customerFeedbackForm"
 import GPSTracking from "../pages/GPSTracking"
 import JourneyHistory from "../pages/JourneyHistory"
+import AdminConfig from "../pages/AdminConfig"
 
 const Routers = () => {
   return (
@@ -38,6 +39,7 @@ const Routers = () => {
       <Route path="/customerFeedbackFrom" element={<CustomerFeedbackFrom/>} />
       <Route path="/gps-tracking" element={<GPSTracking/>} />
       <Route path="/journey-history" element={<JourneyHistory/>} />
+      <Route path="/admin-config" element={<AdminConfig/>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
