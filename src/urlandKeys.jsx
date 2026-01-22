@@ -50,32 +50,32 @@ export const googleSheetUrl =
 //     return ContentService.createTextOutput("Your message was successfully sent to the CABBOOKING database!");
 //   
 //   } else if (data.hasOwnProperty("TRIPID")) {
-//     // Request for DRIVERCABDETAIL sheet (22 columns matching your spreadsheet)
+//     // Request for DRIVERCABDETAIL sheet (22 columns - GPS Auto-filled Trip Records)
 //     sheetC.appendRow([
-//       data.DATE,
-//       data.TRIPID,
-//       data.CABNO,
-//       data.VENDORNAME,
-//       data.DRIVERNAME,
-//       data.DRIVERMOBILE,
-//       data.ESCORTNAME,
-//       data.ESCORTIDMOBILE,
-//       data.EMPLOYEENAME,
-//       data.EMPID,
-//       data.TRIPTYPE,
-//       data.PICKUPLOCATION,
-//       data.PICKUPTIME,
-//       data.PICKUPMETERREADING,
-//       data.DROPOFFLOCATION,
-//       data.DROPOFFTIME,
-//       data.DROPOFFMETERREADING,
-//       data.TOTALKM,
-//       data.SHIFTTIMING,
-//       data.GPSENABLED,
-//       data.DELAY,
-//       data.REMARKS
+//       data.DATE,                    // Date of trip
+//       data.TRIPID,                  // Unique trip ID (journeyId + empId)
+//       data.CABNO,                   // Cab number
+//       data.VENDORNAME,              // Vendor name
+//       data.DRIVERNAME,              // Driver name
+//       data.DRIVERMOBILE,            // Driver mobile
+//       data.ESCORTNAME,              // Escort name
+//       data.ESCORTIDMOBILE,          // Escort mobile
+//       data.EMPLOYEENAME,            // Employee name
+//       data.EMPID,                   // Employee ID
+//       data.TRIPTYPE,                // Trip type (PICKUP/DROP)
+//       data.PICKUPLOCATION,          // GPS pickup location
+//       data.PICKUPTIME,              // Pickup time
+//       data.PICKUPMETERREADING,      // Meter reading at pickup
+//       data.DROPOFFLOCATION,         // GPS drop location
+//       data.DROPOFFTIME,             // Drop time
+//       data.DROPOFFMETERREADING,     // Meter reading at drop
+//       data.TOTALKM,                 // Total KM for this employee trip
+//       data.SHIFTTIMING,             // Shift timing
+//       data.GPSENABLED,              // GPS enabled (YES)
+//       data.DELAY,                   // Delay info (if any)
+//       data.REMARKS                  // Additional remarks
 //     ]);
-//     return ContentService.createTextOutput("Your message was successfully sent to the DRIVERCABDETAIL database!");
+//     return ContentService.createTextOutput("Trip record successfully saved to DRIVERCABDETAIL database!");
 //   
 //   } else if (data.hasOwnProperty("SUGGESTIONS")) {
 //     // Request for FEEDBACKDETAILS sheet

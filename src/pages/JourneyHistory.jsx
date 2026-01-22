@@ -10,7 +10,8 @@ const JourneyHistory = () => {
   const [journeys, setJourneys] = useState([]);
   const [selectedJourney, setSelectedJourney] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [filterDate, setFilterDate] = useState("");
+  const [filterFromDate, setFilterFromDate] = useState("");
+  const [filterToDate, setFilterToDate] = useState("");
   const [filterDriver, setFilterDriver] = useState("");
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
@@ -209,15 +210,319 @@ const JourneyHistory = () => {
     };
   }, [selectedJourney]);
 
-  // Filter journeys
+  // Filter journeys with date range
   const filteredJourneys = journeys.filter(j => {
-    const matchDate = !filterDate || j.DATE === filterDate;
-    const matchDriver = !filterDriver || j.DRIVERNAME?.toLowerCase().includes(filterDriver.toLowerCase());
+    // Date range filter
+    let matchDate = true;
+    if (filterFromDate || filterToDate) {
+      if (!j.DATE) return false;
+      
+      // Convert DD/MM/YYYY to YYYY-MM-DD for comparison
+      const dateParts = j.DATE.split('/');
+      if (dateParts.length === 3) {
+        const journeyDate = `${dateParts[2]}-${dateParts[1].padStart(2, '0')}-${dateParts[0].padStart(2, '0')}`;
+        
+        if (filterFromDate && journeyDate < filterFromDate) matchDate = false;
+        if (filterToDate && journeyDate > filterToDate) matchDate = false;
+      }
+    }
+    
+    // Driver filter
+    const matchDriver = !filterDriver || filterDriver === "all" || j.DRIVERNAME?.toLowerCase().includes(filterDriver.toLowerCase());
+    
     return matchDate && matchDriver;
   });
 
   // Get unique drivers for filter
   const uniqueDrivers = [...new Set(journeys.map(j => j.DRIVERNAME).filter(Boolean))];
+
+  // Generate PDF Report
+  // CSV Export Function - No external libraries needed!
+  const exportAsCSV = () => {
+    if (filteredJourneys.length === 0) {
+      toast.error("No journeys to export!");
+      return;
+    }
+
+    try {
+      // CSV Headers
+      const headers = [
+        'S.No',
+        'Journey ID',
+        'Date',
+        'Driver Name',
+        'Cab No',
+        'Start Time',
+        'End Time',
+        'Total KM',
+        'Total Stops',
+        'Start Location',
+        'End Location',
+        'GPS Enabled',
+        'Status'
+      ];
+
+      // CSV Rows
+      const rows = filteredJourneys.map((journey, index) => [
+        index + 1,
+        journey.JOURNEYID || 'N/A',
+        journey.DATE || 'N/A',
+        journey.DRIVERNAME || 'N/A',
+        journey.CABNO || 'N/A',
+        journey.STARTTIME || 'N/A',
+        journey.ENDTIME || 'N/A',
+        journey.TOTALKM || '0',
+        journey.TOTALSTOPS || '0',
+        journey.STARTLOCATION || 'N/A',
+        journey.ENDLOCATION || 'N/A',
+        journey.GPSENABLED || 'N/A',
+        journey.STATUS || 'N/A'
+      ]);
+
+      // Create CSV content
+      const csvContent = [
+        headers.join(','),
+        ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+      ].join('\n');
+
+      // Create blob and download
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Journey_History_${new Date().toISOString().split('T')[0]}.csv`);
+      link.style.visibility = 'hidden';
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      toast.success("CSV downloaded successfully!");
+    } catch (error) {
+      console.error("CSV Export Error:", error);
+      toast.error("Failed to export CSV. Please try again.");
+    }
+  };
+
+  // Browser-Native Print to PDF (No jsPDF needed!)
+  const generatePDFReport = () => {
+    if (filteredJourneys.length === 0) {
+      toast.error("No journeys to export!");
+      return;
+    }
+
+    try {
+      // Calculate summary
+      const totalDistance = filteredJourneys.reduce((sum, j) => sum + (parseFloat(j.TOTALKM) || 0), 0);
+      const totalStops = filteredJourneys.reduce((sum, j) => sum + (parseInt(j.TOTALSTOPS) || 0), 0);
+      
+      const fromDate = filterFromDate || 'Start';
+      const toDate = filterToDate || 'End';
+      const driverText = filterDriver && filterDriver !== "all" ? filterDriver : 'All Drivers';
+
+      // Create HTML report
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <title>Journey History Report</title>
+          <style>
+            @media print {
+              @page { margin: 1cm; size: A4; }
+              body { margin: 0; }
+            }
+            body {
+              font-family: 'Segoe UI', Arial, sans-serif;
+              color: #333;
+              line-height: 1.6;
+              max-width: 1200px;
+              margin: 0 auto;
+              padding: 20px;
+            }
+            .header {
+              background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+              color: white;
+              padding: 30px;
+              text-align: center;
+              border-radius: 8px;
+              margin-bottom: 25px;
+            }
+            .header h1 {
+              margin: 0 0 10px 0;
+              font-size: 28px;
+              font-weight: 700;
+            }
+            .header p {
+              margin: 5px 0;
+              font-size: 14px;
+              opacity: 0.95;
+            }
+            .filters {
+              background: #f8fafc;
+              padding: 15px 20px;
+              border-left: 4px solid #f59e0b;
+              margin-bottom: 20px;
+              border-radius: 4px;
+            }
+            .filters h3 {
+              margin: 0 0 10px 0;
+              color: #1e293b;
+              font-size: 16px;
+            }
+            .filters p {
+              margin: 5px 0;
+              color: #475569;
+              font-size: 14px;
+            }
+            .summary {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 15px;
+              margin-bottom: 25px;
+            }
+            .summary-card {
+              background: #f59e0b;
+              color: white;
+              padding: 20px;
+              border-radius: 8px;
+              text-align: center;
+            }
+            .summary-card h4 {
+              margin: 0 0 8px 0;
+              font-size: 14px;
+              font-weight: 600;
+              opacity: 0.95;
+            }
+            .summary-card p {
+              margin: 0;
+              font-size: 24px;
+              font-weight: 700;
+            }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin-bottom: 20px;
+              background: white;
+              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+            th {
+              background: #1e293b;
+              color: white;
+              padding: 12px 8px;
+              text-align: left;
+              font-size: 13px;
+              font-weight: 600;
+            }
+            td {
+              padding: 10px 8px;
+              border-bottom: 1px solid #e2e8f0;
+              font-size: 12px;
+              color: #334155;
+            }
+            tr:hover {
+              background: #f8fafc;
+            }
+            .footer {
+              text-align: center;
+              color: #94a3b8;
+              font-size: 11px;
+              margin-top: 30px;
+              padding-top: 15px;
+              border-top: 1px solid #e2e8f0;
+            }
+            @media print {
+              .summary { page-break-inside: avoid; }
+              tr { page-break-inside: avoid; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>🚗 UNION SERVICES</h1>
+            <p>GPS Journey History Report</p>
+            <p>Generated on: ${new Date().toLocaleString('en-IN')}</p>
+          </div>
+
+          <div class="filters">
+            <h3>📋 Report Filters</h3>
+            <p><strong>Date Range:</strong> ${fromDate} to ${toDate}</p>
+            <p><strong>Driver:</strong> ${driverText}</p>
+          </div>
+
+          <div class="summary">
+            <div class="summary-card">
+              <h4>Total Journeys</h4>
+              <p>${filteredJourneys.length}</p>
+            </div>
+            <div class="summary-card">
+              <h4>Total Distance</h4>
+              <p>${totalDistance.toFixed(2)} km</p>
+            </div>
+            <div class="summary-card">
+              <h4>Total Stops</h4>
+              <p>${totalStops}</p>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Journey ID</th>
+                <th>Date</th>
+                <th>Driver</th>
+                <th>Cab</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>KM</th>
+                <th>Stops</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filteredJourneys.map((journey, index) => `
+                <tr>
+                  <td>${index + 1}</td>
+                  <td>${journey.JOURNEYID || 'N/A'}</td>
+                  <td>${journey.DATE || 'N/A'}</td>
+                  <td>${journey.DRIVERNAME || 'N/A'}</td>
+                  <td>${journey.CABNO || 'N/A'}</td>
+                  <td>${journey.STARTTIME || 'N/A'}</td>
+                  <td>${journey.ENDTIME || 'N/A'}</td>
+                  <td>${journey.TOTALKM || '0'}</td>
+                  <td>${journey.TOTALSTOPS || '0'}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+
+          <div class="footer">
+            <p>Union Services - GPS Journey Report | Confidential</p>
+            <p>This report was auto-generated from GPS tracking data</p>
+          </div>
+        </body>
+        </html>
+      `;
+
+      // Open in new window and trigger print
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(htmlContent);
+      printWindow.document.close();
+      
+      // Wait for content to load, then print
+      printWindow.onload = () => {
+        printWindow.focus();
+        setTimeout(() => {
+          printWindow.print();
+          toast.success("Print dialog opened! Save as PDF from there.");
+        }, 250);
+      };
+    } catch (error) {
+      console.error("PDF Generation Error:", error);
+      toast.error("Failed to generate PDF. Please try again.");
+    }
+  };
 
   // Format date for display
   const formatDate = (dateStr) => {
@@ -258,11 +563,20 @@ const JourneyHistory = () => {
               {/* Filters */}
               <div className="filters-section">
                 <div className="filter-item">
-                  <label><i className="ri-calendar-line"></i> Date</label>
+                  <label><i className="ri-calendar-line"></i> From Date</label>
                   <input
                     type="date"
-                    value={filterDate}
-                    onChange={(e) => setFilterDate(e.target.value)}
+                    value={filterFromDate}
+                    onChange={(e) => setFilterFromDate(e.target.value)}
+                    className="filter-input"
+                  />
+                </div>
+                <div className="filter-item">
+                  <label><i className="ri-calendar-line"></i> To Date</label>
+                  <input
+                    type="date"
+                    value={filterToDate}
+                    onChange={(e) => setFilterToDate(e.target.value)}
                     className="filter-input"
                   />
                 </div>
@@ -273,16 +587,36 @@ const JourneyHistory = () => {
                     onChange={(e) => setFilterDriver(e.target.value)}
                     className="filter-input"
                   >
-                    <option value="">All Drivers</option>
+                    <option value="all">All Drivers</option>
                     {uniqueDrivers.map((driver, i) => (
                       <option key={i} value={driver}>{driver}</option>
                     ))}
                   </select>
                 </div>
-                {(filterDate || filterDriver) && (
+                <div className="filter-item export-buttons">
+                  <button
+                    onClick={exportAsCSV}
+                    className="csv-export-btn"
+                    disabled={filteredJourneys.length === 0}
+                    title="Export to Excel/CSV"
+                  >
+                    <i className="ri-file-excel-line"></i>
+                    Export CSV
+                  </button>
+                  <button
+                    onClick={generatePDFReport}
+                    className="pdf-download-btn"
+                    disabled={filteredJourneys.length === 0}
+                    title="Print or Save as PDF"
+                  >
+                    <i className="ri-printer-line"></i>
+                    Print Report
+                  </button>
+                </div>
+                {(filterFromDate || filterToDate || filterDriver) && filterDriver !== "all" && (
                   <button 
                     className="clear-filters-btn"
-                    onClick={() => { setFilterDate(""); setFilterDriver(""); }}
+                    onClick={() => { setFilterFromDate(""); setFilterToDate(""); setFilterDriver("all"); }}
                   >
                     <i className="ri-close-line"></i> Clear
                   </button>

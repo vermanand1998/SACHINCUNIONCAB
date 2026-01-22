@@ -9,7 +9,8 @@ const GPSJourneyAccess = () => {
   const [filteredJourneys, setFilteredJourneys] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedJourney, setSelectedJourney] = useState(null);
-  const [filterDate, setFilterDate] = useState("");
+  const [filterFromDate, setFilterFromDate] = useState("");
+  const [filterToDate, setFilterToDate] = useState("");
   const [filterDriver, setFilterDriver] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const mapRef = useRef(null);
@@ -31,14 +32,31 @@ const GPSJourneyAccess = () => {
 
   useEffect(() => {
     let filtered = journeys;
-    if (filterDate) {
-      filtered = filtered.filter(j => j.DATE === filterDate);
+    
+    // Date range filter
+    if (filterFromDate || filterToDate) {
+      filtered = filtered.filter(j => {
+        if (!j.DATE) return false;
+        
+        // Convert DD/MM/YYYY to YYYY-MM-DD for comparison
+        const dateParts = j.DATE.split('/');
+        if (dateParts.length === 3) {
+          const journeyDate = `${dateParts[2]}-${dateParts[1].padStart(2, '0')}-${dateParts[0].padStart(2, '0')}`;
+          
+          if (filterFromDate && journeyDate < filterFromDate) return false;
+          if (filterToDate && journeyDate > filterToDate) return false;
+        }
+        return true;
+      });
     }
-    if (filterDriver) {
+    
+    // Driver filter
+    if (filterDriver && filterDriver !== "all") {
       filtered = filtered.filter(j => j.DRIVERNAME?.toLowerCase().includes(filterDriver.toLowerCase()));
     }
+    
     setFilteredJourneys(filtered);
-  }, [journeys, filterDate, filterDriver]);
+  }, [journeys, filterFromDate, filterToDate, filterDriver]);
 
   const fetchJourneys = async () => {
     setIsLoading(true);
@@ -219,6 +237,187 @@ const GPSJourneyAccess = () => {
 
   const uniqueDrivers = [...new Set(journeys.map(j => j.DRIVERNAME).filter(Boolean))];
 
+  // Export as CSV (No external library needed!)
+  const exportAsCSV = () => {
+    if (filteredJourneys.length === 0) {
+      toast.error("No journeys to export!");
+      return;
+    }
+
+    try {
+      // CSV Headers
+      const headers = ['#', 'Journey ID', 'Date', 'Driver', 'Cab', 'Vehicle', 'Start Time', 'End Time', 'Total KM', 'Total Stops', 'Status'];
+      
+      // CSV Rows
+      const rows = filteredJourneys.map((journey, index) => {
+        const suspicious = isSuspicious(journey);
+        return [
+          index + 1,
+          journey.JOURNEYID || 'N/A',
+          journey.DATE || 'N/A',
+          journey.DRIVERNAME || 'N/A',
+          journey.CABNO || 'N/A',
+          journey.VEHICLENO || 'N/A',
+          journey.STARTTIME || 'N/A',
+          journey.ENDTIME || 'N/A',
+          journey.TOTALKM || '0',
+          journey.TOTALSTOPS || '0',
+          suspicious ? 'Review' : 'OK'
+        ];
+      });
+      
+      // Create CSV content
+      let csvContent = headers.join(',') + '\n';
+      rows.forEach(row => {
+        csvContent += row.map(cell => `"${cell}"`).join(',') + '\n';
+      });
+      
+      // Create download link
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `GPS_Journey_Report_${new Date().toISOString().split('T')[0]}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      toast.success('📊 CSV Report Downloaded!');
+    } catch (error) {
+      console.error("CSV Export Error:", error);
+      toast.error("Failed to export CSV. Please try again.");
+    }
+  };
+
+  // Generate PDF Report (Alternative using print)
+  const generatePDFReport = () => {
+    if (filteredJourneys.length === 0) {
+      toast.error("No journeys to export!");
+      return;
+    }
+
+    try {
+      // Create printable HTML
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        toast.error("Please allow popups to generate PDF");
+        return;
+      }
+
+      
+      // Calculate summary
+      const totalJourneys = filteredJourneys.length;
+      const totalDistance = filteredJourneys.reduce((sum, j) => sum + (parseFloat(j.TOTALKM) || 0), 0);
+      const totalStops = filteredJourneys.reduce((sum, j) => sum + (parseInt(j.TOTALSTOPS) || 0), 0);
+      const suspiciousCount = filteredJourneys.filter(j => isSuspicious(j)).length;
+      
+      // Create HTML for printing
+      const html = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>GPS Journey Report</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            .header { background: #1e293b; color: white; padding: 20px; text-align: center; }
+            .header h1 { margin: 0; font-size: 24px; }
+            .header p { margin: 5px 0 0 0; font-size: 14px; }
+            .filters { margin: 20px 0; padding: 10px; background: #f8fafc; border-left: 4px solid #f59e0b; }
+            .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
+            .stat { background: #fef3c7; padding: 15px; text-align: center; border-radius: 8px; }
+            .stat-label { font-size: 12px; color: #92400e; }
+            .stat-value { font-size: 20px; font-weight: bold; color: #1e293b; }
+            table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+            th { background: #1e293b; color: white; padding: 10px; text-align: left; font-size: 11px; }
+            td { padding: 8px; border-bottom: 1px solid #e2e8f0; font-size: 10px; }
+            tr:nth-child(even) { background: #f8fafc; }
+            @media print { .no-print { display: none; } }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>UNION SERVICES</h1>
+            <p>GPS Journey Report</p>
+            <p>Generated: ${new Date().toLocaleString('en-IN')}</p>
+          </div>
+          
+          <div class="filters">
+            <strong>Filters:</strong> 
+            ${filterFromDate || filterToDate ? `Date: ${filterFromDate || 'Start'} to ${filterToDate || 'End'} | ` : ''}
+            Driver: ${filterDriver && filterDriver !== "all" ? filterDriver : 'All Drivers'}
+          </div>
+          
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-label">Total Journeys</div>
+              <div class="stat-value">${totalJourneys}</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Total Distance</div>
+              <div class="stat-value">${totalDistance.toFixed(2)} km</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Total Stops</div>
+              <div class="stat-value">${totalStops}</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Suspicious</div>
+              <div class="stat-value">${suspiciousCount}</div>
+            </div>
+          </div>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Journey ID</th>
+                <th>Date</th>
+                <th>Driver</th>
+                <th>Cab</th>
+                <th>Time</th>
+                <th>KM</th>
+                <th>Stops</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filteredJourneys.map((j, i) => `
+                <tr>
+                  <td>${i + 1}</td>
+                  <td>${j.JOURNEYID || 'N/A'}</td>
+                  <td>${j.DATE || 'N/A'}</td>
+                  <td>${j.DRIVERNAME || 'N/A'}</td>
+                  <td>${j.CABNO || 'N/A'}</td>
+                  <td>${j.STARTTIME || ''} - ${j.ENDTIME || ''}</td>
+                  <td>${j.TOTALKM || '0'}</td>
+                  <td>${j.TOTALSTOPS || '0'}</td>
+                  <td>${isSuspicious(j) ? '⚠ Review' : '✓ OK'}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+          
+          <button class="no-print" onclick="window.print()" style="padding: 10px 20px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; margin: 20px 0;">
+            Print / Save as PDF
+          </button>
+          <button class="no-print" onclick="window.close()" style="padding: 10px 20px; background: #64748b; color: white; border: none; border-radius: 6px; cursor: pointer;">
+            Close
+          </button>
+        </body>
+        </html>
+      `;
+      
+      printWindow.document.write(html);
+      printWindow.document.close();
+      
+      toast.success('📄 Print preview opened! Use Print to save as PDF');
+    } catch (error) {
+      console.error("PDF Generation Error:", error);
+      toast.error("Failed to generate report. Please try again.");
+    }
+  };
+
   // Helper function to check if journey is suspicious
   const isSuspicious = (journey) => {
     // Check SUSPICIOUS field (handles various formats)
@@ -251,6 +450,8 @@ const GPSJourneyAccess = () => {
     th: { background: '#1e293b', color: '#fff', padding: '10px 12px', textAlign: 'left', fontWeight: '600', fontSize: '10px', textTransform: 'uppercase', whiteSpace: 'nowrap' },
     td: { padding: '10px 12px', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap', fontSize: '12px' },
     viewBtn: { background: '#f59e0b', color: '#1e293b', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: '600', fontSize: '11px' },
+    csvBtn: { background: '#10b981', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: '600', fontSize: '11px', transition: 'all 0.2s' },
+    pdfBtn: { background: '#ef4444', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: '600', fontSize: '11px', transition: 'all 0.2s' },
     gpsBtn: { background: '#10b981', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' },
     badge: { display: 'inline-block', padding: '4px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: '600' },
     modalOverlay: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 1000, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: isMobile ? '10px' : '20px', overflowY: 'auto' },
@@ -294,11 +495,20 @@ const GPSJourneyAccess = () => {
             </button>
           )}
           <div style={styles.filterGroup}>
-            <span style={styles.filterLabel}>Date</span>
+            <span style={styles.filterLabel}>From Date</span>
             <input
               type="date"
-              value={filterDate}
-              onChange={(e) => setFilterDate(e.target.value)}
+              value={filterFromDate}
+              onChange={(e) => setFilterFromDate(e.target.value)}
+              style={styles.filterInput}
+            />
+          </div>
+          <div style={styles.filterGroup}>
+            <span style={styles.filterLabel}>To Date</span>
+            <input
+              type="date"
+              value={filterToDate}
+              onChange={(e) => setFilterToDate(e.target.value)}
               style={styles.filterInput}
             />
           </div>
@@ -309,7 +519,7 @@ const GPSJourneyAccess = () => {
               onChange={(e) => setFilterDriver(e.target.value)}
               style={styles.filterInput}
             >
-              <option value="">All Drivers</option>
+              <option value="all">All Drivers</option>
               {uniqueDrivers.map((d, i) => (
                 <option key={i} value={d}>{d}</option>
               ))}
@@ -320,6 +530,20 @@ const GPSJourneyAccess = () => {
             style={{ ...styles.viewBtn, alignSelf: 'flex-end' }}
           >
             🔄 Refresh
+          </button>
+          <button
+            onClick={exportAsCSV}
+            style={{ ...styles.csvBtn, alignSelf: 'flex-end' }}
+            disabled={filteredJourneys.length === 0}
+          >
+            📊 Export CSV
+          </button>
+          <button
+            onClick={generatePDFReport}
+            style={{ ...styles.pdfBtn, alignSelf: 'flex-end' }}
+            disabled={filteredJourneys.length === 0}
+          >
+            📄 Print Report
           </button>
         </div>
       </div>
